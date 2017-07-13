@@ -16,7 +16,7 @@ namespace NMEA_MessageParserConstructor
 
         protected string Description { get; set; }
 
-        public byte Priority { get; set; }
+        protected byte Priority { get; set; }
 
         protected string AccessSchema { get; set; }
 
@@ -58,7 +58,18 @@ namespace NMEA_MessageParserConstructor
         enum enumTransmittedStation
         {
             M,
-            B
+            B,
+            MB
         };
+
+        #region VDM ve VDO mesajlarını oluşturacak.
+        public void Parse(string messages)
+        {
+            //Mesajı parçalarına ayır.
+            string[] messagesPart = messages.Split(',');
+
+
+        }
+        #endregion
     }
 }

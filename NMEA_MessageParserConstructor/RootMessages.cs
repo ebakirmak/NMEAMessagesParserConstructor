@@ -12,11 +12,11 @@ namespace NMEA_MessageParserConstructor
         {
             this.RepeatIndicator = 0;
         }
-        protected string MessageID { get; set; }
+        protected byte MessageID { get; set; }
 
         protected string Description { get; set; }
 
-        public string Priority { get; set; }
+        public byte Priority { get; set; }
 
         protected string AccessSchema { get; set; }
 
@@ -26,7 +26,7 @@ namespace NMEA_MessageParserConstructor
 
         protected byte RepeatIndicator { get; set; }
 
-        protected string NumberOfBits { get; set; }
+        protected short TotalNumberOfBits { get; set; }
 
         protected int Spare { get; set; }
 

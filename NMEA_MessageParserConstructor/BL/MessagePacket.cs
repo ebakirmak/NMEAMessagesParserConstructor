@@ -8,7 +8,17 @@ namespace NMEA_MessageParserConstructor.BL
 {
    public class MessagePacket:RootMessages
     {
-        #region VDM ve VDO mesajlarının (okunabilir yapıya) ayrıştıracak ve mesaj id geri döndürecek.
+
+        #region Message ID geri döndür. Gönderilen Message ID'ye göre ilgili sınıfta işlem yapılacak.
+        public byte getMessageID(string message)
+        {
+
+            //ascii8 içeriğini ascii6 dönüştür. Binary yapıda al. 2 lik tabandan 10'luk tabana çevir.
+            return Convert.ToByte(getSubstringFromBinary(getContentBinary(Parser(message)[5]), 0, 6));
+        }
+        #endregion
+
+        #region VDM veya VDO mesajını parçalarına ayrıştıracak ve geri döndürecek.
         public override string[] Parser(string message)
         {
             return base.Parser(message);         
@@ -16,7 +26,7 @@ namespace NMEA_MessageParserConstructor.BL
         }
         #endregion
 
-        #region ascii8 karakterlerini ascii6 tablosuna çevir. Daha sonra bunların binary yapılarını bul
+        #region ascii8 karakterlerini ascii6 tablosuna çevir. Daha sonra bunların 6 basamaklı binary yapılarını bul.  Örnek 010100 gibi.
         public string getContentBinary(string content)
         {
             string bits="";
@@ -52,22 +62,13 @@ namespace NMEA_MessageParserConstructor.BL
         }
         #endregion
 
-        #region Message ID geri döndür.
-        public byte getMessageID(string message)
-        {
-            
-            //ascii8 içeriğini ascii6 dönüştür. Binary yapıda al. 2 lik tabandan 10'luk tabana çevir.
-            return Convert.ToByte(getSubstringFromBinary( getContentBinary(Parser(message)[5]),0,6));
+        #region Alınan bir binary içeriğini (010101 gibi) 2'lik tabandan 10'luk tabana çevir.
+        public string getSubstringFromBinary(string binary,int start,int length)
+        {           
+            return Convert.ToInt32(binary.Substring(start,length), 2).ToString();            
         }
         #endregion
 
-        #region 2'lik tabandan 10'luk tabana çevir.
-        public string getSubstringFromBinary(string binary,int start,int length)
-        {
-           
-            return Convert.ToInt32(binary.Substring(start,length), 2).ToString();
-            
-        }
-        #endregion
+      
     }
 }

@@ -25,6 +25,8 @@ namespace NMEA_MessageParserConstructor
             //m.getMessageID("!AIVDM,1,1,,A,18AlJpwP00Qtb18F0ELv4?wl20S7,0*23");
             byte messageID = m.getMessageID(VDM);
 
+
+            //return edilen Message ID'sine göre ilgili sınıfta işlem yapılacak.
             if (messageID==1)
             {
                 MessageType1 mesaj = new MessageType1();

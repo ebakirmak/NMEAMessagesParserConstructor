@@ -45,7 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BL\MessagePacket.cs" />
+    <Compile Include="BL\CommunicationState\SOTDMA.cs" />
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>

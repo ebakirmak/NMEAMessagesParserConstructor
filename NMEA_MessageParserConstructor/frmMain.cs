@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using NMEA_MessageParserConstructor.BL;
 namespace NMEA_MessageParserConstructor
 {
     public partial class frmMain : Form
@@ -19,8 +19,25 @@ namespace NMEA_MessageParserConstructor
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            MessageType1 m = new MessageType1();
-            m.Parse("!AIVDM,1,1,,A,13u?etPv2;0n:dDPwUM1U1Cb069D,0*23");
+            string VDM = "!AIVDM,1,1,,D,18AlJpwP00Qtb18F0ELv4?wl20S7,0*2B";
+
+            MessagePacket m = new MessagePacket();
+            //m.getMessageID("!AIVDM,1,1,,A,18AlJpwP00Qtb18F0ELv4?wl20S7,0*23");
+            byte messageID = m.getMessageID(VDM);
+
+            if (messageID==1)
+            {
+                MessageType1 mesaj = new MessageType1();
+                mesaj.Parser(VDM);
+            }
+            else if (messageID == 2)
+            {
+                Console.WriteLine(messageID);
+            }
+            else
+            {
+                Console.WriteLine("Hatalı Mesaj");
+            }
         }
     }
 }

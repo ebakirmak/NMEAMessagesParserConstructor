@@ -28,14 +28,23 @@ namespace NMEA_MessageParserConstructor
 
         protected short TotalNumberOfBits { get; set; }
 
-        protected int Spare { get; set; }
+        protected byte Spare { get; set; }
+
+        public virtual string[] Parser(string message) {
+
+            //Mesajı parçalarına ayır.
+            string[] messagesPart = message.Split(',');
+            //Tüm mesajı döndür.
+            return messagesPart;
+        }
+
 
         enum enumPriority
         {
-          PriorityOne,
-          PriorityTwo,
-          PriorityThree,    
-          PriorityFour
+            PriorityOne,
+            PriorityTwo,
+            PriorityThree,
+            PriorityFour
 
         };
 
@@ -49,7 +58,8 @@ namespace NMEA_MessageParserConstructor
             ITDMA
         };
 
-        enum enumCommunicitonState {
+        enum enumCommunicitonState
+        {
             SOTDMA,
             ITDMA,
             NA
@@ -61,15 +71,5 @@ namespace NMEA_MessageParserConstructor
             B,
             MB
         };
-
-        #region VDM ve VDO mesajlarını oluşturacak.
-        public void Parse(string messages)
-        {
-            //Mesajı parçalarına ayır.
-            string[] messagesPart = messages.Split(',');
-
-
-        }
-        #endregion
     }
 }

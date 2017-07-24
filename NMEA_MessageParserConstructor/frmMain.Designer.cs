@@ -28,13 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.cmbPorts = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
+            // 
+            // cmbPorts
+            // 
+            this.cmbPorts.FormattingEnabled = true;
+            this.cmbPorts.Location = new System.Drawing.Point(127, 48);
+            this.cmbPorts.Name = "cmbPorts";
+            this.cmbPorts.Size = new System.Drawing.Size(121, 21);
+            this.cmbPorts.TabIndex = 0;
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(620, 417);
+            this.Controls.Add(this.cmbPorts);
             this.Name = "frmMain";
             this.Text = "frmMain";
             this.Load += new System.EventHandler(this.frmMain_Load);
@@ -43,5 +53,7 @@
         }
 
         #endregion
+
+        private System.Windows.Forms.ComboBox cmbPorts;
     }
 }

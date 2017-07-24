@@ -1,0 +1,113 @@
+﻿using NMEA_MessageParserConstructor.BL.CommunicationState;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace NMEA_MessageParserConstructor.BL.Messages
+{
+    public class MessageType4 : RootMessages
+    {
+        private int UserID { get; set; }
+        private ushort UtcYear { get; set; }
+        private byte UtcMonth { get; set; }
+        private byte UtcDay { get; set; }
+        private byte UtcHour { get; set; }
+        private byte UtcMinute { get; set; }
+        private byte UtcSecond { get; set; }
+        private byte PositionAccuracy { get; set; }
+        private double Longitude { get; set; }
+        private double Latitude { get; set; }
+        private byte TypeOfElectronicPositionFixingDevice { get; set; }
+        private byte TransmissionControlForLongRangeBroadcastMessage { get; set; }
+        private byte RAIMFlag { get; set; }
+        private SOTDMA Sotdma;
+        public MessageType4()
+        {
+            this.MessageID = 4;
+            this.RepeatIndicator = 0;
+            this.Description = "Base station report";
+            this.Priority = 1;            
+            this.TransmissionControlForLongRangeBroadcastMessage = 0;
+            this.TotalNumberOfBits = 168;
+            this.Sotdma = new SOTDMA();         
+        }
+        #region Mesaj yapısında bulunan attributelara, alınan mesajdaki değerleri set ettik.
+        public override string[] Parser(string message)
+        {
+            string[] messages = base.Parser(message);  
+            //Context'i oku. Binary yapıda.
+            string content = getContentBinary(messages[5]);
+            //Tüm mesajlarda olan özellikleri burada gir.
+            //MessageID
+            this.MessageID = Convert.ToByte(getSubstringFromBinary(content, 0, 6));
+            //Repeat indicator
+            this.RepeatIndicator = Convert.ToByte(getSubstringFromBinary(content, 6, 2));
+            //Source MMSI
+            this.UserID = Convert.ToInt32(getSubstringFromBinary(content, 8, 30));
+            //UTC Year
+            this.UtcYear = Convert.ToUInt16(getSubstringFromBinary(content, 38, 14));
+            //UTC Month
+            this.UtcMonth = Convert.ToByte(getSubstringFromBinary(content, 52, 4));
+            //UTC Day
+            this.UtcDay = Convert.ToByte(getSubstringFromBinary(content, 56, 5));
+            //UTC Hour
+            this.UtcHour = Convert.ToByte(getSubstringFromBinary(content, 61, 5));
+            //UTC Minute
+            this.UtcMinute = Convert.ToByte(getSubstringFromBinary(content, 66, 6));
+            //UTC Second
+            this.UtcSecond = Convert.ToByte(getSubstringFromBinary(content, 72, 6));
+            //PA
+            this.PositionAccuracy = Convert.ToByte(getSubstringFromBinary(content, 78, 1));
+            //LON - Dakikaya çevrildi ve 10.000 ile çarpıldı.
+            this.Longitude = Convert.ToDouble((getSubstringFromBinary(content, 79, 28)));
+            this.Longitude /= 60;
+            this.Longitude /= 10000;
+            //LAT - Dakikaya çevrildi ve 10.000 ile çarpıldı.
+            this.Latitude = Convert.ToDouble(getSubstringFromBinary(content, 107, 27));
+            this.Latitude /= 60;
+            this.Latitude /= 10000;
+            //Fix Type
+            this.TypeOfElectronicPositionFixingDevice = Convert.ToByte(getSubstringFromBinary(content, 134, 4));
+            //Transmission control for long - range broadcast mesage
+            this.TransmissionControlForLongRangeBroadcastMessage = Convert.ToByte(getSubstringFromBinary(content, 138, 1));
+            //Spare
+            this.Spare = Convert.ToByte(getSubstringFromBinary(content, 139, 9));
+            //RAIM
+            this.RAIMFlag = Convert.ToByte(getSubstringFromBinary(content, 148, 1));
+            //Communication State            
+            this.Sotdma.SyncState = Convert.ToByte(getSubstringFromBinary(content, 149, 2));
+            this.Sotdma.SlotTimeOut = Convert.ToByte(getSubstringFromBinary(content, 151, 3));
+            //Communication State Sub Message
+            this.Sotdma.subMessage.SlotNumber = Convert.ToInt32(getSubstringFromBinary(content, 154, 14));
+            this.CommunicationState = Sotdma;
+            return null;
+        }
+        #endregion
+
+        #region ToString() methodunu override ettik.
+        public override string ToString()
+        {
+            return
+                "Message ID: " + this.MessageID + "\n" +
+                "RepeatIndicator" + this.RepeatIndicator + "\n" +
+                "User ID / MMSI" + this.UserID + "\n" +
+                "UTC Year" + this.UtcYear + "\n" +
+                "UTC Month" + this.UtcMonth + "\n" +
+                "UTC Day" + this.UtcDay + "\n" +
+                "UTC Hour" + this.UtcHour + "\n" +
+                "UTC Minute" + this.UtcMinute + "\n" +
+                "UTC Second" + this.UtcSecond + "\n" +
+                "PA" + this.PositionAccuracy + "\n" +
+                "Lon" + this.Longitude + "\n" +
+                "Lat" + this.Latitude + "\n" +
+                "Type of electronic position fixing device" + this.TypeOfElectronicPositionFixingDevice + "\n" +
+                "Transmission control..." + this.TransmissionControlForLongRangeBroadcastMessage + "\n"+   
+                "Spare" + this.Spare + "\n" +
+                "RAIM" + this.RAIMFlag + "\n" +
+                this.CommunicationState.ToString();
+        }
+        #endregion
+    }
+}

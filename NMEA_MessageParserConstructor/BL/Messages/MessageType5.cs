@@ -16,7 +16,7 @@ namespace NMEA_MessageParserConstructor.BL.Messages
         private string Name { get; set; }
         private byte TypeOfShipAndCargoType { get; set; }
         //Ship dimensions - Gemi boyutları | Gemi genel boyutları
-        private string OverallDimensions { get; set; }
+        private OverallDimension OverallDimensions { get; set; }
         //Type of electronic position fixing device
         private byte TypeOfEPFD { get; set; }
         //Estimated time of arrival; MMDDHHMM UTC | Tahmini varış zamanı
@@ -27,7 +27,8 @@ namespace NMEA_MessageParserConstructor.BL.Messages
         private string Destination { get; set; }
         //Data terminal equipment
         private byte DTE { get; set; }
-       
+
+
 
         public MessageType5()
         {
@@ -38,6 +39,7 @@ namespace NMEA_MessageParserConstructor.BL.Messages
             this.TotalNumberOfBits = 424;
             this.IMONumber = 0;
             this.Eta = new ETA();
+            this.OverallDimensions = new OverallDimension();
         }
         public class ETA
         {
@@ -47,6 +49,14 @@ namespace NMEA_MessageParserConstructor.BL.Messages
             public byte Month { get; set; }
         }
 
+        public class OverallDimension
+        {
+            public int A { get; set; }
+            public int B { get; set; }
+            public int C { get; set; }
+            public int D { get; set; }
+
+        }
         #region Mesaj yapısında bulunan attributelara, alınan mesajdaki değerleri set ettik.
         public override string[] Parser(string message1,string message2)
         {
@@ -81,8 +91,11 @@ namespace NMEA_MessageParserConstructor.BL.Messages
             this.TypeOfShipAndCargoType = Convert.ToByte((getSubstringFromBinary(content, 232, 8)));
 
             //Overall Dimensions String Hatalı
-            this.OverallDimensions = getStringFromBinary(content, 240, 30);
-
+            this.OverallDimensions.D =Convert.ToInt32(getSubstringFromBinary(content, 240, 6));
+            this.OverallDimensions.C = Convert.ToInt32(getSubstringFromBinary(content, 246, 6));
+            this.OverallDimensions.B = Convert.ToInt32(getSubstringFromBinary(content, 252, 9));
+            this.OverallDimensions.A = Convert.ToInt32(getSubstringFromBinary(content, 261, 9));
+            
             //
             this.TypeOfEPFD = Convert.ToByte(getSubstringFromBinary(content, 270, 4));
 

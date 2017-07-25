@@ -110,6 +110,7 @@ namespace NMEA_MessageParserConstructor
         public string getStringFromBinary(string binarys, int start, int length)
         {
             string metin = binarys.Substring(start, length), context="";
+            Console.WriteLine(metin.Length);
             Ascii6 ascii6 = new Ascii6();
             for (int i = 0; i < metin.Length; i+=6)
                 context += ascii6.getStringBinarySix(metin.Substring(i,6));

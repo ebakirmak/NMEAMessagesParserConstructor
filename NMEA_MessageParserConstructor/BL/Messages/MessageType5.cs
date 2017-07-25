@@ -11,7 +11,7 @@ namespace NMEA_MessageParserConstructor.BL.Messages
     {
         private int UserID { get; set; }
         private byte AISVersionIndicator { get; set; }
-        private UInt32 IMONumber { get; set; }
+        private int IMONumber { get; set; }
         private string CallSign { get; set; }
         private string Name { get; set; }
         private byte TypeOfShipAndCargoType { get; set; }
@@ -57,6 +57,7 @@ namespace NMEA_MessageParserConstructor.BL.Messages
             public int D { get; set; }
 
         }
+
         #region Mesaj yapısında bulunan attributelara, alınan mesajdaki değerleri set ettik.
         public override string[] Parser(string message1,string message2)
         {
@@ -79,22 +80,22 @@ namespace NMEA_MessageParserConstructor.BL.Messages
             this.AISVersionIndicator = Convert.ToByte(getSubstringFromBinary(content, 38, 2));
 
             //IMONumber
-            this.IMONumber = Convert.ToUInt32(getSubstringFromBinary(content, 40, 30));
+            this.IMONumber = Convert.ToInt32(getSubstringFromBinary(content, 40, 30));
 
             //Call sign - String
             this.CallSign = getStringFromBinary(content, 70, 42).Trim();
 
-            //Name
+            //Name - Bir mesaj örneği için doğru çalışıyor başka bir mesaj örneği için hatalı çalışıyor. Buradan sonrası. Mesaja bağlı.
             this.Name = getStringFromBinary(content, 112, 120).Trim();
 
             //Type Of Ship And Cargo Type
             this.TypeOfShipAndCargoType = Convert.ToByte((getSubstringFromBinary(content, 232, 8)));
 
-            //Overall Dimensions String Hatalı
-            this.OverallDimensions.D =Convert.ToInt32(getSubstringFromBinary(content, 240, 6));
-            this.OverallDimensions.C = Convert.ToInt32(getSubstringFromBinary(content, 246, 6));
-            this.OverallDimensions.B = Convert.ToInt32(getSubstringFromBinary(content, 252, 9));
-            this.OverallDimensions.A = Convert.ToInt32(getSubstringFromBinary(content, 261, 9));
+            //Overall Dimensions String Hatalı - DÖKÜMANDA HATALI SOR.
+            this.OverallDimensions.A =Convert.ToInt32(getSubstringFromBinary(content, 240, 9));
+            this.OverallDimensions.B = Convert.ToInt32(getSubstringFromBinary(content, 249, 9));
+            this.OverallDimensions.C = Convert.ToInt32(getSubstringFromBinary(content, 258, 6));
+            this.OverallDimensions.D = Convert.ToInt32(getSubstringFromBinary(content, 264, 6));
             
             //
             this.TypeOfEPFD = Convert.ToByte(getSubstringFromBinary(content, 270, 4));
@@ -118,6 +119,31 @@ namespace NMEA_MessageParserConstructor.BL.Messages
             this.Spare = Convert.ToByte(getSubstringFromBinary(content, 423, 1));
       
             return null;
+        }
+        #endregion
+
+        #region ToString() methodunu override ettik.
+        public override string ToString()
+        {
+            return
+                "Message ID: " + this.MessageID + "\n" +
+                "RepeatIndicator: " + this.RepeatIndicator + "\n" +
+                "User ID / MMSI: " + this.UserID + "\n" +
+                "AIS Version Indicator: " + this.AISVersionIndicator + "\n" +
+                "IMO Number: " + this.IMONumber + "\n" +
+                "Call Sign: " + this.CallSign + "\n" +
+                "Name: " + this.Name + "\n" +
+                "Type Of Ship And Cargo Type: " + this.TypeOfShipAndCargoType + "\n" +
+                "Overall Dimensions A: " + this.OverallDimensions.A + " B: " + this.OverallDimensions.B + " C: " + this.OverallDimensions.C + " D: " + this.OverallDimensions.D + "\n" +
+                "Type Of EPFD: " + this.TypeOfEPFD + "\n" +
+                "ETA Month: " + this.Eta.Month + "\n" +
+                "ETA Day:" + this.Eta.Day + "\n" +
+                "ETA Hour: " + this.Eta.Hour + "\n" +
+                "ETA Minute: " + this.Eta.Minute + "\n" +
+                "Max. static draught: " + this.MaxStaticDraught + "\n" +
+                "Destination: " + this.Destination + "\n" +
+                "DTE: " + this.DTE + "\n" +
+                "Spare: " + this.Spare + "\n";
         }
         #endregion
     }

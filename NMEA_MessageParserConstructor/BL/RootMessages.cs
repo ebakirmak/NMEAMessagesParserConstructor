@@ -69,7 +69,8 @@ namespace NMEA_MessageParserConstructor
             string bits = "";
             string currentBits = "";
             int ascii;
-            foreach (var letter in content)
+            content = content.Trim();
+            foreach (var letter in content )
             {
                 ascii = Convert.ToInt32(letter);
                 if (ascii > 88)
@@ -92,6 +93,7 @@ namespace NMEA_MessageParserConstructor
                 else
                     bits += currentBits;
             }
+            Console.WriteLine(bits.Length);
             return bits;
         }
         #endregion
@@ -99,7 +101,7 @@ namespace NMEA_MessageParserConstructor
         #region Alınan bir binary içeriğini (010101 gibi) 2'lik tabandan 10'luk tabana çevir.
         public string getSubstringFromBinary(string binary, int start, int length)
         {
-    
+            string a =binary.Substring(start, length).ToString();
             return Convert.ToInt32(binary.Substring(start, length), 2).ToString();
         }
         #endregion
@@ -107,27 +109,11 @@ namespace NMEA_MessageParserConstructor
 
         public string getStringFromBinary(string binarys, int start, int length)
         {
-            //00110011 01000110 01001111 01000110 00111000 
-            string context = binarys.Substring(start, length);
-            int binary = 0;
-            int x = 0;
-            Ascii6 ascii = new Ascii6();
-            for (int i = 0; i < context.Length; i += 6)
-            {
-                binary = Convert.ToInt32(context.Substring(i, 6), 2);
-                Console.WriteLine(binary + " -- " + Convert.ToString(binary, 2));
-                if (binary < 88)
-                    binary += 56;
-                else
-
-                    binary += 48;
-                x++;
-                Console.WriteLine(binary +" -- "+ Convert.ToString(binary,2));
-                //Console.WriteLine(ascii.getStringBinarySix(Convert.ToString(binary,2)));
-                
-            }
-
-            return "0";
+            string metin = binarys.Substring(start, length), context="";
+            Ascii6 ascii6 = new Ascii6();
+            for (int i = 0; i < metin.Length; i+=6)
+                context += ascii6.getStringBinarySix(metin.Substring(i,6));
+            return context;
         }
 
   

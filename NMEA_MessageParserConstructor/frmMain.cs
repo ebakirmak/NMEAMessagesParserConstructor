@@ -46,8 +46,8 @@ private void frmMain_Load(object sender, EventArgs e)
         {
             //string VDM1 = "!AIVDM,2,1,0,A,58wt8Ui`g??r21`7S=:22058<v05Htp000000015>8OA;0sk,0*7B ";
             //string VDM2 = "!AIVDM,2,2,0,A,eQ8823mDm3kP00000000000,2*5D";
-            string VDM1 = "!AIVDM,2,1,1,A,55?MbV02;H;s<HtKR20EHE:address@hidden@Dn2222222216L961O5Gf0NSQEp6ClRp8,0*1C";
-            string VDM2 = "!AIVDM,2,2,1,A,88888888880,2*25";
+            string VDM1 = "!AIVDM,2,1,0,A,58wt8Ui`g??r21`7S=:22058<v05Htp000000015>8OA;0sk,0*7B";
+            string VDM2 = "!AIVDM,2,2,0,A,eQ8823mDm3kP00000000000,2 * 5D";
             string currentVDM;
             Queue<string> mesajQueue = new Queue<string>();
             mesajQueue.Enqueue(VDM1);

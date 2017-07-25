@@ -11,7 +11,7 @@ namespace NMEA_MessageParserConstructor.BL.Messages
     {
         private int UserID { get; set; }
         private byte AISVersionIndicator { get; set; }
-        private int IMONumber { get; set; }
+        private UInt32 IMONumber { get; set; }
         private string CallSign { get; set; }
         private string Name { get; set; }
         private byte TypeOfShipAndCargoType { get; set; }
@@ -69,19 +69,19 @@ namespace NMEA_MessageParserConstructor.BL.Messages
             this.AISVersionIndicator = Convert.ToByte(getSubstringFromBinary(content, 38, 2));
 
             //IMONumber
-            this.IMONumber = Convert.ToInt32(getSubstringFromBinary(content, 40, 30));
+            this.IMONumber = Convert.ToUInt32(getSubstringFromBinary(content, 40, 30));
 
             //Call sign - String
-            this.CallSign = getStringFromBinary(content, 70, 42);
+            this.CallSign = getStringFromBinary(content, 70, 42).Trim();
 
             //Name
-            //this.Name = Convert.ToString(getSubstringFromBinary(content, 112, 120));
+            this.Name = getStringFromBinary(content, 112, 120).Trim();
 
             //Type Of Ship And Cargo Type
             this.TypeOfShipAndCargoType = Convert.ToByte((getSubstringFromBinary(content, 232, 8)));
 
-            //Overall Dimensions String
-            //this.OverallDimensions = Convert.ToString(getSubstringFromBinary(content, 240, 30));
+            //Overall Dimensions String Hatalı
+            this.OverallDimensions = getStringFromBinary(content, 240, 30);
 
             //
             this.TypeOfEPFD = Convert.ToByte(getSubstringFromBinary(content, 270, 4));
@@ -96,7 +96,7 @@ namespace NMEA_MessageParserConstructor.BL.Messages
             this.MaxStaticDraught = Convert.ToDouble(getSubstringFromBinary(content, 294, 8))/10;
 
             //Destination - String
-            //this.Destination = getSubstringFromBinary(content, 302,120);
+            this.Destination = getStringFromBinary(content, 302,120);
 
             //Data Terminal Equipment
             this.DTE = Convert.ToByte(getSubstringFromBinary(content, 422, 1));

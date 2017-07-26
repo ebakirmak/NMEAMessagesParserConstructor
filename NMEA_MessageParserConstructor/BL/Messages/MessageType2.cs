@@ -37,45 +37,45 @@ namespace NMEA_MessageParserConstructor.BL.Messages
         #region Mesaj yapısında bulunan attributelara, alınan mesajdaki değerleri set ettik.
         public override string[] Parser(string message)
         {
-            string[] messages = base.Parser(message);
+            string[] messageParts = base.Parser(message);
             //Context'i oku. Binary yapıda.
-            string content = getContentBinary(messages[5]);
+            string content = getContentBinary(messageParts[5], Remove(messageParts[6]));
             //Tüm mesajlarda olan özellikleri burada gir.
             //MessageID
-            this.MessageID = Convert.ToByte(getSubstringFromBinary(content, 0, 6));
+            this.MessageID = Convert.ToByte(getDecimalFromBinary(content, 0, 6));
             //Repeat indicator
-            this.RepeatIndicator = Convert.ToByte(getSubstringFromBinary(content, 6, 2));     
+            this.RepeatIndicator = Convert.ToByte(getDecimalFromBinary(content, 6, 2));     
             //Source MMSI
-            this.UserID = Convert.ToInt32(getSubstringFromBinary(content, 8, 30));
+            this.UserID = Convert.ToInt32(getDecimalFromBinary(content, 8, 30));
             //NavigationalStatus - Nav Status
-            this.NavigationalStatus = Convert.ToByte(getSubstringFromBinary(content, 38, 4));
+            this.NavigationalStatus = Convert.ToByte(getDecimalFromBinary(content, 38, 4));
             //RateOfTurnROTAIS - ROT
-            this.RateOfTurnROTAIS = float.Parse(getSubstringFromBinary(content, 42, 8));
+            this.RateOfTurnROTAIS = float.Parse(getDecimalFromBinary(content, 42, 8));
             //SOG - **** 10'a böldük. Doküman.
-            this.SOG = float.Parse(getSubstringFromBinary(content, 50, 10)) / 10;
+            this.SOG = float.Parse(getDecimalFromBinary(content, 50, 10)) / 10;
             //PA
-            this.PositionAccuracy = Convert.ToByte(getSubstringFromBinary(content, 60, 1));
+            this.PositionAccuracy = Convert.ToByte(getDecimalFromBinary(content, 60, 1));
             //LON - Dakikaya çevrildi ve 10.000 ile çarpıldı. Bir yanlışlık var.
-            this.Longitude = Convert.ToDouble((getSubstringFromBinary(content, 61, 28))) / 60 / 10000;
+            this.Longitude = Convert.ToDouble((getDecimalFromBinary(content, 61, 28))) / 60 / 10000;
             //LAT - Dakikaya çevrildi ve 10.000 ile çarpıldı. Bir yanlışlık var.
-            this.Latitude = Convert.ToDouble(getSubstringFromBinary(content, 89, 27)) / 60 / 10000;
+            this.Latitude = Convert.ToDouble(getDecimalFromBinary(content, 89, 27)) / 60 / 10000;
             //COG **** 10'a böldük. Doküman.
-            this.COG = float.Parse(getSubstringFromBinary(content, 116, 12)) / 10;
+            this.COG = float.Parse(getDecimalFromBinary(content, 116, 12)) / 10;
             //True Heaading
-            this.TrueHeading = Convert.ToInt32(getSubstringFromBinary(content, 128, 9));
+            this.TrueHeading = Convert.ToInt32(getDecimalFromBinary(content, 128, 9));
             //Time stamp
-            this.TimeStamp = Convert.ToByte(getSubstringFromBinary(content, 137, 6));
+            this.TimeStamp = Convert.ToByte(getDecimalFromBinary(content, 137, 6));
             //Spe Man
-            this.SpecialManoeuvreIndicator = Convert.ToInt32(getSubstringFromBinary(content, 143, 2));
+            this.SpecialManoeuvreIndicator = Convert.ToInt32(getDecimalFromBinary(content, 143, 2));
             //Spare
-            this.Spare = Convert.ToByte(getSubstringFromBinary(content, 145, 3));
+            this.Spare = Convert.ToByte(getDecimalFromBinary(content, 145, 3));
             //RAIM
-            this.RAIMFlag = Convert.ToByte(getSubstringFromBinary(content, 148, 1));
+            this.RAIMFlag = Convert.ToByte(getDecimalFromBinary(content, 148, 1));
             //Communication State            
-            this.Sotdma.SyncState = Convert.ToByte(getSubstringFromBinary(content, 149, 2));
-            this.Sotdma.SlotTimeOut = Convert.ToByte(getSubstringFromBinary(content, 151, 3));
+            this.Sotdma.SyncState = Convert.ToByte(getDecimalFromBinary(content, 149, 2));
+            this.Sotdma.SlotTimeOut = Convert.ToByte(getDecimalFromBinary(content, 151, 3));
             //Communication State Sub Message
-            this.Sotdma.subMessage.SlotNumber = Convert.ToInt32(getSubstringFromBinary(content, 154, 14));
+            this.Sotdma.subMessage.SlotNumber = Convert.ToInt32(getDecimalFromBinary(content, 154, 14));
             this.CommunicationState = Sotdma;
             //Total Number Of Bits
             this.TotalNumberOfBits = 168;

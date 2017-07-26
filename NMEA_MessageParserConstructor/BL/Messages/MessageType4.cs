@@ -36,51 +36,51 @@ namespace NMEA_MessageParserConstructor.BL.Messages
         #region Mesaj yapısında bulunan attributelara, alınan mesajdaki değerleri set ettik.
         public override string[] Parser(string message)
         {
-            string[] messages = base.Parser(message);  
+            string[] messageParts = base.Parser(message);  
             //Context'i oku. Binary yapıda.
-            string content = getContentBinary(messages[5]);
+            string content = getContentBinary(messageParts[5], Remove(messageParts[6]));
             //Tüm mesajlarda olan özellikleri burada gir.
             //MessageID
-            this.MessageID = Convert.ToByte(getSubstringFromBinary(content, 0, 6));
+            this.MessageID = Convert.ToByte(getDecimalFromBinary(content, 0, 6));
             //Repeat indicator
-            this.RepeatIndicator = Convert.ToByte(getSubstringFromBinary(content, 6, 2));
+            this.RepeatIndicator = Convert.ToByte(getDecimalFromBinary(content, 6, 2));
             //Source MMSI
-            this.UserID = Convert.ToInt32(getSubstringFromBinary(content, 8, 30));
+            this.UserID = Convert.ToInt32(getDecimalFromBinary(content, 8, 30));
             //UTC Year
-            this.UtcYear = Convert.ToUInt16(getSubstringFromBinary(content, 38, 14));
+            this.UtcYear = Convert.ToUInt16(getDecimalFromBinary(content, 38, 14));
             //UTC Month
-            this.UtcMonth = Convert.ToByte(getSubstringFromBinary(content, 52, 4));
+            this.UtcMonth = Convert.ToByte(getDecimalFromBinary(content, 52, 4));
             //UTC Day
-            this.UtcDay = Convert.ToByte(getSubstringFromBinary(content, 56, 5));
+            this.UtcDay = Convert.ToByte(getDecimalFromBinary(content, 56, 5));
             //UTC Hour
-            this.UtcHour = Convert.ToByte(getSubstringFromBinary(content, 61, 5));
+            this.UtcHour = Convert.ToByte(getDecimalFromBinary(content, 61, 5));
             //UTC Minute
-            this.UtcMinute = Convert.ToByte(getSubstringFromBinary(content, 66, 6));
+            this.UtcMinute = Convert.ToByte(getDecimalFromBinary(content, 66, 6));
             //UTC Second
-            this.UtcSecond = Convert.ToByte(getSubstringFromBinary(content, 72, 6));
+            this.UtcSecond = Convert.ToByte(getDecimalFromBinary(content, 72, 6));
             //PA
-            this.PositionAccuracy = Convert.ToByte(getSubstringFromBinary(content, 78, 1));
+            this.PositionAccuracy = Convert.ToByte(getDecimalFromBinary(content, 78, 1));
             //LON - Dakikaya çevrildi ve 10.000 ile çarpıldı.
-            this.Longitude = Convert.ToDouble((getSubstringFromBinary(content, 79, 28)));
+            this.Longitude = Convert.ToDouble((getDecimalFromBinary(content, 79, 28)));
             this.Longitude /= 60;
             this.Longitude /= 10000;
             //LAT - Dakikaya çevrildi ve 10.000 ile çarpıldı.
-            this.Latitude = Convert.ToDouble(getSubstringFromBinary(content, 107, 27));
+            this.Latitude = Convert.ToDouble(getDecimalFromBinary(content, 107, 27));
             this.Latitude /= 60;
             this.Latitude /= 10000;
             //Fix Type
-            this.TypeOfElectronicPositionFixingDevice = Convert.ToByte(getSubstringFromBinary(content, 134, 4));
+            this.TypeOfElectronicPositionFixingDevice = Convert.ToByte(getDecimalFromBinary(content, 134, 4));
             //Transmission control for long - range broadcast mesage
-            this.TransmissionControlForLongRangeBroadcastMessage = Convert.ToByte(getSubstringFromBinary(content, 138, 1));
+            this.TransmissionControlForLongRangeBroadcastMessage = Convert.ToByte(getDecimalFromBinary(content, 138, 1));
             //Spare
-            this.Spare = Convert.ToByte(getSubstringFromBinary(content, 139, 9));
+            this.Spare = Convert.ToByte(getDecimalFromBinary(content, 139, 9));
             //RAIM
-            this.RAIMFlag = Convert.ToByte(getSubstringFromBinary(content, 148, 1));
+            this.RAIMFlag = Convert.ToByte(getDecimalFromBinary(content, 148, 1));
             //Communication State            
-            this.Sotdma.SyncState = Convert.ToByte(getSubstringFromBinary(content, 149, 2));
-            this.Sotdma.SlotTimeOut = Convert.ToByte(getSubstringFromBinary(content, 151, 3));
+            this.Sotdma.SyncState = Convert.ToByte(getDecimalFromBinary(content, 149, 2));
+            this.Sotdma.SlotTimeOut = Convert.ToByte(getDecimalFromBinary(content, 151, 3));
             //Communication State Sub Message
-            this.Sotdma.subMessage.SlotNumber = Convert.ToInt32(getSubstringFromBinary(content, 154, 14));
+            this.Sotdma.subMessage.SlotNumber = Convert.ToInt32(getDecimalFromBinary(content, 154, 14));
             this.CommunicationState = Sotdma;
             return null;
         }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NMEA_MessageParserConstructor.BL;
 
 namespace NMEA_MessageParserConstructor.BL.Messages
 {
@@ -28,8 +29,6 @@ namespace NMEA_MessageParserConstructor.BL.Messages
         //Data terminal equipment
         private byte DTE { get; set; }
 
-
-
         public MessageType5()
         {
             this.MessageID = 5;
@@ -41,6 +40,7 @@ namespace NMEA_MessageParserConstructor.BL.Messages
             this.Eta = new ETA();
             this.OverallDimensions = new OverallDimension();
         }
+
         public class ETA
         {
             public byte Minute { get; set; }
@@ -61,26 +61,29 @@ namespace NMEA_MessageParserConstructor.BL.Messages
         #region Mesaj yapısında bulunan attributelara, alınan mesajdaki değerleri set ettik.
         public override string[] Parser(string message1,string message2)
         {
-            //string[] messages = base.Parser(message);
+            //Mesajı parçalarına ayır.
+            string[] messageParts1 = message1.Split(',');
+            string[] messageParts2 = message2.Split(',');
+
             //Context'i oku. Binary yapıda.
-            string content = getContentBinary(message1);
-            content += getContentBinary(message2);
-            //Tüm mesajlarda olan özellikleri burada gir.
+            string content = getContentBinary(messageParts1[5], Remove(messageParts1[6]));
+            content += getContentBinary(messageParts2[5], Remove(messageParts2[6]));
+        
 
             //MessageID
-            this.MessageID = Convert.ToByte(getSubstringFromBinary(content, 0, 6));
+            this.MessageID = Convert.ToByte(getDecimalFromBinary(content, 0, 6));
 
             //Repeat indicator
-            this.RepeatIndicator = Convert.ToByte(getSubstringFromBinary(content, 6, 2));
+            this.RepeatIndicator = Convert.ToByte(getDecimalFromBinary(content, 6, 2));
 
             //Source MMSI
-            this.UserID = Convert.ToInt32(getSubstringFromBinary(content, 8, 30));
+            this.UserID = Convert.ToInt32(getDecimalFromBinary(content, 8, 30));
 
             //AISVersionIndicator
-            this.AISVersionIndicator = Convert.ToByte(getSubstringFromBinary(content, 38, 2));
+            this.AISVersionIndicator = Convert.ToByte(getDecimalFromBinary(content, 38, 2));
 
             //IMONumber
-            this.IMONumber = Convert.ToInt32(getSubstringFromBinary(content, 40, 30));
+            this.IMONumber = Convert.ToInt32(getDecimalFromBinary(content, 40, 30));
 
             //Call sign - String
             this.CallSign = getStringFromBinary(content, 70, 42).Trim();
@@ -89,34 +92,34 @@ namespace NMEA_MessageParserConstructor.BL.Messages
             this.Name = getStringFromBinary(content, 112, 120).Trim();
 
             //Type Of Ship And Cargo Type
-            this.TypeOfShipAndCargoType = Convert.ToByte((getSubstringFromBinary(content, 232, 8)));
+            this.TypeOfShipAndCargoType = Convert.ToByte((getDecimalFromBinary(content, 232, 8)));
 
             //Overall Dimensions String Hatalı - DÖKÜMANDA HATALI SOR.
-            this.OverallDimensions.A =Convert.ToInt32(getSubstringFromBinary(content, 240, 9));
-            this.OverallDimensions.B = Convert.ToInt32(getSubstringFromBinary(content, 249, 9));
-            this.OverallDimensions.C = Convert.ToInt32(getSubstringFromBinary(content, 258, 6));
-            this.OverallDimensions.D = Convert.ToInt32(getSubstringFromBinary(content, 264, 6));
+            this.OverallDimensions.A =Convert.ToInt32(getDecimalFromBinary(content, 240, 9));
+            this.OverallDimensions.B = Convert.ToInt32(getDecimalFromBinary(content, 249, 9));
+            this.OverallDimensions.C = Convert.ToInt32(getDecimalFromBinary(content, 258, 6));
+            this.OverallDimensions.D = Convert.ToInt32(getDecimalFromBinary(content, 264, 6));
             
             //
-            this.TypeOfEPFD = Convert.ToByte(getSubstringFromBinary(content, 270, 4));
+            this.TypeOfEPFD = Convert.ToByte(getDecimalFromBinary(content, 270, 4));
 
             //Estimated time of arrival.
-            this.Eta.Month = Convert.ToByte(getSubstringFromBinary(content, 274, 4));
-            this.Eta.Day = Convert.ToByte(getSubstringFromBinary(content, 278, 5));
-            this.Eta.Hour = Convert.ToByte(getSubstringFromBinary(content, 283, 5));
-            this.Eta.Minute =Convert.ToByte (getSubstringFromBinary(content, 288, 6));
+            this.Eta.Month = Convert.ToByte(getDecimalFromBinary(content, 274, 4));
+            this.Eta.Day = Convert.ToByte(getDecimalFromBinary(content, 278, 5));
+            this.Eta.Hour = Convert.ToByte(getDecimalFromBinary(content, 283, 5));
+            this.Eta.Minute =Convert.ToByte (getDecimalFromBinary(content, 288, 6));
             
             //Maximum present static draught
-            this.MaxStaticDraught = Convert.ToDouble(getSubstringFromBinary(content, 294, 8))/10;
+            this.MaxStaticDraught = Convert.ToDouble(getDecimalFromBinary(content, 294, 8))/10;
 
             //Destination - String
             this.Destination = getStringFromBinary(content, 302,120);
 
             //Data Terminal Equipment
-            this.DTE = Convert.ToByte(getSubstringFromBinary(content, 422, 1));
+            this.DTE = Convert.ToByte(getDecimalFromBinary(content, 422, 1));
 
             //Spare
-            this.Spare = Convert.ToByte(getSubstringFromBinary(content, 423, 1));
+            this.Spare = Convert.ToByte(getDecimalFromBinary(content, 423, 1));
       
             return null;
         }

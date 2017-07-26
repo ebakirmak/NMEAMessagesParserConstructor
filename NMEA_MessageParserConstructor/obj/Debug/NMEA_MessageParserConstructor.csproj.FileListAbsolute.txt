@@ -1,9 +1,12 @@
 C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\bin\Debug\NMEA_MessageParserConstructor.exe.config
-C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\obj\Debug\NMEA_MessageParserConstructor.Properties.Resources.resources
-C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\obj\Debug\NMEA_MessageParserConstructor.csproj.GenerateResource.Cache
-C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\obj\Debug\NMEA_MessageParserConstructor.frmMain.resources
 C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\bin\Debug\NMEA_MessageParserConstructor.exe
 C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\bin\Debug\NMEA_MessageParserConstructor.pdb
+C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\obj\Debug\NMEA_MessageParserConstructor.frmMain.resources
+C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\obj\Debug\NMEA_MessageParserConstructor.Properties.Resources.resources
+C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\obj\Debug\NMEA_MessageParserConstructor.csproj.GenerateResource.Cache
 C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\obj\Debug\NMEA_MessageParserConstructor.exe
 C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\obj\Debug\NMEA_MessageParserConstructor.pdb
 C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\obj\Debug\NMEA_MessageParserConstructor.csprojResolveAssemblyReference.cache
+C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\bin\Debug\NLog.config
+C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\bin\Debug\NLog.dll
+C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\bin\Debug\NLog.xml

@@ -7,21 +7,18 @@ using System.Threading.Tasks;
 
 namespace NMEA_MessageParserConstructor.BL.Messages
 {
-    public class MessageType10 :RootMessages
+    public class MessageType14 : RootMessages
     {
-
-        public int SourceID { get; set; }
-        public int DestinationID { get; set; }
-        public Logger log { get; set; }
-
-        public MessageType10()
+        private int SourceID { get; set; }
+        private string SafetyRelatedText { get; set; }
+        private Logger log;
+        public MessageType14()
         {
-            this.MessageID = 10;
-            this.Description = "Coordinated universal time and date inquiry";
-            this.TotalNumberOfBits = 72;
+            this.MessageID = 14;
+            this.TotalNumberOfBits = 1008;
+            this.Description = "Safety related broadcast message";
             this.log = LogManager.GetCurrentClassLogger();
         }
-
 
         #region Mesaj yapısında bulunan attributelara, alınan mesajdaki değerleri set ettik.
         public override string[] Parser(string message)
@@ -30,31 +27,32 @@ namespace NMEA_MessageParserConstructor.BL.Messages
             {
                 string[] messageParts = base.Parser(message);
                 string content = getContentBinary(messageParts[5], Remove(messageParts[6]));
-
+                int a = content.Length;
                 //Message ID
                 this.MessageID = Convert.ToByte(getDecimalFromBinary(content, 0, 6));
+
                 //Repeat Indicator
                 this.RepeatIndicator = Convert.ToByte(getDecimalFromBinary(content, 6, 2));
+
                 //Source ID - UserID
                 this.SourceID = Convert.ToInt32(getDecimalFromBinary(content, 8, 30));
+
                 //Spare
                 this.Spare = Convert.ToByte(getDecimalFromBinary(content, 38, 2));
-                //Destination ID
-                this.DestinationID = Convert.ToInt32(getDecimalFromBinary(content, 40, 30));
-                //Spare
-                this.Spare = Convert.ToByte(getDecimalFromBinary(content, 70, 2));   
-                
-                          
+
+                //Safety Related Text
+                this.SafetyRelatedText = Convert.ToString(getStringFromBinary(content, 40, content.Length - 40));
+
             }
             catch (Exception ex)
             {
-                log.Error(ex, " MessageType10 :: Parser()");
-                throw;
+                log.Error(ex, " MessageType14 :: Parser()");
+                //throw;
+                return null;
             }
 
 
             return null;
-
         }
         #endregion
 
@@ -66,10 +64,12 @@ namespace NMEA_MessageParserConstructor.BL.Messages
                 "Repeat Indicator: " + this.RepeatIndicator + "\n" +
                 "Source ID: " + this.SourceID + "\n" +
                 "Spare: " + this.Spare + "\n" +
-                "Destination ID: " + this.DestinationID + "\n" +
-                "Spare: " + this.Spare + "\n";
+                "Safety Related Text: " + this.SafetyRelatedText;
+             
+
 
         }
         #endregion
+
     }
 }

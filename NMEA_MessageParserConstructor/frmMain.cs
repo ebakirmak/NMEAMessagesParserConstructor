@@ -18,7 +18,7 @@ namespace NMEA_MessageParserConstructor
         private AllMessage allMessage;
         private int sentencePartCount;
         public frmMain()
-        {
+        {   
             InitializeComponent();
          
             this.root =  new RootMessages();
@@ -26,12 +26,8 @@ namespace NMEA_MessageParserConstructor
         }
 
 
-        //string VDM1 = "!AIVDM,2,1,1,A,55?MbV02;H;s<HtKR20EHE:address@hidden@Dn2222222216L961O5Gf0NSQEp6ClRp8,0*1C";
-        //string VDM2 = "!AIVDM,2,2,1,A,88888888880,2*25";
-        //string VDM1 = "!AIVDM,2,1,0,A,58wt8Ui`g??r21`7S=:22058<v05Htp000000015>8OA;0sk,0*7B";
-        //string VDM2 = "!AIVDM,2,2,0,A,eQ8823mDm3kP00000000000,2 * 5D";
-        string VDM1 = "!AIVDM,1,1,,B,:5MlU41GMK6@,0*6C";
-
+        string VDM1 = "!AIVDM,1,1,,B,C5N3SRgPEnJGEBT>NhWAwwo862PaLELTBJ:V00000000S0D:R220,0*0B";
+        //string VDM2 = "!AIVDM,2,2,5,A,:Oko02TSwu8<:Jbb,0*11";
 
         private void frmMain_Load(object sender, EventArgs e)
         {
@@ -101,10 +97,60 @@ namespace NMEA_MessageParserConstructor
                         mesaj.Parser(VDM1);
                         MessageBox.Show(mesaj.ToString());
                     }
+                    else if (messageID == 11)
+                    {
+                        MessageType11 mesaj = new MessageType11();
+                        mesaj.Parser(VDM1);
+                        MessageBox.Show(mesaj.ToString());
+                    }
+                      else if(messageID == 12)
+                    {
+                        MessageType12 mesaj = new MessageType12();
+                        mesaj.Parser(VDM1);
+                        MessageBox.Show(mesaj.ToString());
+                    }
+                    else if (messageID == 13)
+                    {
+                        MessageType13 mesaj = new MessageType13();
+                        mesaj.Parser(VDM1);
+                        MessageBox.Show(mesaj.ToString());
+                    }
+                    else if (messageID == 14)
+                    {
+                        MessageType14 mesaj = new MessageType14();
+                        mesaj.Parser(VDM1);
+                        MessageBox.Show(mesaj.ToString());
+                    }
+                    else if (messageID == 15)
+                    {
+                        MessageType15 mesaj = new MessageType15();
+                        mesaj.Parser(VDM1);
+                        MessageBox.Show(mesaj.ToString());
+                    }
+                    else if (messageID == 16)
+                    {
+                        MessageType16 mesaj = new MessageType16();
+                        mesaj.Parser(VDM1);
+                        MessageBox.Show(mesaj.ToString());
+                    }
+                    else if (messageID == 18)
+                    {
+                        MessageType18 mesaj = new MessageType18();
+                        mesaj.Parser(VDM1);
+                        MessageBox.Show(mesaj.ToString());
+                    }
+                    else if (messageID == 19)
+                    {
+                        MessageType19 mesaj = new MessageType19();
+                        mesaj.Parser(VDM1);
+                        MessageBox.Show(mesaj.ToString());
+                    }
                 else
                     {
                         Console.WriteLine("Hatalı Mesaj");
                     }
+                    
+
                 }
                 else if (sentencePartCount == 2)
                 { 
@@ -114,7 +160,19 @@ namespace NMEA_MessageParserConstructor
                         mesaj.Parser(currentVDM,allMessage.Dequeue());
                         MessageBox.Show(mesaj.ToString());
                     }
-                }
+                    else if (messageID == 12)
+                    {
+                        MessageType12 mesaj = new MessageType12();
+                        //mesaj.Parser(VDM1,VDM2);
+                        MessageBox.Show(mesaj.ToString());
+                    }
+                    else if (messageID == 17)
+                    {
+                        MessageType17 mesaj = new MessageType17();
+                        //mesaj.Parser(VDM1, VDM2);
+                        MessageBox.Show(mesaj.ToString());
+                    }
+            }
         }
     }
 }

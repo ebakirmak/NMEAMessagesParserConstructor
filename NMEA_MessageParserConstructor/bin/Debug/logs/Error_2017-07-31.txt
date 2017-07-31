@@ -1,0 +1,67 @@
+2017-07-31 11:12:16.1948 ERROR RootMessages :: getStringFromBinary() System.ArgumentOutOfRangeException: Index and length must refer to a location within the string.
+Parameter name: length
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at NMEA_MessageParserConstructor.RootMessages.getStringFromBinary(String binarys, Int32 start, Int32 length) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 134    at System.String.Substring(Int32 startIndex, Int32 length)
+   at NMEA_MessageParserConstructor.RootMessages.getStringFromBinary(String binarys, Int32 start, Int32 length) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 134
+
+2017-07-31 11:12:27.3597 ERROR RootMessages :: getStringFromBinary() System.ArgumentOutOfRangeException: Index and length must refer to a location within the string.
+Parameter name: length
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at NMEA_MessageParserConstructor.RootMessages.getStringFromBinary(String binarys, Int32 start, Int32 length) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 134    at System.String.Substring(Int32 startIndex, Int32 length)
+   at NMEA_MessageParserConstructor.RootMessages.getStringFromBinary(String binarys, Int32 start, Int32 length) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 134
+
+2017-07-31 11:13:50.6642 ERROR RootMessages :: getStringFromBinary() System.ArgumentOutOfRangeException: Index and length must refer to a location within the string.
+Parameter name: length
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at NMEA_MessageParserConstructor.RootMessages.getStringFromBinary(String binarys, Int32 start, Int32 length) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 134    at System.String.Substring(Int32 startIndex, Int32 length)
+   at NMEA_MessageParserConstructor.RootMessages.getStringFromBinary(String binarys, Int32 start, Int32 length) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 134
+
+2017-07-31 11:21:09.5617 ERROR RootMessages :: getStringFromBinary() System.ArgumentOutOfRangeException: Index and length must refer to a location within the string.
+Parameter name: length
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at NMEA_MessageParserConstructor.RootMessages.getStringFromBinary(String binarys, Int32 start, Int32 length) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 134    at System.String.Substring(Int32 startIndex, Int32 length)
+   at NMEA_MessageParserConstructor.RootMessages.getStringFromBinary(String binarys, Int32 start, Int32 length) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 134
+
+2017-07-31 11:48:43.9813 ERROR RootMessages :: getStringFromBinary() System.ArgumentOutOfRangeException: Index and length must refer to a location within the string.
+Parameter name: length
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at NMEA_MessageParserConstructor.RootMessages.getStringFromBinary(String binarys, Int32 start, Int32 length) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 134    at System.String.Substring(Int32 startIndex, Int32 length)
+   at NMEA_MessageParserConstructor.RootMessages.getStringFromBinary(String binarys, Int32 start, Int32 length) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 134
+
+2017-07-31 13:31:04.3033 ERROR  MessageType15 :: Parser() System.ArgumentOutOfRangeException: Index and length must refer to a location within the string.
+Parameter name: length
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at NMEA_MessageParserConstructor.RootMessages.getDecimalFromBinary(String binary, Int32 start, Int32 length) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 120
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType15.Parser(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType15.cs:line 58    at System.String.Substring(Int32 startIndex, Int32 length)
+   at NMEA_MessageParserConstructor.RootMessages.getDecimalFromBinary(String binary, Int32 start, Int32 length) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 120
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType15.Parser(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType15.cs:line 58
+
+2017-07-31 13:32:35.0390 ERROR RootMessages :: getMessageID System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 86    at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 86
+
+2017-07-31 13:44:59.6824 ERROR  MessageType16 :: Parser() System.ArgumentOutOfRangeException: Index and length must refer to a location within the string.
+Parameter name: length
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at NMEA_MessageParserConstructor.RootMessages.getDecimalFromBinary(String binary, Int32 start, Int32 length) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 129
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType16.Parser(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType16.cs:line 54    at System.String.Substring(Int32 startIndex, Int32 length)
+   at NMEA_MessageParserConstructor.RootMessages.getDecimalFromBinary(String binary, Int32 start, Int32 length) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 129
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType16.Parser(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType16.cs:line 54
+
+2017-07-31 13:54:41.5051 ERROR  MessageType16 :: Parser() System.ArgumentOutOfRangeException: Index and length must refer to a location within the string.
+Parameter name: length
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at NMEA_MessageParserConstructor.RootMessages.getDecimalFromBinary(String binary, Int32 start, Int32 length) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 129
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType16.Parser(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType16.cs:line 54    at System.String.Substring(Int32 startIndex, Int32 length)
+   at NMEA_MessageParserConstructor.RootMessages.getDecimalFromBinary(String binary, Int32 start, Int32 length) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 129
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType16.Parser(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType16.cs:line 54
+
+2017-07-31 16:26:17.2471 ERROR  MessageType18 :: Parser() System.OverflowException: Value was either too large or too small for an unsigned byte.
+   at System.Byte.Parse(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToByte(String value)
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType18.Parser(String message1) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType18.cs:line 102    at System.Byte.Parse(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToByte(String value)
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType18.Parser(String message1) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType18.cs:line 102
+
+2017-07-31 18:00:17.4133 ERROR  MessageType19 :: Parser() System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType19.Parser(String message1) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType19.cs:line 86    at NMEA_MessageParserConstructor.BL.Messages.MessageType19.Parser(String message1) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType19.cs:line 86
+

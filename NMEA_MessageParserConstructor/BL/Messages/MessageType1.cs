@@ -62,8 +62,8 @@ namespace NMEA_MessageParserConstructor
             this.SOG = float.Parse(getDecimalFromBinary(content, 50, 10))/10;
             //PA
             this.PositionAccuracy = Convert.ToByte(getDecimalFromBinary(content, 60, 1));
-            //LON - Dakikaya çevrildi ve 10.000 ile çarpıldı.
-            this.Longitude = Convert.ToDouble((getDecimalFromBinary(content, 61, 28))) / 60 / 10000;
+            //LON - 600.000 ' e bölündü.
+            this.Longitude = Convert.ToDouble((getDecimalFromBinary(content, 61, 28))) /600000;
             //LAT - Dakikaya çevrildi ve 10.000 ile çarpıldı.
             this.Latitude = Convert.ToDouble(getDecimalFromBinary(content, 89, 27)) / 60 / 10000;
             //COG **** 10'a böldük. Doküman.

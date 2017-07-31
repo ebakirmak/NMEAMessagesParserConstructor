@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NMEA_MessageParserConstructor.BL.Messages
 {
-    public class MessageType4 : RootMessages
+    public class MessageType11 : RootMessages
     {
         private int UserID { get; set; }
         private ushort UtcYear { get; set; }
@@ -24,21 +24,21 @@ namespace NMEA_MessageParserConstructor.BL.Messages
         private byte RAIMFlag { get; set; }
         private SOTDMA Sotdma;
 
-        public MessageType4()
+        public MessageType11()
         {
             this.MessageID = 4;
             this.RepeatIndicator = 0;
-            this.Description = "Base station report";
-            this.Priority = 1;            
+            this.Description = "Coordinated Universal Time and Date Inquiry";
+            this.Priority = 1;
             this.TransmissionControlForLongRangeBroadcastMessage = 0;
             this.TotalNumberOfBits = 168;
-            this.Sotdma = new SOTDMA();         
+            this.Sotdma = new SOTDMA();
         }
 
         #region Mesaj yapısında bulunan attributelara, alınan mesajdaki değerleri set ettik.
         public override string[] Parser(string message)
         {
-            string[] messageParts = base.Parser(message);  
+            string[] messageParts = base.Parser(message);
             //Context'i oku. Binary yapıda.
             string content = getContentBinary(messageParts[5], Remove(messageParts[6]));
             //Tüm mesajlarda olan özellikleri burada gir.
@@ -105,11 +105,12 @@ namespace NMEA_MessageParserConstructor.BL.Messages
                 "Lon" + this.Longitude + "\n" +
                 "Lat" + this.Latitude + "\n" +
                 "Type of electronic position fixing device" + this.TypeOfElectronicPositionFixingDevice + "\n" +
-                "Transmission control..." + this.TransmissionControlForLongRangeBroadcastMessage + "\n"+   
+                "Transmission control..." + this.TransmissionControlForLongRangeBroadcastMessage + "\n" +
                 "Spare" + this.Spare + "\n" +
                 "RAIM" + this.RAIMFlag + "\n" +
                 this.CommunicationState.ToString();
         }
         #endregion
+
     }
 }

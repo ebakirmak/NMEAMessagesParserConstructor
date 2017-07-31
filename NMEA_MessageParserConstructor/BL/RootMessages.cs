@@ -80,12 +80,21 @@ namespace NMEA_MessageParserConstructor
         #region Message ID geri döndür. Gönderilen Message ID'ye göre ilgili sınıfta işlem yapılacak.
         public byte getMessageID(string message)
         {
-            //ascii8 içeriğini ascii6 dönüştür. Binary yapıda al. 2 lik tabandan 10'luk tabana çevir.
-            return Convert.ToByte(getDecimalFromBinary(getContentBinary(Parser(message)[5],0), 0, 6));
+            try
+            {
+                //ascii8 içeriğini ascii6 dönüştür. Binary yapıda al. 2 lik tabandan 10'luk tabana çevir.
+                return Convert.ToByte(getDecimalFromBinary(getContentBinary(Parser(message)[5], 0), 0, 6));
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex, "RootMessages :: getMessageID");
+                throw;
+            }
+           
         }
         #endregion
 
-       #region ascii8 karakterlerini ascii6 tablosuna çevir. Daha sonra bunların 6 basamaklı binary yapılarını bul.  Örnek 010100 gibi. Fazladan karakterleri at.
+        #region ascii8 karakterlerini ascii6 tablosuna çevir. Daha sonra bunların 6 basamaklı binary yapılarını bul.  Örnek 010100 gibi.
         //Removezero değiştir.
         public string getContentBinary(string content,int removeZero)
         {
@@ -108,6 +117,7 @@ namespace NMEA_MessageParserConstructor
                 bits += currentBits.PadLeft(6, '0');
                
             }
+            //return bits;
             return bits.Remove(bits.Length-removeZero,removeZero);
         }
         #endregion
@@ -123,10 +133,23 @@ namespace NMEA_MessageParserConstructor
         #region Alınan bir binary içeriğini (000001) 2'lik tabandan 10'luk tabana çevir ve ascii 6 tablosunda ki karakter değerini döndürür.
         public string getStringFromBinary(string binarys, int start, int length)
         {
+            //string ifadeler
             string metin = binarys.Substring(start, length), context = "";
             Ascii6 ascii6 = new Ascii6();
-            for (int i = 0; i < metin.Length; i += 6)
-                context += ascii6.getStringBinarySix(metin.Substring(i, 6));
+            //Ascii6 tablosundan, binary değerine göre ilgili karakteri döndürüyor.
+            for (int i = 0; i < metin.Length; i += 6) {
+                try
+                {
+                    context += ascii6.getStringBinarySix(metin.Substring(i, 6));
+                }
+                catch (Exception ex)
+                {
+                    log.Error(ex, "RootMessages :: getStringFromBinary()");
+                    //throw;
+                }
+               
+            }
+
             return context;
         }
         #endregion

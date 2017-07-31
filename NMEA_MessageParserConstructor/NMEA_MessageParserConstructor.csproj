@@ -55,6 +55,15 @@
     <Compile Include="BL\Dictionarys\Ascii6.cs" />
     <Compile Include="BL\Messages\MessageType1.cs" />
     <Compile Include="BL\Messages\MessageType10.cs" />
+    <Compile Include="BL\Messages\MessageType11.cs" />
+    <Compile Include="BL\Messages\MessageType12.cs" />
+    <Compile Include="BL\Messages\MessageType13.cs" />
+    <Compile Include="BL\Messages\MessageType14.cs" />
+    <Compile Include="BL\Messages\MessageType15.cs" />
+    <Compile Include="BL\Messages\MessageType16.cs" />
+    <Compile Include="BL\Messages\MessageType17.cs" />
+    <Compile Include="BL\Messages\MessageType18.cs" />
+    <Compile Include="BL\Messages\MessageType19.cs" />
     <Compile Include="BL\Messages\MessageType2.cs" />
     <Compile Include="BL\Messages\MessageType3.cs" />
     <Compile Include="BL\Messages\MessageType4.cs" />

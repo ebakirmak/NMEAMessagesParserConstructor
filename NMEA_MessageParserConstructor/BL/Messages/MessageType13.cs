@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace NMEA_MessageParserConstructor.BL.Messages
 {
-    class MessageType7 : RootMessages
+    public class MessageType13 : RootMessages
     {
         private int SourceID { get; set; }
-        private byte Spare { get; set; }
         private int DestinationID1 { get; set; }
         private int SeqNumForID1 { get; set; }
         private int DestinationID2 { get; set; }
@@ -21,11 +20,13 @@ namespace NMEA_MessageParserConstructor.BL.Messages
         private int SeqNumForID4 { get; set; }
         private Logger log;
 
-        public MessageType7()
+        public MessageType13()
         {
             this.MessageID = 7;
             this.TotalNumberOfBits = 168;
+            this.Description = "Safety related acknowledge";
             this.log = LogManager.GetCurrentClassLogger();
+            
         }
 
         #region Mesaj yapısında bulunan attributelara, alınan mesajdaki değerleri set ettik.
@@ -34,7 +35,7 @@ namespace NMEA_MessageParserConstructor.BL.Messages
             try
             {
                 string[] messageParts = base.Parser(message);
-                string content = getContentBinary(messageParts[5],Remove(messageParts[6]));
+                string content = getContentBinary(messageParts[5], Remove(messageParts[6]));
                 int a = content.Length;
                 //Message ID
                 this.MessageID = Convert.ToByte(getDecimalFromBinary(content, 0, 6));
@@ -47,7 +48,7 @@ namespace NMEA_MessageParserConstructor.BL.Messages
 
                 //Spare
                 this.Spare = Convert.ToByte(getDecimalFromBinary(content, 38, 2));
-        
+
                 //Destination ID 1
                 this.DestinationID1 = Convert.ToInt32(getDecimalFromBinary(content, 40, 30));
 
@@ -81,7 +82,7 @@ namespace NMEA_MessageParserConstructor.BL.Messages
                     this.SeqNumForID4 = Convert.ToInt32(getDecimalFromBinary(content, 166, 2));
                 }
 
-          
+
             }
             catch (Exception ex)
             {

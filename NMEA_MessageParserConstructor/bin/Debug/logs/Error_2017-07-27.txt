@@ -1,0 +1,7 @@
+2017-07-27 11:44:35.8714 ERROR AllMessage :: Dequeue() System.InvalidOperationException: Queue empty.
+   at System.ThrowHelper.ThrowInvalidOperationException(ExceptionResource resource)
+   at System.Collections.Generic.Queue`1.Dequeue()
+   at NMEA_MessageParserConstructor.BL.AllMessage.Dequeue() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\AllMessage.cs:line 43    at System.ThrowHelper.ThrowInvalidOperationException(ExceptionResource resource)
+   at System.Collections.Generic.Queue`1.Dequeue()
+   at NMEA_MessageParserConstructor.BL.AllMessage.Dequeue() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\AllMessage.cs:line 43
+

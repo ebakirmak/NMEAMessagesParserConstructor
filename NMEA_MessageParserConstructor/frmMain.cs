@@ -30,7 +30,7 @@ namespace NMEA_MessageParserConstructor
         //string VDM2 = "!AIVDM,2,2,1,A,88888888880,2*25";
         //string VDM1 = "!AIVDM,2,1,0,A,58wt8Ui`g??r21`7S=:22058<v05Htp000000015>8OA;0sk,0*7B";
         //string VDM2 = "!AIVDM,2,2,0,A,eQ8823mDm3kP00000000000,2 * 5D";
-        string VDM1 = "!AIVDM,1,1,,B,:6TMCD1GOS60,0*5B,s36310,d-081,T59.01777335";
+        string VDM1 = "!AIVDM,1,1,,B,:5MlU41GMK6@,0*6C";
 
 
         private void frmMain_Load(object sender, EventArgs e)

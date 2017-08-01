@@ -130,29 +130,29 @@ namespace NMEA_MessageParserConstructor
         }
         #endregion
 
-        #region Alınan bir binary içeriğini (000001) 2'lik tabandan 10'luk tabana çevir ve ascii 6 tablosunda ki karakter değerini döndürür.
-        public string getStringFromBinary(string binarys, int start, int length)
-        {
-            //string ifadeler
-            string metin = binarys.Substring(start, length), context = "";
-            Ascii6 ascii6 = new Ascii6();
-            //Ascii6 tablosundan, binary değerine göre ilgili karakteri döndürüyor.
-            for (int i = 0; i < metin.Length; i += 6) {
-                try
-                {
-                    context += ascii6.getStringBinarySix(metin.Substring(i, 6));
-                }
-                catch (Exception ex)
-                {
-                    log.Error(ex, "RootMessages :: getStringFromBinary()");
-                    //throw;
-                }
+                      #region Alınan bir binary içeriğini (000001) 2'lik tabandan 10'luk tabana çevir ve ascii 6 tablosunda ki karakter değerini döndürür.
+                    public string getStringFromBinary(string binarys, int start, int length)
+                    {
+                        //string ifadeler
+                        string metin = binarys.Substring(start, length), context = "";
+                        Ascii6 ascii6 = new Ascii6();
+                        //Ascii6 tablosundan, binary değerine göre ilgili karakteri döndürüyor.
+                        for (int i = 0; i < metin.Length; i += 6) {
+                            try
+                            {
+                                context += ascii6.getStringBinarySix(metin.Substring(i, 6));
+                            }
+                            catch (Exception ex)
+                            {
+                                log.Error(ex, "RootMessages :: getStringFromBinary()");
+                                //throw;
+                            }
                
-            }
+                        }
 
-            return context;
-        }
-        #endregion
+                        return context;
+                    }
+                    #endregion
 
         #region Sondaki 6'nın katına eşitlemek için koyulan fazladan karakterleri at. Fonk ismini değiştir.
         public int Remove(string messagePart )
@@ -160,42 +160,14 @@ namespace NMEA_MessageParserConstructor
             string[] messageParts = messagePart.Split('*');
             return Convert.ToInt32(messageParts[0]);
         }
-        
+
         #endregion
 
 
+
+
+
     }
-    enum enumPriority
-        {
-            PriorityOne,
-            PriorityTwo,
-            PriorityThree,
-            PriorityFour
 
-        };
-
-        enum enumAccessSchema
-        {
-            SOTDMA,
-            RATDMA,
-            CSTDMA,
-            MSSA,
-            FATDMA,
-            ITDMA
-        };
-
-        enum enumCommunicitonState
-        {
-            SOTDMA,
-            ITDMA,
-            NA
-        };
-
-        enum enumTransmittedStation
-        {
-            M,
-            B,
-            MB
-        };
-    }
+}
 

@@ -1,4 +1,5 @@
 ﻿using NLog;
+using NMEA_MessageParserConstructor.BL.AnnexClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,13 +33,7 @@ namespace NMEA_MessageParserConstructor.BL.Messages
         private byte Spare3 { get; set; }
         private Logger log { get; set; }
 
-        public class OverallDimension
-        {
-            public int A { get; set; }
-            public int B { get; set; }
-            public int C { get; set; }
-            public int D { get; set; }
-        }
+     
 
         public MessageType19()
         {
@@ -84,10 +79,7 @@ namespace NMEA_MessageParserConstructor.BL.Messages
                 //Type of ship and cargo type
                 this.TypeOfShipAndCargoType = Convert.ToByte(getDecimalFromBinary(content, 263, 8));
                 //Dimension of ship/reference for position
-                this.DimensionOfShip.A = Convert.ToInt32(getDecimalFromBinary(content, 271, 9));
-                this.DimensionOfShip.B = Convert.ToInt32(getDecimalFromBinary(content, 280, 9));
-                this.DimensionOfShip.C = Convert.ToInt32(getDecimalFromBinary(content, 289, 6));
-                this.DimensionOfShip.D = Convert.ToInt32(getDecimalFromBinary(content, 295, 6));
+                this.DimensionOfShip.setValue(content, 271);
                 //Type of Electronic position fixing device
                 this.TypeOfElectronicPositionFixing = Convert.ToByte(getDecimalFromBinary(content, 301, 4));
                 //RAIM Flag
@@ -131,10 +123,10 @@ namespace NMEA_MessageParserConstructor.BL.Messages
                  "Spare 2 : " + this.Spare2 + "\n" +
                  "Name: " + this.Name + "\n" +
                  "Type of ship and cargo type: " + this.TypeOfShipAndCargoType + "\n" +
-                 "Dimension of ship: " + this.DimensionOfShip.A
-                                      + this.DimensionOfShip.B
-                                      + this.DimensionOfShip.C
-                                      + this.DimensionOfShip.D + "\n" +
+                 "Dimension of ship: " + this.DimensionOfShip.getA() 
+                                      + this.DimensionOfShip.getB()
+                                      + this.DimensionOfShip.getC()
+                                      + this.DimensionOfShip.getD() + "\n" +
                  "Type of electronic position fixing device: " + this.TypeOfElectronicPositionFixing + "\n" +
                  "RAIM Flag: " + this.RAIMFlag + "\n" +
                  "DTE: " + this.DTE + "\n" +

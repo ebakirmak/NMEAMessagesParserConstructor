@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BL\AllMessage.cs" />
+    <Compile Include="BL\AnnexClasses\OverallDimension.cs" />
     <Compile Include="BL\CommunicationState\ITDMA.cs" />
     <Compile Include="BL\CommunicationState\SOTDMA.cs" />
     <Compile Include="BL\Dictionarys\Ascii6.cs" />
@@ -65,6 +66,8 @@
     <Compile Include="BL\Messages\MessageType18.cs" />
     <Compile Include="BL\Messages\MessageType19.cs" />
     <Compile Include="BL\Messages\MessageType2.cs" />
+    <Compile Include="BL\Messages\MessageType20.cs" />
+    <Compile Include="BL\Messages\MessageType21.cs" />
     <Compile Include="BL\Messages\MessageType3.cs" />
     <Compile Include="BL\Messages\MessageType4.cs" />
     <Compile Include="BL\Messages\MessageType5.cs" />

@@ -19,7 +19,8 @@ namespace NMEA_MessageParserConstructor.BL.Messages
         private byte PositionAccuracy { get; set; }
         private double Longitude { get; set; }
         private double Latitude { get; set; }
-        private byte TypeOfElectronicPositionFixingDevice { get; set; }
+        //Type Of Electronic Position Fixing Device
+        private byte TOEPFD { get; set; }
         private byte TransmissionControlForLongRangeBroadcastMessage { get; set; }
         private byte RAIMFlag { get; set; }
         private SOTDMA Sotdma;
@@ -71,7 +72,7 @@ namespace NMEA_MessageParserConstructor.BL.Messages
             this.Latitude /= 60;
             this.Latitude /= 10000;
             //Fix Type
-            this.TypeOfElectronicPositionFixingDevice = Convert.ToByte(getDecimalFromBinary(content, 134, 4));
+            this.TOEPFD = Convert.ToByte(getDecimalFromBinary(content, 134, 4));
             //Transmission control for long - range broadcast mesage
             this.TransmissionControlForLongRangeBroadcastMessage = Convert.ToByte(getDecimalFromBinary(content, 138, 1));
             //Spare
@@ -104,7 +105,7 @@ namespace NMEA_MessageParserConstructor.BL.Messages
                 "PA" + this.PositionAccuracy + "\n" +
                 "Lon" + this.Longitude + "\n" +
                 "Lat" + this.Latitude + "\n" +
-                "Type of electronic position fixing device" + this.TypeOfElectronicPositionFixingDevice + "\n" +
+                "Type of electronic position fixing device" + this.TOEPFD + "\n" +
                 "Transmission control..." + this.TransmissionControlForLongRangeBroadcastMessage + "\n"+   
                 "Spare" + this.Spare + "\n" +
                 "RAIM" + this.RAIMFlag + "\n" +

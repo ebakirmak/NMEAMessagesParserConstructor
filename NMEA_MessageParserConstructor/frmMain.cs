@@ -26,14 +26,14 @@ namespace NMEA_MessageParserConstructor
         }
 
 
-        string VDM1 = "!AIVDM,1,1,,B,C5N3SRgPEnJGEBT>NhWAwwo862PaLELTBJ:V00000000S0D:R220,0*0B";
-        //string VDM2 = "!AIVDM,2,2,5,A,:Oko02TSwu8<:Jbb,0*11";
+        string VDM1 = "!AIVDO,2,1,5,B,E1c2;q@b44ah4ah0h:2ab@70VRpU<Bgpm4:gP50HH`Th`QF5,0*7B";
+        string VDM2 = "!AIVDO,2,2,5,B,1CQ1A83PCAH0,0*60";
 
         private void frmMain_Load(object sender, EventArgs e)
         {
             //2 mesaj kuyruğa ekleniyor.
             allMessage.Enqueue(VDM1);
-            //allMessage.Enqueue(VDM2);
+            allMessage.Enqueue(VDM2);
             //Kuyruktaki ilk mesaj parse edilmek üzere alınıyor ve kuyruktan siliniyor.          
             string currentVDM = allMessage.Dequeue();
             //Mesajın kaç parçadan oluştuğuna bakılıyor.
@@ -145,6 +145,12 @@ namespace NMEA_MessageParserConstructor
                         mesaj.Parser(VDM1);
                         MessageBox.Show(mesaj.ToString());
                     }
+                    else if (messageID == 20)
+                    {
+                        MessageType20 mesaj = new MessageType20();
+                        mesaj.Parser(VDM1);
+                        MessageBox.Show(mesaj.ToString());
+                }
                 else
                     {
                         Console.WriteLine("Hatalı Mesaj");
@@ -172,6 +178,12 @@ namespace NMEA_MessageParserConstructor
                         //mesaj.Parser(VDM1, VDM2);
                         MessageBox.Show(mesaj.ToString());
                     }
+                    else if (messageID == 21)
+                    {
+                        MessageType21 mesaj = new MessageType21();
+                        mesaj.Parser(VDM1, VDM2);
+                        MessageBox.Show(mesaj.ToString());
+                } 
             }
         }
     }

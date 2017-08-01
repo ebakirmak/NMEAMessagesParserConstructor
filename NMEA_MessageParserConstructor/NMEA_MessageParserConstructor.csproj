@@ -51,9 +51,11 @@
   <ItemGroup>
     <Compile Include="BL\AllMessage.cs" />
     <Compile Include="BL\AnnexClasses\OverallDimension.cs" />
+    <Compile Include="BL\Enum\TypeOfAidsToNavigation.cs" />
     <Compile Include="BL\CommunicationState\ITDMA.cs" />
     <Compile Include="BL\CommunicationState\SOTDMA.cs" />
     <Compile Include="BL\Dictionarys\Ascii6.cs" />
+    <Compile Include="BL\Enum\ReportingIntervalSettings.cs" />
     <Compile Include="BL\Messages\MessageType1.cs" />
     <Compile Include="BL\Messages\MessageType10.cs" />
     <Compile Include="BL\Messages\MessageType11.cs" />
@@ -68,6 +70,11 @@
     <Compile Include="BL\Messages\MessageType2.cs" />
     <Compile Include="BL\Messages\MessageType20.cs" />
     <Compile Include="BL\Messages\MessageType21.cs" />
+    <Compile Include="BL\Messages\MessageType22.cs" />
+    <Compile Include="BL\Messages\MessageType23.cs" />
+    <Compile Include="BL\Messages\MessageType24.cs" />
+    <Compile Include="BL\Messages\MessageType24A.cs" />
+    <Compile Include="BL\Messages\MessageType24B.cs" />
     <Compile Include="BL\Messages\MessageType3.cs" />
     <Compile Include="BL\Messages\MessageType4.cs" />
     <Compile Include="BL\Messages\MessageType5.cs" />

@@ -26,14 +26,14 @@ namespace NMEA_MessageParserConstructor
         }
 
 
-        string VDM1 = "!AIVDO,2,1,5,B,E1c2;q@b44ah4ah0h:2ab@70VRpU<Bgpm4:gP50HH`Th`QF5,0*7B";
-        string VDM2 = "!AIVDO,2,2,5,B,1CQ1A83PCAH0,0*60";
+        string VDM1 = "!AIVDM,1,1,,A,H42O55i18tMET00000000000000,2*6D";
+        //string VDM2 = "!AIVDO,2,2,5,B,1CQ1A83PCAH0,0*60";
 
         private void frmMain_Load(object sender, EventArgs e)
         {
             //2 mesaj kuyruğa ekleniyor.
             allMessage.Enqueue(VDM1);
-            allMessage.Enqueue(VDM2);
+            //allMessage.Enqueue(VDM2);
             //Kuyruktaki ilk mesaj parse edilmek üzere alınıyor ve kuyruktan siliniyor.          
             string currentVDM = allMessage.Dequeue();
             //Mesajın kaç parçadan oluştuğuna bakılıyor.
@@ -150,7 +150,36 @@ namespace NMEA_MessageParserConstructor
                         MessageType20 mesaj = new MessageType20();
                         mesaj.Parser(VDM1);
                         MessageBox.Show(mesaj.ToString());
-                }
+                    }
+                    else if (messageID == 22)
+                    {
+                        MessageType22 mesaj = new MessageType22();
+                        mesaj.Parser(VDM1);
+                        MessageBox.Show(mesaj.ToString());
+                    }
+                    else if (messageID == 23)
+                    {
+                        MessageType23 mesaj = new MessageType23();
+                        mesaj.Parser(VDM1);
+                        MessageBox.Show(mesaj.ToString());
+                    }
+                    else if (messageID == 24)
+                    {
+                        MessageType24 mesaj = new MessageType24();
+                        mesaj.setPartNumber(VDM1);
+                        if (mesaj.getPartNumber() == 0)
+                        {
+                            MessageType24A mesajA = new MessageType24A();
+                            mesajA.Parser(VDM1);
+                            MessageBox.Show(mesajA.ToString());
+                        }
+                        else if (mesaj.getPartNumber() == 1)
+                        {
+                            MessageType24B mesajB = new MessageType24B();
+                            mesajB.Parser(VDM1);
+                            MessageBox.Show(mesajB.ToString());
+                        }
+                    }
                 else
                     {
                         Console.WriteLine("Hatalı Mesaj");
@@ -181,7 +210,7 @@ namespace NMEA_MessageParserConstructor
                     else if (messageID == 21)
                     {
                         MessageType21 mesaj = new MessageType21();
-                        mesaj.Parser(VDM1, VDM2);
+                        //mesaj.Parser(VDM1, VDM2);
                         MessageBox.Show(mesaj.ToString());
                 } 
             }

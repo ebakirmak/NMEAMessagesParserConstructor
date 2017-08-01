@@ -12,3 +12,58 @@ Parameter name: length
    at NMEA_MessageParserConstructor.RootMessages.getStringFromBinary(String binarys, Int32 start, Int32 length) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 143    at System.String.Substring(Int32 startIndex, Int32 length)
    at NMEA_MessageParserConstructor.RootMessages.getStringFromBinary(String binarys, Int32 start, Int32 length) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 143
 
+2017-08-01 15:52:57.2881 ERROR MessageType22 :: Parser System.ArgumentOutOfRangeException: Index and length must refer to a location within the string.
+Parameter name: length
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at NMEA_MessageParserConstructor.RootMessages.getDecimalFromBinary(String binary, Int32 start, Int32 length) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 129
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType23.Parser(String message1) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType23.cs:line 57    at System.String.Substring(Int32 startIndex, Int32 length)
+   at NMEA_MessageParserConstructor.RootMessages.getDecimalFromBinary(String binary, Int32 start, Int32 length) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 129
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType23.Parser(String message1) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType23.cs:line 57
+
+2017-08-01 17:14:49.1161 ERROR MessageType22 :: Parser System.ArgumentOutOfRangeException: Index and length must refer to a location within the string.
+Parameter name: length
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at NMEA_MessageParserConstructor.RootMessages.getDecimalFromBinary(String binary, Int32 start, Int32 length) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 129
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType23.Parser(String message1) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType23.cs:line 57    at System.String.Substring(Int32 startIndex, Int32 length)
+   at NMEA_MessageParserConstructor.RootMessages.getDecimalFromBinary(String binary, Int32 start, Int32 length) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 129
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType23.Parser(String message1) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType23.cs:line 57
+
+2017-08-01 17:16:13.8666 ERROR MessageType22 :: Parser System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType24A.Parser(String message1) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType24A.cs:line 26    at NMEA_MessageParserConstructor.BL.Messages.MessageType24A.Parser(String message1) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType24A.cs:line 26
+
+2017-08-01 17:29:58.8996 ERROR MessageType24B :: Parser System.OverflowException: Value was either too large or too small for a UInt32.
+   at System.ParseNumbers.StringToInt(String s, Int32 radix, Int32 flags, Int32* currPos)
+   at System.Convert.ToInt32(String value, Int32 fromBase)
+   at NMEA_MessageParserConstructor.RootMessages.getDecimalFromBinary(String binary, Int32 start, Int32 length) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 129
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType24B.Parser(String message1) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType24B.cs:line 44    at System.ParseNumbers.StringToInt(String s, Int32 radix, Int32 flags, Int32* currPos)
+   at System.Convert.ToInt32(String value, Int32 fromBase)
+   at NMEA_MessageParserConstructor.RootMessages.getDecimalFromBinary(String binary, Int32 start, Int32 length) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 129
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType24B.Parser(String message1) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType24B.cs:line 44
+
+2017-08-01 17:32:24.8840 ERROR MessageType24B :: Parser System.OverflowException: Value was either too large or too small for a UInt32.
+   at System.ParseNumbers.StringToInt(String s, Int32 radix, Int32 flags, Int32* currPos)
+   at System.Convert.ToInt32(String value, Int32 fromBase)
+   at NMEA_MessageParserConstructor.RootMessages.getDecimalFromBinary(String binary, Int32 start, Int32 length) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 129
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType24B.Parser(String message1) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType24B.cs:line 44    at System.ParseNumbers.StringToInt(String s, Int32 radix, Int32 flags, Int32* currPos)
+   at System.Convert.ToInt32(String value, Int32 fromBase)
+   at NMEA_MessageParserConstructor.RootMessages.getDecimalFromBinary(String binary, Int32 start, Int32 length) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 129
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType24B.Parser(String message1) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType24B.cs:line 44
+
+2017-08-01 17:38:45.3096 ERROR RootMessages :: getStringFromBinary() System.ArgumentOutOfRangeException: Index and length must refer to a location within the string.
+Parameter name: length
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at NMEA_MessageParserConstructor.RootMessages.getStringFromBinary(String binarys, Int32 start, Int32 length) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 143    at System.String.Substring(Int32 startIndex, Int32 length)
+   at NMEA_MessageParserConstructor.RootMessages.getStringFromBinary(String binarys, Int32 start, Int32 length) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 143
+
+2017-08-01 17:39:03.7064 ERROR RootMessages :: getStringFromBinary() System.ArgumentOutOfRangeException: Index and length must refer to a location within the string.
+Parameter name: length
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at NMEA_MessageParserConstructor.RootMessages.getStringFromBinary(String binarys, Int32 start, Int32 length) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 143    at System.String.Substring(Int32 startIndex, Int32 length)
+   at NMEA_MessageParserConstructor.RootMessages.getStringFromBinary(String binarys, Int32 start, Int32 length) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 143
+
+2017-08-01 17:39:25.7036 ERROR RootMessages :: getStringFromBinary() System.ArgumentOutOfRangeException: Index and length must refer to a location within the string.
+Parameter name: length
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at NMEA_MessageParserConstructor.RootMessages.getStringFromBinary(String binarys, Int32 start, Int32 length) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 143    at System.String.Substring(Int32 startIndex, Int32 length)
+   at NMEA_MessageParserConstructor.RootMessages.getStringFromBinary(String binarys, Int32 start, Int32 length) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 143
+

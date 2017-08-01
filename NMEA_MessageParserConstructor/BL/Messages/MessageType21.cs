@@ -1,5 +1,6 @@
 ﻿using NLog;
 using NMEA_MessageParserConstructor.BL.AnnexClasses;
+using NMEA_MessageParserConstructor.BL.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -105,7 +106,7 @@ namespace NMEA_MessageParserConstructor.BL.Messages
                 "Message ID: " + this.MessageID + "\n" +
                 "RepeatIndicator" + this.RepeatIndicator + "\n" +
                 "User ID / MMSI" + this.ID + "\n" +
-                "type of aids to navigation: " + this.TypeOfAidsToNavigation + "\n" +
+                "type of aids to navigation: " + this.TypeOfAidsToNavigation + (TypeOfAidsToNavigation)this.TypeOfAidsToNavigation + "\n" +
                 "Name of aids to navigation:" + this.NameOfAidsToNavigation + "\n" +
                 "PA" + this.PositionAccuracy + "\n" +
                 "Lon" + this.Longitude + "\n" +

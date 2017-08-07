@@ -42,6 +42,25 @@ namespace NMEA_MessageParserConstructor.BL.CommunicationState
                 "Slot Offset" + this.subMessage.SlotOffset;
         }
         #endregion
+
+       
+        #region Attributeları döndürür.
+        public List<Tuple<string, string>> getAttributes()
+        {
+            List<Tuple<string, string>> _listAttribute = new List<Tuple<string, string>>
+            {
+                new Tuple<string, string>("Sync State",this.SyncState.ToString()),
+                new Tuple<string, string>("Slot Time Out",this.SlotTimeOut.ToString()),              
+                new Tuple<string, string>("Received Stations",this.subMessage.ReceivedStations.ToString()),
+                new Tuple<string, string>("Slot Number",this.subMessage.SlotNumber.ToString()),
+                new Tuple<string, string>("UTC Hour",this.subMessage.UTCHour.ToString()),
+                new Tuple<string, string>("UTC Minute",this.subMessage.UTCMinute.ToString()),
+                new Tuple<string, string>("Slot Offset",this.subMessage.SlotOffset.ToString())
+            };          
+            return _listAttribute;
+        }
+        #endregion
+
     }
     #endregion
 }

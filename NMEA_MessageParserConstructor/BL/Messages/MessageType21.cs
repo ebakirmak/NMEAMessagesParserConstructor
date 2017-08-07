@@ -85,9 +85,12 @@ namespace NMEA_MessageParserConstructor.BL.Messages
                 //Spare
                 this.Spare = Convert.ToByte(getDecimalFromBinary(content, 271, 1));
                 //Name of Aid-to-Navigation Extension
-                this.NameOfAidToNavigationExtension = Convert.ToString(getStringFromBinary(content, 272, 84));
-                //Spare 2
-                this.Spare2 = Convert.ToByte(getDecimalFromBinary(content, 356, 4));
+                this.NameOfAidToNavigationExtension = Convert.ToString(getStringFromBinary(content, 272, content.Length - 272));
+                if (content.Length > 356) {
+                    
+                    //Spare 2
+                    this.Spare2 = Convert.ToByte(getDecimalFromBinary(content, 356, 4));
+                }
             }
             catch (Exception ex)
             {
@@ -128,6 +131,47 @@ namespace NMEA_MessageParserConstructor.BL.Messages
 
 
                
+        }
+        #endregion
+
+        #region Attributeları döndürür.
+        //new Tuple<string, string>("",this..ToString()),
+        public override List<Tuple<string, string>> getAttributes()
+        {
+            List<Tuple<string, string>> _listAttribute = base.getAttributes();
+            try
+            {
+
+                List<Tuple<string, string>> _attributes = new List<Tuple<string, string>> {
+                new Tuple<string, string>("ID",this.ID.ToString()),
+                new Tuple<string, string>("Type Of Aids To Navigation",this.TypeOfAidsToNavigation.ToString()),
+                new Tuple<string, string>("Name Of Aids To Navigation",this.NameOfAidsToNavigation.ToString()),
+                new Tuple<string, string>("Position Accuracy",this.PositionAccuracy.ToString()),
+                new Tuple<string, string>("Longitude",this.Longitude.ToString()),
+                new Tuple<string, string>("Latitude",this.Latitude.ToString()),
+                new Tuple<string, string>("Dimension Of Ship",this.DimensionOfShip.ToString()),
+                new Tuple<string, string>("Type Of Electronic Postion Fixing Device",this.TOEPFD.ToString()),
+                new Tuple<string, string>("Time Stamp",this.TimeStamp.ToString()),
+                new Tuple<string, string>("Off Position Indicator",this.OffPositionIndicator.ToString()),
+                new Tuple<string, string>("AtoN Status",this.AtoNStatus.ToString()),
+                new Tuple<string, string>("RAIM Flag",this.RAIMFlag.ToString()),
+                new Tuple<string, string>("Virtual AtoN Flag",this.VirtualAtoNFlag.ToString()),
+                new Tuple<string, string>("Assigned Mode Flag",this.AssignedModeFlag.ToString()),
+                new Tuple<string, string>("Name Of Aid To Navigation Extension",this.NameOfAidToNavigationExtension.ToString()),
+                new Tuple<string, string>("Spare 2",this.Spare2.ToString())
+
+               };
+                _listAttribute.AddRange(_attributes);
+
+
+
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex, "MessageType19 :: getAttribute");
+            }
+
+            return _listAttribute;
         }
         #endregion
     }

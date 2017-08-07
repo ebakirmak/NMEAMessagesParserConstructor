@@ -1,4 +1,5 @@
 ﻿using NLog;
+using NMEA_MessageParserConstructor.BL.AnnexClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,6 @@ namespace NMEA_MessageParserConstructor.BL.Messages
         private byte SequenceNumber { get; set; }
         private int DestinationID { get; set; }
         private byte RetransmitFlag { get; set; }
-        private byte Spare { get; set; }
         private BinaryData binaryData { get; set; }
         private Logger log;
       
@@ -23,20 +23,13 @@ namespace NMEA_MessageParserConstructor.BL.Messages
         public MessageType6()
         {
             this.MessageID = 6;
+            this.Description = "Adressed Binary Message";
             this.RepeatIndicator = 0;
             this.TotalNumberOfBits = 1008;
             binaryData = new BinaryData();
             this.log = LogManager.GetCurrentClassLogger();
         }
-        #region BinaryData ' yı saklamak için kullanılıyor.
-        class BinaryData
-        {
-            public int DAC { get; set; }
-            public int FID { get; set; }
-            public string Data { get; set; }
-
-        }
-        #endregion
+       
 
         #region Mesaj yapısında bulunan attributelara, alınan mesajdaki değerleri set ettik.
         public override string[] Parser(string message)
@@ -68,10 +61,7 @@ namespace NMEA_MessageParserConstructor.BL.Messages
                 this.Spare = Convert.ToByte(getDecimalFromBinary(content, 71, 1));
 
                 //Binary Data
-                this.binaryData.DAC = Convert.ToInt32(getDecimalFromBinary(content,72, 10));
-                this.binaryData.FID = Convert.ToInt32(getDecimalFromBinary(content, 82, 6));
-                //HATA VAR!
-                this.binaryData.Data = Convert.ToString(getDecimalFromBinary(content, 88, 5));
+                this.binaryData.setValue(content, 72);
             }
             catch (Exception ex)
             {
@@ -88,17 +78,38 @@ namespace NMEA_MessageParserConstructor.BL.Messages
         #region ToString mesajını ezdik. Methodu sınıfa göre tasarladık.
         public override string ToString()
         {
-            return 
-                "Message ID: "+   this.MessageID + "\n" +
+            return
+                "Message ID: " + this.MessageID + "\n" +
                 "Repeat Indicator: " + this.RepeatIndicator + "\n" +
                 "Source ID: " + this.SourceID + "\n" +
                 "Sequence Number: " + this.SequenceNumber + "\n" +
                 "Destination ID: " + this.DestinationID + "\n" +
                 "Retransmit Flag: " + this.RetransmitFlag + "\n" +
                 "Spare: " + this.Spare + "\n" +
-                "DAC: " + this.binaryData.DAC + "\n" +
-                "FID: " + this.binaryData.FID + "\n" +
-                "Data: " + this.binaryData.Data;
+                this.binaryData.ToString();
+        }
+        #endregion
+
+        #region Attributeları döndürür.
+        public override List<Tuple<string, string>> getAttributes()
+        {
+            List<Tuple<string, string>> _listAttribute = base.getAttributes();
+            List<Tuple<string, string>> _listBinaryData = this.binaryData.getAttributes();
+
+            List<Tuple<string, string>> _attributes = new List<Tuple<string, string>> {
+                  new Tuple<string, string>("Source ID",this.SourceID.ToString()),
+                  new Tuple<string, string>("Sequence Number",this.SequenceNumber.ToString()),
+                  new Tuple<string, string>("Destination ID",this.DestinationID.ToString()),
+                  new Tuple<string, string>("Retransmit Flag",this.RetransmitFlag.ToString())
+             };
+
+            _listAttribute.AddRange(_attributes);
+            foreach (var binaryData in _listBinaryData)
+            {
+                _listAttribute.Add(new Tuple<string, string>(binaryData.Item1, binaryData.Item2));
+
+            }
+            return _listAttribute;
         }
         #endregion
 

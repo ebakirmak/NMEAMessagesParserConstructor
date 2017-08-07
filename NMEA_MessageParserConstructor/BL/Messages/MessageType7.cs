@@ -10,7 +10,6 @@ namespace NMEA_MessageParserConstructor.BL.Messages
     class MessageType7 : RootMessages
     {
         private int SourceID { get; set; }
-        private byte Spare { get; set; }
         private int DestinationID1 { get; set; }
         private int SeqNumForID1 { get; set; }
         private int DestinationID2 { get; set; }
@@ -25,6 +24,7 @@ namespace NMEA_MessageParserConstructor.BL.Messages
         {
             this.MessageID = 7;
             this.TotalNumberOfBits = 168;
+            this.Description = "Binary acknowledge";
             this.log = LogManager.GetCurrentClassLogger();
         }
 
@@ -113,6 +113,27 @@ namespace NMEA_MessageParserConstructor.BL.Messages
                 "Sequence Number for ID 4: " + this.SeqNumForID4 + "\n";
 
 
+        }
+        #endregion
+
+        #region Attributeları döndürür.
+        public override List<Tuple<string, string>> getAttributes()
+        {
+            List<Tuple<string, string>> _listAttribute = base.getAttributes();
+            List<Tuple<string, string>> _attributes = new List<Tuple<string, string>> {
+                  new Tuple<string, string>("Source ID",this.SourceID.ToString()),
+                  new Tuple<string, string>("Destination ID 1",this.DestinationID1.ToString()),
+                  new Tuple<string, string>("Sequence Number For ID 1",this.SeqNumForID1.ToString()),
+                  new Tuple<string, string>("Destination ID 2",this.DestinationID2.ToString()),
+                  new Tuple<string, string>("Sequence Number For ID 2",this.SeqNumForID2.ToString()),
+                  new Tuple<string, string>("Destination ID 3",this.DestinationID3.ToString()),
+                  new Tuple<string, string>("Sequence Number For ID 3",this.SeqNumForID3.ToString()),
+                      new Tuple<string, string>("Destination ID 4",this.DestinationID4.ToString()),
+                  new Tuple<string, string>("Sequence Number For ID 4",this.SeqNumForID4.ToString()),
+             };
+
+            _listAttribute.AddRange(_attributes);
+            return _listAttribute;
         }
         #endregion
     }

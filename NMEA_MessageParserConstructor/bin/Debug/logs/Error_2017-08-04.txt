@@ -1,0 +1,239 @@
+2017-08-04 13:48:38.5516 ERROR frmMain :: Run System.OverflowException: Value was either too large or too small for an unsigned byte.
+   at System.Byte.Parse(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToByte(String value)
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType3.Parser(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType3.cs:line 76
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 150    at System.Byte.Parse(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToByte(String value)
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType3.Parser(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType3.cs:line 76
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 150
+
+2017-08-04 13:49:38.6804 ERROR frmMain :: Run System.OverflowException: Value was either too large or too small for an unsigned byte.
+   at System.Byte.Parse(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToByte(String value)
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType3.Parser(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType3.cs:line 76
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 150    at System.Byte.Parse(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToByte(String value)
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType3.Parser(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType3.cs:line 76
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 150
+
+2017-08-04 14:04:13.7901 ERROR frmMain :: Run System.OverflowException: Value was either too large or too small for an unsigned byte.
+   at System.Byte.Parse(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToByte(String value)
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType4.Parser(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType4.cs:line 80
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 157    at System.Byte.Parse(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToByte(String value)
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType4.Parser(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType4.cs:line 80
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 157
+
+2017-08-04 14:07:05.2994 ERROR frmMain :: Run System.OverflowException: Value was either too large or too small for an unsigned byte.
+   at System.Byte.Parse(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToByte(String value)
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType3.Parser(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType3.cs:line 77
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 150    at System.Byte.Parse(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToByte(String value)
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType3.Parser(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType3.cs:line 77
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 150
+
+2017-08-04 14:08:24.0054 ERROR frmMain :: Run System.OverflowException: Value was either too large or too small for an unsigned byte.
+   at System.Byte.Parse(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToByte(String value)
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType3.Parser(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType3.cs:line 77
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 150    at System.Byte.Parse(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToByte(String value)
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType3.Parser(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType3.cs:line 77
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 150
+
+2017-08-04 14:23:55.7976 ERROR RootMessages : getSentences() System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Byte.Parse(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToByte(String value)
+   at NMEA_MessageParserConstructor.RootMessages.getSentences(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 86    at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Byte.Parse(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToByte(String value)
+   at NMEA_MessageParserConstructor.RootMessages.getSentences(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 86
+
+2017-08-04 14:23:55.8537 ERROR RootMessages :: getMessageID System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 105    at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 105
+
+2017-08-04 14:24:00.2675 ERROR frmMain :: Run System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 110
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 127    at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 110
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 127
+
+2017-08-04 14:24:08.3118 ERROR RootMessages : getSentences() System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Byte.Parse(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToByte(String value)
+   at NMEA_MessageParserConstructor.RootMessages.getSentences(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 86    at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Byte.Parse(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToByte(String value)
+   at NMEA_MessageParserConstructor.RootMessages.getSentences(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 86
+
+2017-08-04 14:24:08.3308 ERROR RootMessages :: getMessageID System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 105    at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 105
+
+2017-08-04 14:24:11.1430 ERROR frmMain :: Run System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 110
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 127    at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 110
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 127
+
+2017-08-04 14:24:41.8861 ERROR RootMessages :: getMessageID System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 105    at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 105
+
+2017-08-04 14:24:45.0720 ERROR frmMain :: Run System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 110
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 127    at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 110
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 127
+
+2017-08-04 14:25:13.3877 ERROR RootMessages :: getMessageID System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 105    at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 105
+
+2017-08-04 14:25:38.6883 ERROR frmMain :: Run System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 110
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 127    at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 110
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 127
+
+2017-08-04 14:25:56.0878 ERROR RootMessages :: getMessageID System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 105    at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 105
+
+2017-08-04 14:25:57.4393 ERROR frmMain :: Run System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 110
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 127    at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 110
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 127
+
+2017-08-04 14:26:47.4788 ERROR RootMessages :: getMessageID System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 105    at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 105
+
+2017-08-04 14:26:49.5149 ERROR frmMain :: Run System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 110
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 127    at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 110
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 127
+
+2017-08-04 14:27:10.6829 ERROR RootMessages :: getMessageID System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 105    at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 105
+
+2017-08-04 14:27:12.7375 ERROR frmMain :: Run System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 110
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 127    at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 110
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 127
+
+2017-08-04 14:27:47.4362 ERROR frmMain :: Run System.OverflowException: Value was either too large or too small for an unsigned byte.
+   at System.Byte.Parse(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToByte(String value)
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType3.Parser(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType3.cs:line 77
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 150    at System.Byte.Parse(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToByte(String value)
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType3.Parser(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType3.cs:line 77
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 150
+
+2017-08-04 14:29:19.8158 ERROR RootMessages :: getMessageID System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 105    at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 105
+
+2017-08-04 14:29:20.7791 ERROR frmMain :: Run System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 110
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 127    at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 110
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 127
+
+2017-08-04 14:29:28.8407 ERROR RootMessages :: getMessageID System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 105    at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 105
+
+2017-08-04 14:29:29.8336 ERROR frmMain :: Run System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 110
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 127    at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 110
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 127
+
+2017-08-04 14:29:37.6466 ERROR RootMessages :: getMessageID System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 105    at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 105
+
+2017-08-04 14:29:39.2029 ERROR frmMain :: Run System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 110
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 127    at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 110
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 127
+
+2017-08-04 14:29:41.8866 ERROR RootMessages :: getMessageID System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 105    at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 105
+
+2017-08-04 14:29:50.8548 ERROR frmMain :: Run System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 110
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 127    at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 110
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 127
+
+2017-08-04 14:29:54.5451 ERROR RootMessages :: getMessageID System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 105    at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 105
+
+2017-08-04 14:29:55.4386 ERROR frmMain :: Run System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 110
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 127    at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 110
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 127
+
+2017-08-04 14:29:58.8246 ERROR RootMessages :: getMessageID System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 105    at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 105
+
+2017-08-04 14:30:02.0201 ERROR frmMain :: Run System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 110
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 127    at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 110
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 127
+
+2017-08-04 14:42:26.5242 ERROR RootMessages :: getMessageID System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 105    at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 105
+
+2017-08-04 14:42:29.0631 ERROR frmMain :: Run System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 110
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 127    at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 110
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 127
+
+2017-08-04 14:42:47.8899 ERROR MessageType4 :: Parser System.ArgumentOutOfRangeException: Index and length must refer to a location within the string.
+Parameter name: length
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at NMEA_MessageParserConstructor.RootMessages.getDecimalFromBinary(String binary, Int32 start, Int32 length) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 148
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType4.Parser(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType4.cs:line 92    at System.String.Substring(Int32 startIndex, Int32 length)
+   at NMEA_MessageParserConstructor.RootMessages.getDecimalFromBinary(String binary, Int32 start, Int32 length) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 148
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType4.Parser(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType4.cs:line 92
+
+2017-08-04 14:42:49.6667 ERROR frmMain :: Run System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType4.ToString() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType4.cs:line 108
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 158    at NMEA_MessageParserConstructor.BL.Messages.MessageType4.ToString() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType4.cs:line 108
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 158
+
+2017-08-04 14:43:45.1172 ERROR MessageType4 :: Parser System.ArgumentOutOfRangeException: Index and length must refer to a location within the string.
+Parameter name: length
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at NMEA_MessageParserConstructor.RootMessages.getDecimalFromBinary(String binary, Int32 start, Int32 length) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 148
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType4.Parser(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType4.cs:line 92    at System.String.Substring(Int32 startIndex, Int32 length)
+   at NMEA_MessageParserConstructor.RootMessages.getDecimalFromBinary(String binary, Int32 start, Int32 length) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 148
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType4.Parser(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType4.cs:line 92
+
+2017-08-04 14:43:46.5785 ERROR frmMain :: Run System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType4.ToString() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType4.cs:line 108
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 158    at NMEA_MessageParserConstructor.BL.Messages.MessageType4.ToString() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType4.cs:line 108
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 158
+
+2017-08-04 14:44:12.7221 ERROR MessageType4 :: Parser System.ArgumentOutOfRangeException: Index and length must refer to a location within the string.
+Parameter name: length
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at NMEA_MessageParserConstructor.RootMessages.getDecimalFromBinary(String binary, Int32 start, Int32 length) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 148
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType4.Parser(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType4.cs:line 92    at System.String.Substring(Int32 startIndex, Int32 length)
+   at NMEA_MessageParserConstructor.RootMessages.getDecimalFromBinary(String binary, Int32 start, Int32 length) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 148
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType4.Parser(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType4.cs:line 92
+
+2017-08-04 14:44:13.9433 ERROR frmMain :: Run System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType4.ToString() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType4.cs:line 108
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 158    at NMEA_MessageParserConstructor.BL.Messages.MessageType4.ToString() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType4.cs:line 108
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 158
+
+2017-08-04 14:52:43.3482 ERROR MessageType4 :: Parser System.OverflowException: Value was either too large or too small for an unsigned byte.
+   at System.Byte.Parse(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToByte(String value)
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType4.Parser(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType4.cs:line 85    at System.Byte.Parse(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToByte(String value)
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType4.Parser(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType4.cs:line 85
+
+2017-08-04 14:52:44.7431 ERROR frmMain :: Run System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType4.ToString() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType4.cs:line 109
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 158    at NMEA_MessageParserConstructor.BL.Messages.MessageType4.ToString() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType4.cs:line 109
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 158
+

@@ -134,5 +134,47 @@ namespace NMEA_MessageParserConstructor.BL.Messages
 
         }
         #endregion
+
+        #region Attributeları döndürür.
+        //new Tuple<string, string>("",this..ToString()),
+        public override List<Tuple<string, string>> getAttributes()
+        {
+            List<Tuple<string, string>> _listAttribute = base.getAttributes();
+            try
+            {
+
+                List<Tuple<string, string>> _attributes = new List<Tuple<string, string>> {
+                new Tuple<string, string>("Source Station",this.SourceStationID.ToString()),
+                new Tuple<string, string>("Off Set Number 1",this.OffsetNumber1.ToString()),
+                new Tuple<string, string>("Number of Slots 1",this.NumberOfSlots1.ToString()),
+                new Tuple<string, string>("TimeOut 1",this.TimeOut1.ToString()),
+                new Tuple<string, string>("Increment 1",this.Increment1.ToString()),
+                new Tuple<string, string>("Off Set Number 2",this.OffsetNumber2.ToString()),
+                new Tuple<string, string>("Number Of Slots 2",this.NumberOfSlots2.ToString()),
+                new Tuple<string, string>("Timeout 2",this.TimeOut2.ToString()),
+                new Tuple<string, string>("Increment 2",this.Increment2.ToString()),
+                new Tuple<string, string>("Off Set Number 3",this.OffsetNumber3.ToString()),
+                new Tuple<string, string>("Number Of Slots 3",this.NumberOfSlots3.ToString()),
+                new Tuple<string, string>("Timeout 3",this.TimeOut3.ToString()),
+                new Tuple<string, string>("Increment 3",this.Increment3.ToString()),
+                new Tuple<string, string>("Off Set Number 4",this.OffsetNumber4.ToString()),
+                new Tuple<string, string>("Number Of Slots 4",this.NumberOfSlots4.ToString()),
+                new Tuple<string, string>("Timeout 4",this.TimeOut4.ToString()),
+                new Tuple<string, string>("Increment 4",this.Increment4.ToString()),
+
+               };
+                _listAttribute.AddRange(_attributes);
+
+
+
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex, "MessageType19 :: getAttribute");
+            }
+
+            return _listAttribute;
+        }
+        #endregion
     }
 }

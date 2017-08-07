@@ -90,5 +90,37 @@ namespace NMEA_MessageParserConstructor.BL.Messages
                 "Spare 2: " + this.Spare2 + "\n";
         }
         #endregion
+
+        #region Attributeları döndürür.
+        //!AIVDM,1,1,,A,@address@hidden<P00,0*18
+        public override List<Tuple<string, string>> getAttributes()
+        {
+            List<Tuple<string, string>> _listAttribute = base.getAttributes();
+            try
+            {
+
+                List<Tuple<string, string>> _attributes = new List<Tuple<string, string>> {
+                  new Tuple<string, string>("Source ID",this.SourceID.ToString()),
+                  new Tuple<string, string>("Destination ID A",this.DestinationIDA.ToString()),
+                  new Tuple<string, string>("Off Set A",this.OffsetA.ToString()),
+                  new Tuple<string, string>("Increment A",this.IncrementA.ToString()),
+                  new Tuple<string, string>("Destination ID B",this.DestinationIDB.ToString()),
+                  new Tuple<string, string>("Off Set B",this.OffsetB.ToString()),
+                  new Tuple<string, string>("Increment B",this.IncrementB.ToString()),
+                  new Tuple<string, string>("Spare 2",this.Spare2.ToString()),
+                
+               };
+
+                _listAttribute.AddRange(_attributes);
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex, "MessageType15 :: getAttribute");
+            }
+
+            return _listAttribute;
+        }
+        #endregion
+
     }
 }

@@ -11,7 +11,7 @@ namespace NMEA_MessageParserConstructor.BL.Messages
     public class MessageType18 : RootMessages
     {
         private int UserID { get; set; }
-        private int SOG { get; set; }
+        private double SOG { get; set; }
         private int PositionAccuracy { get; set; }
         private double Longitude { get; set; }
         private double Latitude { get; set; }
@@ -57,7 +57,7 @@ namespace NMEA_MessageParserConstructor.BL.Messages
                 //Spare
                 this.Spare = Convert.ToByte(getDecimalFromBinary(content, 38, 8));
                 //SOG
-                this.SOG = Convert.ToInt32(getDecimalFromBinary(content, 46, 10));
+                this.SOG = Convert.ToDouble(getDecimalFromBinary(content, 46, 10))/10;
                 //Position Accuracy
                 this.PositionAccuracy = Convert.ToInt32(getDecimalFromBinary(content, 56, 1));
                 //Longitude
@@ -91,6 +91,7 @@ namespace NMEA_MessageParserConstructor.BL.Messages
                 if (this.CommunicationStateSelectorFlag == 0)
                 {
                     this.Sotdma = new SOTDMA();
+                    
                     this.Sotdma.SyncState = Convert.ToByte(getDecimalFromBinary(content, 149, 2));
                     this.Sotdma.SlotTimeOut = Convert.ToByte(getDecimalFromBinary(content, 151, 3));
                     //this.Sotdma.subMessage.ReceivedStations = Convert.ToString(getStringFromBinary(content,154,))
@@ -148,6 +149,55 @@ namespace NMEA_MessageParserConstructor.BL.Messages
                 "RAIM Flag: " + this.RAIM_Flag + "\n" +
                 com;
         
+        }
+        #endregion
+
+        #region Attributeları döndürür.
+        //new Tuple<string, string>("",this..ToString()),
+        public override List<Tuple<string, string>> getAttributes()
+        {
+            List<Tuple<string, string>> _listAttribute = base.getAttributes(); 
+
+            try
+            {
+
+                List<Tuple<string, string>> _attributes = new List<Tuple<string, string>> {
+                  new Tuple<string, string>("User ID",this.UserID.ToString()),
+                  new Tuple<string, string>("SOG",this.SOG.ToString()),
+                  new Tuple<string, string>("Position Accuracy",this.PositionAccuracy.ToString()),
+                  new Tuple<string, string>("Longitude",this.Longitude.ToString()),
+                  new Tuple<string, string>("Latitude",this.Latitude.ToString()),
+                  new Tuple<string, string>("COG",this.COG.ToString()),
+                  new Tuple<string, string>("True Heading",this.TrueHeading.ToString()),
+                  new Tuple<string, string>("Time Stamp",this.TimeStamp.ToString()),
+                  new Tuple<string, string>("Spare 2",this.Spare2.ToString()),
+                  new Tuple<string, string>("Class B Unit Flag",this.ClassBUnitFlag.ToString()),
+                  new Tuple<string, string>("Class B Display Flag",this.ClassBDisplayFlag.ToString()),
+                  new Tuple<string, string>("Class B DSC Flag",this.ClassBDSCFlag.ToString()),
+                  new Tuple<string, string>("Class B Band Flag",this.ClassBBandFlag.ToString()),
+                  new Tuple<string, string>("Class B Message 22 Flag ",this.ClassBMessage22Flag.ToString()),
+                  new Tuple<string, string>("Mode Flag",this.ModeFlag.ToString()),
+                  new Tuple<string, string>("RAIM Flag",this.RAIM_Flag.ToString()),
+                  new Tuple<string, string>("Communication State Selector Flag",this.CommunicationStateSelectorFlag.ToString()),
+
+               };
+                _listAttribute.AddRange(_attributes);
+                List<Tuple<string, string>> _list = null;
+                if (this.CommunicationStateSelectorFlag == 0)
+                    _list = this.Sotdma.getAttributes();
+                else
+                    _list = this.Itdma.getAttributea();
+                foreach (var item in _list)
+                {
+                    _listAttribute.Add(new Tuple<string, string>(item.Item1, item.Item2));
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex, "MessageType17 :: getAttribute");
+            }
+
+            return _listAttribute;
         }
         #endregion
     }

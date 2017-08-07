@@ -1,0 +1,54 @@
+2017-08-03 13:38:19.9153 ERROR RootMessages : getSentences() System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at NMEA_MessageParserConstructor.RootMessages.getSentences(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 85    at NMEA_MessageParserConstructor.RootMessages.getSentences(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 85
+
+2017-08-03 13:38:20.2055 ERROR RootMessages :: getMessageID System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 104    at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 104
+
+2017-08-03 14:42:28.0502 ERROR RootMessages : getSentences() System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at NMEA_MessageParserConstructor.RootMessages.getSentences(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 85    at NMEA_MessageParserConstructor.RootMessages.getSentences(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 85
+
+2017-08-03 14:42:28.1017 ERROR RootMessages :: getMessageID System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 104    at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 104
+
+2017-08-03 14:48:49.3998 ERROR SeriPort :: Open System.UnauthorizedAccessException: Access to the port 'COM3' is denied.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at NMEA_MessageParserConstructor.BL.SeriPort.Open() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\SeriPort.cs:line 45    at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at NMEA_MessageParserConstructor.BL.SeriPort.Open() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\SeriPort.cs:line 45
+
+2017-08-03 14:48:49.4532 ERROR  SeriPort :: ReadMessage System.InvalidOperationException: The port is closed.
+   at System.IO.Ports.SerialPort.get_BytesToRead()
+   at NMEA_MessageParserConstructor.BL.SeriPort.ReadMessage() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\SeriPort.cs:line 94    at System.IO.Ports.SerialPort.get_BytesToRead()
+   at NMEA_MessageParserConstructor.BL.SeriPort.ReadMessage() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\SeriPort.cs:line 94
+
+2017-08-03 14:51:27.3130 ERROR SeriPort :: Open System.UnauthorizedAccessException: Access to the port 'COM3' is denied.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at NMEA_MessageParserConstructor.BL.SeriPort.Open() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\SeriPort.cs:line 45    at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at NMEA_MessageParserConstructor.BL.SeriPort.Open() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\SeriPort.cs:line 45
+
+2017-08-03 14:51:27.3780 ERROR  SeriPort :: ReadMessage System.InvalidOperationException: The port is closed.
+   at System.IO.Ports.SerialPort.get_BytesToRead()
+   at NMEA_MessageParserConstructor.BL.SeriPort.ReadMessage() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\SeriPort.cs:line 94    at System.IO.Ports.SerialPort.get_BytesToRead()
+   at NMEA_MessageParserConstructor.BL.SeriPort.ReadMessage() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\SeriPort.cs:line 94
+
+2017-08-03 15:01:50.7551 ERROR SeriPort :: Open System.UnauthorizedAccessException: Access to the port 'COM3' is denied.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at NMEA_MessageParserConstructor.BL.SeriPort.Open() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\SeriPort.cs:line 45    at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at NMEA_MessageParserConstructor.BL.SeriPort.Open() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\SeriPort.cs:line 45
+
+2017-08-03 15:01:50.8186 ERROR  SeriPort :: ReadMessage System.InvalidOperationException: The port is closed.
+   at System.IO.Ports.SerialPort.get_BytesToRead()
+   at NMEA_MessageParserConstructor.BL.SeriPort.ReadMessage() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\SeriPort.cs:line 94    at System.IO.Ports.SerialPort.get_BytesToRead()
+   at NMEA_MessageParserConstructor.BL.SeriPort.ReadMessage() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\SeriPort.cs:line 94
+

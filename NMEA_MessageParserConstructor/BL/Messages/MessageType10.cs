@@ -71,5 +71,18 @@ namespace NMEA_MessageParserConstructor.BL.Messages
 
         }
         #endregion
+
+        #region Attributeları döndürür.
+        public override List<Tuple<string, string>> getAttributes()
+        {
+            List<Tuple<string, string>> _listAttribute = base.getAttributes();
+            List<Tuple<string, string>> _attributes = new List<Tuple<string, string>> {
+                  new Tuple<string, string>("User ID",this.SourceID.ToString()),
+                  new Tuple<string, string>("Navigational Status",this.DestinationID.ToString())
+             };
+            _listAttribute.AddRange(_attributes);          
+            return _listAttribute;
+        }
+        #endregion
     }
 }

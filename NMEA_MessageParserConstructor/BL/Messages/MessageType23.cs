@@ -109,5 +109,41 @@ namespace NMEA_MessageParserConstructor.BL.Messages
 
         }
         #endregion
+
+        #region Attributeları döndürür.
+        //new Tuple<string, string>("",this..ToString()),
+        public override List<Tuple<string, string>> getAttributes()
+        {
+            List<Tuple<string, string>> _listAttribute = base.getAttributes();
+            try
+            {
+
+                List<Tuple<string, string>> _attributes = new List<Tuple<string, string>> {
+                new Tuple<string, string>("Source ID",this.SourceID.ToString()),
+                new Tuple<string, string>("Longitude 1",this.Longitude1.ToString()),
+                new Tuple<string, string>("Latitude 1",this.Latitude1.ToString()),
+                new Tuple<string, string>("Longitude 2",this.Longitude2.ToString()),
+                new Tuple<string, string>("Latitude 2",this.Latitude2.ToString()),
+                new Tuple<string, string>("Station Type",this.StationType.ToString()),
+                new Tuple<string, string>("Type Of Ship And Cargo Type",this.TypeOfShipAndCargoType.ToString()),
+                new Tuple<string, string>("Spare 2",this.Spare2.ToString()),
+                new Tuple<string, string>("Tx/Rx Mode",this.TxRxMode.ToString()),
+                new Tuple<string, string>("Reporting Interval",this.ReportingInterval.ToString()),
+                new Tuple<string, string>("Quiet Time",this.QuietTime.ToString()),
+                new Tuple<string, string>("Spare 3",this.Spare3.ToString()),
+                };
+                _listAttribute.AddRange(_attributes);
+
+
+
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex, "MessageType19 :: getAttribute");
+            }
+
+            return _listAttribute;
+        }
+        #endregion
     }
 }

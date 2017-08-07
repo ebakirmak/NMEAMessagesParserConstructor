@@ -11,11 +11,11 @@ namespace NMEA_MessageParserConstructor.BL.Messages
     {
         private int UserID { get; set; }
         private int Altitude { get; set; }
-        private int SOG { get; set; }
+        private double SOG { get; set; }
         private int PositionAccuracy { get; set; }
-        private int Longitude { get; set; }
-        private int Latitude { get; set; }
-        private int COG { get; set; }
+        private double Longitude { get; set; }
+        private double Latitude { get; set; }
+        private double COG { get; set; }
         private int TimeStamp { get; set; }
         private int AltitudeSensor { get; set; }
         private int DTE { get; set; }
@@ -51,15 +51,15 @@ namespace NMEA_MessageParserConstructor.BL.Messages
                 //Altitude (GNSS)
                 this.Altitude = Convert.ToInt32(getDecimalFromBinary(content, 38, 12));
                 //SOG
-                this.SOG = Convert.ToInt32(getDecimalFromBinary(content, 50, 10));
+                this.SOG = Convert.ToDouble(getDecimalFromBinary(content, 50, 10));
                 //PositionAccuracy
                 this.PositionAccuracy = Convert.ToInt32(getDecimalFromBinary(content, 60, 1));
                 //Longitude
-                this.Longitude = Convert.ToInt32(getDecimalFromBinary(content, 61, 28)) / 60 / 10000;
+                this.Longitude = Convert.ToDouble(getDecimalFromBinary(content, 61, 28)) / 60 / 10000;
                 //Latitude
-                this.Latitude = Convert.ToInt32(getDecimalFromBinary(content, 89, 27)) / 60 / 10000;
+                this.Latitude = Convert.ToDouble(getDecimalFromBinary(content, 89, 27)) / 60 / 10000;
                 //COG
-                this.COG = Convert.ToInt32(getDecimalFromBinary(content, 116, 12))/10;
+                this.COG = Convert.ToDouble(getDecimalFromBinary(content, 116, 12))/10;
                 //Time Stamp
                 this.TimeStamp = Convert.ToInt32(getDecimalFromBinary(content, 128, 6));
                 //Altitude Sensor
@@ -114,6 +114,30 @@ namespace NMEA_MessageParserConstructor.BL.Messages
                 "Communication State Selector Flag: " + this.CommunicationStateSelectorFlag + "\n" +
                 "Communication State: " + this.CommunicationState + "\n";
 
+        }
+        #endregion
+
+        #region Attributeları döndürür.
+        public override List<Tuple<string, string>> getAttributes()
+        {
+            List<Tuple<string, string>> _listAttribute = base.getAttributes();
+            List<Tuple<string, string>> _attributes = new List<Tuple<string, string>> {
+                  new Tuple<string, string>("User ID",this.UserID.ToString()),
+                  new Tuple<string, string>("Altitude",this.Altitude.ToString()),
+                  new Tuple<string, string>("SOG",this.SOG.ToString()),
+                  new Tuple<string, string>("PositionAccuracy",this.PositionAccuracy.ToString()),
+                  new Tuple<string, string>("Longitude",this.Longitude.ToString()),
+                  new Tuple<string, string>("Latitude",this.Latitude.ToString()),
+                  new Tuple<string, string>("COG",this.COG.ToString()),
+                  new Tuple<string, string>("Time Stamp",this.TimeStamp.ToString()),
+                  new Tuple<string, string>("Altitude Sensor",this.AltitudeSensor.ToString()),
+                  new Tuple<string, string>("DTE",this.DTE.ToString()),
+                  new Tuple<string, string>("Assigned Mode Flag",this.AssignedModeFlag.ToString()),
+                  new Tuple<string, string>("RAIM Flag",this.RAIMFlag.ToString()),
+                  new Tuple<string, string>("Communication State Selector Flag",this.CommunicationStateSelectorFlag.ToString())
+             };
+            _listAttribute.AddRange(_attributes);
+            return _listAttribute;
         }
         #endregion
     }

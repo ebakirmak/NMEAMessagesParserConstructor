@@ -11,14 +11,6 @@ namespace NMEA_MessageParserConstructor
 {
     public class RootMessages
     {
-
-        private Logger log;
-
-        public RootMessages()
-        {
-            this.log = LogManager.GetCurrentClassLogger();
-        }
-
         protected byte MessageID { get; set; }
 
         protected string Description { get; set; }
@@ -35,13 +27,35 @@ namespace NMEA_MessageParserConstructor
 
         protected short TotalNumberOfBits { get; set; }
 
-        protected byte Spare { get; set; }
+        protected int Spare { get; set; }
 
+        private Logger log;
 
+        public RootMessages()
+        {
+            this.log = LogManager.GetCurrentClassLogger();
+        }        
+
+        #region Mesajın VDM veya VDO mesajı olup olmadığını kontrol edecek
+        public bool CheckMessage(string message)
+        {
+            string [] messageParts = message.Split(',');
+            if(messageParts.Length == 7)
+            {
+                if (messageParts[0] == "!AIVDO" || messageParts[0] == "!AIVDM")
+                    return true;
+                else
+                    return false;
+            }
+            return false;
+        }
+        #endregion
 
         #region VDM veya VDO mesajını parçalarına ayrıştıracak ve geri döndürecek.
         public virtual string[] Parser(string message) {
 
+            if (CheckMessage(message) != true)
+                return null;
             //Mesajı parçalarına ayır.
             string[] messagesPart = message.Split(',');
             if(messagesPart.Count()!=7)
@@ -63,7 +77,7 @@ namespace NMEA_MessageParserConstructor
         #endregion
 
         #region VDM veya VDO mesajı kaç parça olduğunu döndür.
-        public byte getSentences(string message)
+        public byte getSentenceCount(string message)
         {
             try
             {
@@ -82,8 +96,11 @@ namespace NMEA_MessageParserConstructor
         {
             try
             {
-                //ascii8 içeriğini ascii6 dönüştür. Binary yapıda al. 2 lik tabandan 10'luk tabana çevir.
-                return Convert.ToByte(getDecimalFromBinary(getContentBinary(Parser(message)[5], 0), 0, 6));
+                if (message == null)
+                    return 0;
+                else
+                    //ascii8 içeriğini ascii6 dönüştür. Binary yapıda al. 2 lik tabandan 10'luk tabana çevir.
+                    return Convert.ToByte(getDecimalFromBinary(getContentBinary(Parser(message)[5], 0), 0, 6));
             }
             catch (Exception ex)
             {
@@ -130,7 +147,7 @@ namespace NMEA_MessageParserConstructor
         }
         #endregion
 
-                      #region Alınan bir binary içeriğini (000001) 2'lik tabandan 10'luk tabana çevir ve ascii 6 tablosunda ki karakter değerini döndürür.
+        #region Alınan bir binary içeriğini (000001) 2'lik tabandan 10'luk tabana çevir ve ascii 6 tablosunda ki karakter değerini döndürür.
                     public string getStringFromBinary(string binarys, int start, int length)
                     {
                         //string ifadeler
@@ -162,6 +179,28 @@ namespace NMEA_MessageParserConstructor
         }
 
         #endregion
+
+        #region Attribute sayısını döndürür.
+        public virtual byte getAttributeCount()
+        {
+            return 4;
+        }
+        #endregion
+
+        #region Attributeları döndürür.
+        public virtual List<Tuple<string,string>> getAttributes()
+        {
+           List<Tuple<string,string>> _attributes = new List<Tuple<string, string>> { 
+                new Tuple<string, string> ( "Message ID", this.MessageID.ToString() ), 
+                new Tuple<string,string>( "Description ",this.Description),
+                new Tuple<string, string>("Priority",this.Priority.ToString()),
+                new Tuple<string, string>("Repeat Indicator",this.RepeatIndicator.ToString()),
+                new Tuple<string, string>("Spare",this.Spare.ToString())
+           };
+            return _attributes;
+        }
+        #endregion
+
 
 
 

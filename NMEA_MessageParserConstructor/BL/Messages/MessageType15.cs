@@ -109,5 +109,38 @@ namespace NMEA_MessageParserConstructor.BL.Messages
         }
         #endregion
 
+        #region Attributeları döndürür.
+        public override List<Tuple<string, string>> getAttributes()
+        {
+            List<Tuple<string, string>> _listAttribute = base.getAttributes();
+            try
+            {
+
+                List<Tuple<string, string>> _attributes = new List<Tuple<string, string>> {
+                  new Tuple<string, string>("Source ID",this.SourceID.ToString()),
+                  new Tuple<string, string>("Destination ID 1",this.DestinationID1.ToString()),
+                  new Tuple<string, string>("Message ID 1.1",this.MessageID1_1.ToString()),
+                  new Tuple<string, string>("Slot Off Set 1.1",this.SlotOffset1_1.ToString()),
+                  new Tuple<string, string>("Spare 2",this.Spare2.ToString()),
+                  new Tuple<string, string>("Message ID 1.2",this.MessageID1_2.ToString()),
+                  new Tuple<string, string>("Slot Off Set 1ç2",this.SlotOffset1_2.ToString()),
+                  new Tuple<string, string>("Spare 3",this.Spare3.ToString()),
+                  new Tuple<string, string>("Destination ID 2",this.DestinationID2.ToString()),
+                  new Tuple<string, string>("Message ID 2.1",this.MessageID2_1.ToString()),
+                  new Tuple<string, string>("Slot Off Set 2.1",this.SlotOffset2_1.ToString()),
+                  new Tuple<string, string>("Spare 4",this.Spare4.ToString()),
+               };
+
+                _listAttribute.AddRange(_attributes);
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex, "MessageType15 :: getAttribute");
+            }
+
+            return _listAttribute;
+        }
+        #endregion
+
     }
 }

@@ -136,5 +136,47 @@ namespace NMEA_MessageParserConstructor.BL.Messages
 
         }
         #endregion
+
+        #region Attributeları döndürür.
+        //new Tuple<string, string>("",this..ToString()),
+        public override List<Tuple<string, string>> getAttributes()
+        {
+            List<Tuple<string, string>> _listAttribute = base.getAttributes();
+            try
+            {
+
+                List<Tuple<string, string>> _attributes = new List<Tuple<string, string>> {
+                  new Tuple<string, string>("User ID",this.UserID.ToString()),
+                  new Tuple<string, string>("SOG",this.SOG.ToString()),
+                  new Tuple<string, string>("Position Accuracy",this.PositionAccuracy.ToString()),
+                  new Tuple<string, string>("Longitude",this.Longitude.ToString()),
+                  new Tuple<string, string>("Latitude",this.Latitude.ToString()),
+                  new Tuple<string, string>("COG",this.COG.ToString()),
+                  new Tuple<string, string>("True Heading",this.TrueHeading.ToString()),
+                  new Tuple<string, string>("Time Stamp",this.TimeStamp.ToString()),
+                  new Tuple<string, string>("Spare 2",this.Spare2.ToString()),
+                  new Tuple<string, string>("Name",this.Name.ToString()),
+                  new Tuple<string, string>("Type of ship and cargo type",this.TypeOfShipAndCargoType.ToString()),
+                  new Tuple<string, string>("Dimension Of Ship",this.DimensionOfShip.ToString()),
+                  new Tuple<string, string>("Type Of Electronic Position Fixing",this.TypeOfElectronicPositionFixing.ToString()),
+                  new Tuple<string, string>("RAIM Flag",this.RAIMFlag.ToString()),
+                  new Tuple<string, string>("DTE",this.DTE.ToString()),
+                  new Tuple<string, string>("Assigned Mode Flag",this.AssignedModeFlag.ToString()),
+                  new Tuple<string, string>("Spare 3",this.Spare3.ToString()),
+
+               };
+                _listAttribute.AddRange(_attributes);
+               
+               
+            
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex, "MessageType19 :: getAttribute");
+            }
+
+            return _listAttribute;
+        }
+        #endregion
     }
 }

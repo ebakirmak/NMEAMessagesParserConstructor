@@ -113,5 +113,37 @@ namespace NMEA_MessageParserConstructor.BL.Messages
         }
         #endregion
 
+        #region Attributeları döndürür.
+        public override List<Tuple<string, string>> getAttributes()
+        {
+            List<Tuple<string, string>> _listAttribute = base.getAttributes();
+            List<Tuple<string, string>> _listSotdma = this.Sotdma.getAttributes();
+            List<Tuple<string, string>> _attributes = new List<Tuple<string, string>> {
+                  new Tuple<string, string>("User ID",this.UserID.ToString()),
+                  new Tuple<string, string>("UTC Year",this.UtcYear.ToString()),
+                  new Tuple<string, string>("UTC Month",this.UtcMonth.ToString()),
+                  new Tuple<string, string>("UTC Day",this.UtcDay.ToString()),
+                  new Tuple<string, string>("UTC Hour",this.UtcHour.ToString()),
+                  new Tuple<string, string>("UTC Minute",this.UtcMinute.ToString()),
+                  new Tuple<string, string>("UTC Second",this.UtcSecond.ToString()),
+                  new Tuple<string, string>("Position Accuracy",this.PositionAccuracy.ToString()),
+                  new Tuple<string, string>("Longitude",this.Longitude.ToString()),
+                  new Tuple<string, string>("Latitude",this.Latitude.ToString()),
+                  new Tuple<string, string>("Type Of Electronic Position Fix",this.TOEPFD.ToString()),
+                  new Tuple<string, string>("Transmission Control",this.TransmissionControlForLongRangeBroadcastMessage.ToString()),
+                  new Tuple<string, string>("RAIM Flag",this.RAIMFlag.ToString()),
+
+             };
+            _listAttribute.AddRange(_attributes);
+            foreach (var sotdma in _listSotdma)
+            {
+                _listAttribute.Add(new Tuple<string, string>(sotdma.Item1, sotdma.Item2));
+
+            }
+            return _listAttribute;
+        }
+        #endregion
+
+
     }
 }

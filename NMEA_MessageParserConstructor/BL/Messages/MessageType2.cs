@@ -104,5 +104,35 @@ namespace NMEA_MessageParserConstructor.BL.Messages
                 this.CommunicationState.ToString();
         }
         #endregion
+
+        #region Attributeları döndürür.
+        public override List<Tuple<string, string>> getAttributes()
+        {
+            List<Tuple<string, string>> _listAttribute = base.getAttributes();
+            List<Tuple<string, string>> _listSotdma = this.Sotdma.getAttributes();
+            List<Tuple<string, string>> _attributes = new List<Tuple<string, string>> {
+                  new Tuple<string, string>("User ID",this.UserID.ToString()),
+                  new Tuple<string, string>("Navigational Status",this.NavigationalStatus.ToString()),
+                  new Tuple<string, string>("Rate Of Turn ROTAIS",this.RateOfTurnROTAIS.ToString()),
+                  new Tuple<string, string>("SOG",this.SOG.ToString()),
+                  new Tuple<string, string>("PositionAccuracy",this.PositionAccuracy.ToString()),
+                  new Tuple<string, string>("Longitude",this.Longitude.ToString()),
+                  new Tuple<string, string>("Latitude",this.Latitude.ToString()),
+                  new Tuple<string, string>("COG",this.COG.ToString()),
+                  new Tuple<string, string>("True Heading", this.TrueHeading.ToString()),
+                  new Tuple<string, string>("Time Stamp",this.TimeStamp.ToString()),
+                  new Tuple<string, string>("Special Manoeuvre Indicator",this.SpecialManoeuvreIndicator.ToString()),
+                  new Tuple<string, string>("RAIM Flag",this.RAIMFlag.ToString()),
+                  new Tuple<string, string>("Sub Message","")
+             };
+            _listAttribute.AddRange(_attributes);
+            foreach (var sotdma in _listSotdma)
+            {
+                _listAttribute.Add(new Tuple<string, string>(sotdma.Item1, sotdma.Item2));
+
+            }
+            return _listAttribute;
+        }
+        #endregion
     }
 }

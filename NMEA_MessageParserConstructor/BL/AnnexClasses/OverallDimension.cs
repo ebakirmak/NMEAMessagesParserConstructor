@@ -16,6 +16,7 @@ namespace NMEA_MessageParserConstructor.BL.AnnexClasses
         private byte D { get; set; }
         private Logger log { get; set; }
         private RootMessages root { get; set; }
+
         public OverallDimension()
         {
             this.log = LogManager.GetCurrentClassLogger();
@@ -69,5 +70,16 @@ namespace NMEA_MessageParserConstructor.BL.AnnexClasses
             return this.D;
         }
         #endregion
+
+        #region ToString methodunu override ettik.
+        public override string ToString()
+        {
+            return "  A:" + getA() + 
+                   "  B:" + getB() +
+                   "  C:" + getC() +
+                   "  D:" + getD();
+        }
+        #endregion
+
     }
 }

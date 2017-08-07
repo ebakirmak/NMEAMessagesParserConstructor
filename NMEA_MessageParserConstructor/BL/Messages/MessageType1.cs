@@ -2,6 +2,7 @@
 using NMEA_MessageParserConstructor.BL.CommunicationState;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,19 +13,19 @@ namespace NMEA_MessageParserConstructor
     {   
         
         //MMSI
-        private int UserID { get; set; }
-        private byte NavigationalStatus { get; set; }
-        private float RateOfTurnROTAIS { get; set; }
-        private float SOG { get; set; }
-        private byte PositionAccuracy { get; set; }
-        private double Longitude { get; set; }
-        private double Latitude { get; set; }
-        private float COG { get; set; }
-        private int TrueHeading { get; set; }
-        private byte TimeStamp { get; set; }
-        private int SpecialManoeuvreIndicator { get; set; }
-        private byte RAIMFlag { get; set; }
-        private SOTDMA Sotdma;
+        public int UserID { get; set; }
+        public byte NavigationalStatus { get; set; }
+        public float RateOfTurnROTAIS { get; set; }
+        public float SOG { get; set; }
+        public byte PositionAccuracy { get; set; }
+        public double Longitude { get; set; }
+        public double Latitude { get; set; }
+        public float COG { get; set; }
+        public int TrueHeading { get; set; }
+        public byte TimeStamp { get; set; }
+        public int SpecialManoeuvreIndicator { get; set; }
+        public byte RAIMFlag { get; set; }
+        public SOTDMA Sotdma;
 
         public MessageType1()
         {
@@ -34,11 +35,7 @@ namespace NMEA_MessageParserConstructor
             this.Priority = 1;
             this.TotalNumberOfBits = 168;
             this.Sotdma = new SOTDMA();
-        }
-
-
-
-        
+        }        
 
         #region Mesaj yapısında bulunan attributelara, alınan mesajdaki değerleri set ettik.
         public override string[] Parser(string message)
@@ -93,12 +90,13 @@ namespace NMEA_MessageParserConstructor
         #region ToString mesajını ezdik. Methodu sınıfa göre tasarladık.
         public override string ToString()
         {
-            return this.MessageID + "\n" +
-                this.RepeatIndicator + "\n" +
-                this.UserID + "\n" +
-                this.NavigationalStatus + "\n" +
-                this.RateOfTurnROTAIS + "\n" +
-                this.SOG + "\n" +
+            return 
+                ( "Mesaj ID: ")+ this.MessageID + "\n" +
+                "Repeat Indicator: "+ this.RepeatIndicator + "\n" +
+                "User ID: "+this.UserID + "\n" +
+                "Navigational Status: " + this.NavigationalStatus + "\n" +
+                "Rate Of Turn ROTAIS: "+ this.RateOfTurnROTAIS + "\n" +
+                "SOG: "+ this.SOG + "\n" +
                 this.PositionAccuracy + "\n" +
                 this.Longitude + "\n" +
                 this.Latitude + "\n" +
@@ -109,6 +107,36 @@ namespace NMEA_MessageParserConstructor
                 this.Spare + "\n" +
                 this.RAIMFlag + "\n" +
                 this.CommunicationState.ToString();
+        }
+        #endregion
+
+        #region Attributeları döndürür.
+        public override List<Tuple<string,string>> getAttributes()
+        {
+             List<Tuple<string,string>> _listAttribute = base.getAttributes();
+            List<Tuple<string, string>> _listSotdma = this.Sotdma.getAttributes();
+            List<Tuple<string, string>> _attributes = new List<Tuple<string, string>> {
+                  new Tuple<string, string>("User ID",this.UserID.ToString()),
+                  new Tuple<string, string>("Navigational Status",this.NavigationalStatus.ToString()),
+                  new Tuple<string, string>("Rate Of Turn ROTAIS",this.RateOfTurnROTAIS.ToString()),
+                  new Tuple<string, string>("SOG",this.SOG.ToString()),
+                  new Tuple<string, string>("PositionAccuracy",this.PositionAccuracy.ToString()),
+                  new Tuple<string, string>("Longitude",this.Longitude.ToString()),
+                  new Tuple<string, string>("Latitude",this.Latitude.ToString()),
+                  new Tuple<string, string>("COG",this.COG.ToString()),
+                  new Tuple<string, string>("True Heading", this.TrueHeading.ToString()),
+                  new Tuple<string, string>("Time Stamp",this.TimeStamp.ToString()),
+                  new Tuple<string, string>("Special Manoeuvre Indicator",this.SpecialManoeuvreIndicator.ToString()),
+                  new Tuple<string, string>("RAIM Flag",this.RAIMFlag.ToString()),
+                  new Tuple<string, string>("Sub Message","")
+             };
+            _listAttribute.AddRange(_attributes);
+            foreach (var sotdma in _listSotdma)
+            {
+                _listAttribute.Add( new Tuple<string, string>(sotdma.Item1, sotdma.Item2));
+
+            }
+            return _listAttribute;
         }
         #endregion
     }

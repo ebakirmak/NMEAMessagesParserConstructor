@@ -1,4 +1,5 @@
 ﻿using NLog;
+using NMEA_MessageParserConstructor.BL.AnnexClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,17 +25,6 @@ namespace NMEA_MessageParserConstructor.BL.Messages
             this.log = LogManager.GetCurrentClassLogger();
         }
 
-        class CorrectionData
-        {
-            public int MessageType { get; set; }
-            public int StationID { get; set; }
-            public int ZCount { get; set; }
-            public int SequenceNumber { get; set; }
-            public int N { get; set; }
-            public int Health { get; set; }
-            public string  DataWord { get; set; }
-            public int NumberOfBits { get; set; }
-        }
 
 
         #region Mesaj yapısında bulunan attributelara, alınan mesajdaki değerleri set ettik.
@@ -61,19 +51,7 @@ namespace NMEA_MessageParserConstructor.BL.Messages
                 //Spare
                 this.Spare2 = Convert.ToByte(getDecimalFromBinary(content, 75, 5));
                 //DATA MessageType
-                this.Data.MessageType = Convert.ToInt32(getDecimalFromBinary(content, 80, 6));
-                //DATA Station ID
-                this.Data.StationID = Convert.ToInt32(getDecimalFromBinary(content, 86, 10));
-                //DATA Z Count
-                this.Data.ZCount = Convert.ToInt32(getDecimalFromBinary(content, 96, 13));
-                //DATA Sequence Number
-                this.Data.SequenceNumber = Convert.ToInt32(getDecimalFromBinary(content, 109, 3));
-                //DATA N
-                this.Data.N = Convert.ToInt32(getDecimalFromBinary(content, 112, 5));
-                //Health
-                this.Data.Health = Convert.ToInt32(getDecimalFromBinary(content, 117, 3));
-                ////DATA DGNSS data word -- HATALI DÜZELTİLECEK.
-                this.Data.DataWord = Convert.ToString(getStringFromBinary(content, 120, content.Length - 120));
+                this.Data.setValue(content, 80);
 
             }
             catch (Exception ex)
@@ -99,13 +77,43 @@ namespace NMEA_MessageParserConstructor.BL.Messages
                 "Longitude: " + this.Longitude + "\n" +
                 "Latitude: " + this.Latitude + "\n" +
                 "Spare 2 : " + this.Spare2 + "\n" +
-                "Data Message Type: " + this.Data.MessageType + "\n" +
-                "Data Station ID: " + this.Data.StationID + "\n" +
-                "Data ZCount: " + this.Data.ZCount + "\n" +
-                "Data Sequence Number: " + this.Data.SequenceNumber + "\n" +
-                "Data N: " + this.Data.N + "\n" +
-                "Data Health: " + this.Data.Health + "\n" +
-                "DGNSS data word: " + this.Data.DataWord + "\n";
+                this.Data.ToString();
+                
+        }
+        #endregion
+
+        #region Attributeları döndürür.
+        //new Tuple<string, string>("",this..ToString()),
+        public override List<Tuple<string, string>> getAttributes()
+        {
+            List<Tuple<string, string>> _listAttribute = base.getAttributes();
+
+            List<Tuple<string, string>> _listCorrectionData = this.Data.getAttributes();
+
+            try
+            {
+
+                List<Tuple<string, string>> _attributes = new List<Tuple<string, string>> {
+                  new Tuple<string, string>("Source ID",this.SourceID.ToString()),
+                  new Tuple<string, string>("Longitude",this.Longitude.ToString()),
+                  new Tuple<string, string>("Latitude",this.Latitude.ToString()),
+                  new Tuple<string, string>("Spare 2",this.Spare2.ToString()),
+
+
+               };
+                _listAttribute.AddRange(_attributes);
+
+                foreach (var correctionData in _listCorrectionData)
+                {
+                    _listAttribute.Add(new Tuple<string, string>(correctionData.Item1, correctionData.Item2));
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex, "MessageType17 :: getAttribute");
+            }
+
+            return _listAttribute;
         }
         #endregion
     }

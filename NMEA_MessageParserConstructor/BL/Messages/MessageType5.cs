@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NMEA_MessageParserConstructor.BL;
+using NMEA_MessageParserConstructor.BL.AnnexClasses;
 
 namespace NMEA_MessageParserConstructor.BL.Messages
 {
@@ -41,22 +42,8 @@ namespace NMEA_MessageParserConstructor.BL.Messages
             this.OverallDimensions = new OverallDimension();
         }
 
-        public class ETA
-        {
-            public byte Minute { get; set; }
-            public byte Hour { get; set; }
-            public byte Day { get; set; }
-            public byte Month { get; set; }
-        }
+      
 
-        public class OverallDimension
-        {
-            public int A { get; set; }
-            public int B { get; set; }
-            public int C { get; set; }
-            public int D { get; set; }
-
-        }
 
         #region Mesaj yapısında bulunan attributelara, alınan mesajdaki değerleri set ettik.
         public override string[] Parser(string message1,string message2)
@@ -95,19 +82,14 @@ namespace NMEA_MessageParserConstructor.BL.Messages
             this.TypeOfShipAndCargoType = Convert.ToByte((getDecimalFromBinary(content, 232, 8)));
 
             //Overall Dimensions String Hatalı - DÖKÜMANDA HATALI SOR.
-            this.OverallDimensions.A =Convert.ToInt32(getDecimalFromBinary(content, 240, 9));
-            this.OverallDimensions.B = Convert.ToInt32(getDecimalFromBinary(content, 249, 9));
-            this.OverallDimensions.C = Convert.ToInt32(getDecimalFromBinary(content, 258, 6));
-            this.OverallDimensions.D = Convert.ToInt32(getDecimalFromBinary(content, 264, 6));
+            this.OverallDimensions.setValue(content, 240);
             
             //
             this.TypeOfEPFD = Convert.ToByte(getDecimalFromBinary(content, 270, 4));
 
             //Estimated time of arrival.
-            this.Eta.Month = Convert.ToByte(getDecimalFromBinary(content, 274, 4));
-            this.Eta.Day = Convert.ToByte(getDecimalFromBinary(content, 278, 5));
-            this.Eta.Hour = Convert.ToByte(getDecimalFromBinary(content, 283, 5));
-            this.Eta.Minute =Convert.ToByte (getDecimalFromBinary(content, 288, 6));
+            this.Eta.setValue(content, 274);
+       
             
             //Maximum present static draught
             this.MaxStaticDraught = Convert.ToDouble(getDecimalFromBinary(content, 294, 8))/10;
@@ -137,16 +119,39 @@ namespace NMEA_MessageParserConstructor.BL.Messages
                 "Call Sign: " + this.CallSign + "\n" +
                 "Name: " + this.Name + "\n" +
                 "Type Of Ship And Cargo Type: " + this.TypeOfShipAndCargoType + "\n" +
-                "Overall Dimensions A: " + this.OverallDimensions.A + " B: " + this.OverallDimensions.B + " C: " + this.OverallDimensions.C + " D: " + this.OverallDimensions.D + "\n" +
+                "Overall Dimensions A: " + this.OverallDimensions.getA() +
+                                  " B: " + this.OverallDimensions.getB() +
+                                  " C: " + this.OverallDimensions.getC() +
+                                  " D: " + this.OverallDimensions.getD() + "\n" +
                 "Type Of EPFD: " + this.TypeOfEPFD + "\n" +
-                "ETA Month: " + this.Eta.Month + "\n" +
-                "ETA Day:" + this.Eta.Day + "\n" +
-                "ETA Hour: " + this.Eta.Hour + "\n" +
-                "ETA Minute: " + this.Eta.Minute + "\n" +
+                this.Eta.ToString() +
                 "Max. static draught: " + this.MaxStaticDraught + "\n" +
                 "Destination: " + this.Destination + "\n" +
                 "DTE: " + this.DTE + "\n" +
                 "Spare: " + this.Spare + "\n";
+        }
+        #endregion
+
+        #region Attributeları döndürür.
+        public override List<Tuple<string, string>> getAttributes()
+        {
+            List<Tuple<string, string>> _listAttribute = base.getAttributes();
+            List<Tuple<string, string>> _attributes = new List<Tuple<string, string>> {
+                  new Tuple<string, string>("User ID",this.UserID.ToString()),
+                  new Tuple<string, string>("AIS Version Indicator",this.AISVersionIndicator.ToString()),
+                  new Tuple<string, string>("IMO Number",this.IMONumber.ToString()),
+                  new Tuple<string, string>("Call Sign",this.CallSign.ToString()),
+                  new Tuple<string, string>("Name",this.Name.ToString()),
+                  new Tuple<string, string>("Type Of Ship And Cargo Type",this.TypeOfShipAndCargoType.ToString()),
+                  new Tuple<string, string>("Overall Dimensions",this.OverallDimensions.ToString()),
+                  new Tuple<string, string>("EPFD Type",this.TypeOfEPFD.ToString()),
+                  new Tuple<string, string>("Eta", this.Eta.ToString()),
+                  new Tuple<string, string>("MaxStaticDraught",this.MaxStaticDraught.ToString()),
+                  new Tuple<string, string>("Destination",this.Destination.ToString()),
+                  new Tuple<string, string>("DTE",this.DTE.ToString())
+             };
+            _listAttribute.AddRange(_attributes);            
+            return _listAttribute;
         }
         #endregion
     }

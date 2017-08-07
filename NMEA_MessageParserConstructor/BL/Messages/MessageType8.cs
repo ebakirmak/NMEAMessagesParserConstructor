@@ -1,4 +1,5 @@
 ﻿using NLog;
+using NMEA_MessageParserConstructor.BL.AnnexClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,15 +24,15 @@ namespace NMEA_MessageParserConstructor.BL.Messages
             this.log = LogManager.GetCurrentClassLogger();
         }
 
-        #region BinaryData ' yı saklamak için kullanılıyor.
-        class BinaryData
-        {
-            public int DAC { get; set; }
-            public int FID { get; set; }
-            public string Data { get; set; }
+        //#region BinaryData ' yı saklamak için kullanılıyor.
+        //class BinaryData
+        //{
+        //    public int DAC { get; set; }
+        //    public int FID { get; set; }
+        //    public string Data { get; set; }
 
-        }
-        #endregion
+        //}
+        //#endregion
 
         #region Mesaj yapısında bulunan attributelara, alınan mesajdaki değerleri set ettik.
         public override string[] Parser(string message)
@@ -52,12 +53,9 @@ namespace NMEA_MessageParserConstructor.BL.Messages
 
                 //Spare
                 this.Spare = Convert.ToByte(getDecimalFromBinary(content, 38, 2));
-                
+
                 //Binary Data
-                this.binaryData.DAC = Convert.ToInt32(getDecimalFromBinary(content, 40, 10));
-                //HATA VAR!
-                this.binaryData.FID = Convert.ToInt32(getDecimalFromBinary(content, 50, 6));
-                this.binaryData.Data = Convert.ToString(getStringFromBinary(content, 56,12));
+                this.binaryData.setValue(content, 40);
             }
             catch (Exception ex)
             {
@@ -79,9 +77,27 @@ namespace NMEA_MessageParserConstructor.BL.Messages
                 "Repeat Indicator: " + this.RepeatIndicator + "\n" +
                 "Source ID: " + this.SourceID + "\n" +
                 "Spare: " + this.Spare + "\n" +
-                "DAC: " + this.binaryData.DAC + "\n" +
-                "FID: " + this.binaryData.FID + "\n" +
-                "Data: " + this.binaryData.Data;
+                binaryData.ToString();
+        }
+        #endregion
+
+        #region Attributeları döndürür.
+        public override List<Tuple<string, string>> getAttributes()
+        {
+            List<Tuple<string, string>> _listAttribute = base.getAttributes();
+            List<Tuple<string, string>> _listBinaryData = this.binaryData.getAttributes();
+
+            List<Tuple<string, string>> _attributes = new List<Tuple<string, string>> {
+                  new Tuple<string, string>("Source ID",this.SourceID.ToString())
+             };
+
+            _listAttribute.AddRange(_attributes);
+            foreach (var binaryData in _listBinaryData)
+            {
+                _listAttribute.Add(new Tuple<string, string>(binaryData.Item1, binaryData.Item2));
+
+            }
+            return _listAttribute;
         }
         #endregion
     }

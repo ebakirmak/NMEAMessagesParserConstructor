@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,12 +15,13 @@ namespace NMEA_MessageParserConstructor.BL.Messages
         private int DestinationID { get; set; }
         private byte RetransmitFlag { get; set; }
         private string SafetyRelatedText { get; set; }
-
+        private Logger log; 
         public MessageType12()
         {
             this.MessageID = 12;
             this.TotalNumberOfBits = 1008;
             this.Description = "Adressed Safety Related Message";
+            this.log = LogManager.GetCurrentClassLogger();
         }
 
         #region Mesaj yapısında bulunan attributelara, alınan mesajdaki değerleri set ettik.
@@ -31,10 +33,12 @@ namespace NMEA_MessageParserConstructor.BL.Messages
             if (messageParts1 != null)
                content = getContentBinary(messageParts1[5], Remove(messageParts1[6]));
 
-            string[] messageParts2 = base.Parser(message2);
-            //Context'i oku. Binary yapıda.
-            if(messageParts2 != null)
+            string[] messageParts2= { };
+            if (message2 != null) { 
+                messageParts2 = base.Parser(message2);
+                //Context'i oku. Binary yapıda.       
                 content += getContentBinary(messageParts2[5], Remove(messageParts2[6]));
+            }
 
 
             //Tüm mesajlarda olan özellikleri burada gir.
@@ -54,7 +58,7 @@ namespace NMEA_MessageParserConstructor.BL.Messages
             //Spare
             this.Spare = Convert.ToByte(getDecimalFromBinary(content, 71, 1));
             //Safety Related Text
-            this.SafetyRelatedText = Convert.ToString(getStringFromBinary(content, 72, 36));
+            this.SafetyRelatedText = Convert.ToString(getStringFromBinary(content, 72, content.Length-72));
 
             return null;
         }
@@ -74,6 +78,33 @@ namespace NMEA_MessageParserConstructor.BL.Messages
                 "Safety Related Text: " + this.SafetyRelatedText + "\n";
 
          
+        }
+        #endregion
+
+        #region Attributeları döndürür.
+        public override List<Tuple<string, string>> getAttributes()
+        {
+            List<Tuple<string, string>> _listAttribute = base.getAttributes();
+            try
+            {
+             
+                List<Tuple<string, string>> _attributes = new List<Tuple<string, string>> {
+                  new Tuple<string, string>("Source ID",this.SourceID.ToString()),
+                  new Tuple<string, string>("Sequence Number",this.SequenceNumber.ToString()),
+                  new Tuple<string, string>("Destination ID",this.DestinationID.ToString()),
+                  new Tuple<string, string>("Retransmit Flag",this.RetransmitFlag.ToString()),
+                  new Tuple<string, string>("Safety Related Text",this.SafetyRelatedText.ToString()),
+
+             };
+
+                _listAttribute.AddRange(_attributes);
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex, "MessageType12 :: getAttribute");
+            }
+          
+            return _listAttribute;
         }
         #endregion
 

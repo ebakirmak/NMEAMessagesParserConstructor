@@ -7,14 +7,25 @@ using System.Threading.Tasks;
 
 namespace NMEA_MessageParserConstructor.BL
 {
+    //Seriportlardan gelecek olan mesajların yönetileceği sınıftır.
    public class AllMessage
     {
         private Queue<string> Message;
         private Logger log;
+        private static AllMessage SingleAllMessage;
+
         public AllMessage()
         {
             this.Message = new Queue<string>();
             this.log = LogManager.GetCurrentClassLogger();
+        }
+
+        public static AllMessage getObject()
+        {
+            if (SingleAllMessage == null)
+                SingleAllMessage = new AllMessage();
+
+            return SingleAllMessage;
         }
 
         #region Kuyruğa eleman ekleme
@@ -40,14 +51,16 @@ namespace NMEA_MessageParserConstructor.BL
         {        
             try
             {
-               return  this.Message.Dequeue();
+                if (this.Count() > 0)
+                    return this.Message.Dequeue();
+                else
+                    return null;
                
             }
             catch (Exception ex)
             {
                 log.Error(ex, "AllMessage :: Dequeue()");
                 throw;
-                return null;
             }
           
         }
@@ -65,7 +78,6 @@ namespace NMEA_MessageParserConstructor.BL
 
                 log.Error(ex, "AllMessage : Count()");
                 throw;
-                return 0;
             }
         }
         #endregion

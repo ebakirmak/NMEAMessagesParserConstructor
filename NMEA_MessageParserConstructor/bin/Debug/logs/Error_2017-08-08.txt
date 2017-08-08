@@ -1,0 +1,5 @@
+2017-08-08 10:50:40.1627 ERROR  SeriPort :: ReadMessage System.InvalidOperationException: The port is closed.
+   at System.IO.Ports.SerialPort.get_BytesToRead()
+   at NMEA_MessageParserConstructor.BL.SeriPort.ReadMessage() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\SeriPort.cs:line 101    at System.IO.Ports.SerialPort.get_BytesToRead()
+   at NMEA_MessageParserConstructor.BL.SeriPort.ReadMessage() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\SeriPort.cs:line 101
+

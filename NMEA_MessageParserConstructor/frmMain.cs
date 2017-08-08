@@ -33,7 +33,7 @@ namespace NMEA_MessageParserConstructor
          
             this.root =  new RootMessages();
             this.allMessage = AllMessage.getObject();
-            sp = new SeriPort("COM4", 38400, 8);
+          
             //ReadMessage fonksiyonunu bir thread'e atıyoruz.
             threadRead  = new Thread(ReadMessage);
             //log nesnemizi oluşturduk.
@@ -50,8 +50,10 @@ namespace NMEA_MessageParserConstructor
         
         #region FormLoad
         private void frmMain_Load(object sender, EventArgs e)
-        {           
-            threadRead.Start();
+        {
+            comboBox1.Items.AddRange( SeriPort.getPortNames());
+            listBox1.Items.Add("!AIVDM,1,1, ,A,139>M@O28PsWH40<e3W25-N0804,0*3F");
+          
             tmrMessage.Interval = 500;
             tmrMessage.Start();
             ScreenResize();
@@ -86,7 +88,8 @@ namespace NMEA_MessageParserConstructor
         #region Program kapatılırken seriporttan mesaj okuma işlemi bitirilir.
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            sp.DontReadMessage();
+            if(sp !=null && sp.isOpen())
+                sp.DontReadMessage();
         }
         #endregion
    
@@ -375,6 +378,30 @@ namespace NMEA_MessageParserConstructor
         {
             VDM1 = textBox1.Text;
             Run();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if(sp != null)
+            {
+                if (sp.isOpen())
+                {
+                    sp.DontReadMessage();
+              
+                    button2.Text = "Port Aç";
+                }
+                else
+                {
+                    threadRead.Start();
+                    button2.Text = "Port Kapa";
+                }
+            }
+           
+        }
+
+        private void comboBox1_TextChanged(object sender, EventArgs e)
+        {
+            sp = new SeriPort(comboBox1.Text, 38400, 8);
         }
     }
 }

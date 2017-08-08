@@ -35,7 +35,7 @@ namespace NMEA_MessageParserConstructor.BL
         #endregion
 
         #region Seriport bağlantı noktasını açar.
-        private bool Open()
+        public bool Open()
         {
             try
             {
@@ -59,7 +59,7 @@ namespace NMEA_MessageParserConstructor.BL
         #endregion
 
         #region Seriport bağlantı noktasını kapar.
-        private bool Close()
+        public bool Close()
         {
             try
             {
@@ -78,6 +78,13 @@ namespace NMEA_MessageParserConstructor.BL
                 return false;
                 throw ex;
             }
+        }
+        #endregion
+
+        #region Seriport durumunu döndürür.
+        public bool isOpen()
+        {
+            return myPort.IsOpen;
         }
         #endregion
 

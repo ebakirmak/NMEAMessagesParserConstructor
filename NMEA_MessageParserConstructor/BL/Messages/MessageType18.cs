@@ -154,9 +154,9 @@ namespace NMEA_MessageParserConstructor.BL.Messages
 
         #region Attributeları döndürür.
         //new Tuple<string, string>("",this..ToString()),
-        public override List<Tuple<string, string>> getAttributes()
+        public override List<Tuple<string, string>> getAttributesAndValues()
         {
-            List<Tuple<string, string>> _listAttribute = base.getAttributes(); 
+            List<Tuple<string, string>> _listAttribute = base.getAttributesAndValues(); 
 
             try
             {
@@ -184,9 +184,9 @@ namespace NMEA_MessageParserConstructor.BL.Messages
                 _listAttribute.AddRange(_attributes);
                 List<Tuple<string, string>> _list = null;
                 if (this.CommunicationStateSelectorFlag == 0)
-                    _list = this.Sotdma.getAttributes();
+                    _list = this.Sotdma.getAttributesAndValues();
                 else
-                    _list = this.Itdma.getAttributea();
+                    _list = this.Itdma.getAttributes();
                 foreach (var item in _list)
                 {
                     _listAttribute.Add(new Tuple<string, string>(item.Item1, item.Item2));

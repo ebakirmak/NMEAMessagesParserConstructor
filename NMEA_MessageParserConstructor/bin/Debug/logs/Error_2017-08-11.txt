@@ -1,0 +1,18 @@
+2017-08-11 17:14:16.6967 ERROR MessageType1 :: Parser System.ArgumentOutOfRangeException: Index and count must refer to a location within the string.
+Parameter name: destinationIndex
+   at System.String.CopyTo(Int32 sourceIndex, Char[] destination, Int32 destinationIndex, Int32 count)
+   at NMEA_MessageParserConstructor.RootMessages.ProperRateOfTurnROTAIS(Double value) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 378
+   at NMEA_MessageParserConstructor.MessageType1.Parser(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType1.cs:line 62    at System.String.CopyTo(Int32 sourceIndex, Char[] destination, Int32 destinationIndex, Int32 count)
+   at NMEA_MessageParserConstructor.RootMessages.ProperRateOfTurnROTAIS(Double value) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 378
+   at NMEA_MessageParserConstructor.MessageType1.Parser(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType1.cs:line 62
+
+2017-08-11 17:14:16.7467 ERROR frmMain :: Run System.ArgumentOutOfRangeException: Index and count must refer to a location within the string.
+Parameter name: destinationIndex
+   at System.String.CopyTo(Int32 sourceIndex, Char[] destination, Int32 destinationIndex, Int32 count)
+   at NMEA_MessageParserConstructor.RootMessages.ProperRateOfTurnROTAIS(Double value) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 378
+   at NMEA_MessageParserConstructor.MessageType1.Parser(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType1.cs:line 92
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 224    at System.String.CopyTo(Int32 sourceIndex, Char[] destination, Int32 destinationIndex, Int32 count)
+   at NMEA_MessageParserConstructor.RootMessages.ProperRateOfTurnROTAIS(Double value) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 378
+   at NMEA_MessageParserConstructor.MessageType1.Parser(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType1.cs:line 92
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 224
+

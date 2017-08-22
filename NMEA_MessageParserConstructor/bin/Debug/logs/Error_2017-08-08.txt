@@ -3,3 +3,32 @@
    at NMEA_MessageParserConstructor.BL.SeriPort.ReadMessage() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\SeriPort.cs:line 101    at System.IO.Ports.SerialPort.get_BytesToRead()
    at NMEA_MessageParserConstructor.BL.SeriPort.ReadMessage() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\SeriPort.cs:line 101
 
+2017-08-08 11:55:51.2677 ERROR frmMain :: Run System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 228    at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 228
+
+2017-08-08 12:19:48.7558 ERROR frmMain :: Run System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 229    at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 229
+
+2017-08-08 12:19:55.9245 ERROR frmMain :: Run System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 229    at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 229
+
+2017-08-08 12:20:25.4214 ERROR frmMain :: Run System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 229    at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 229
+
+2017-08-08 12:20:47.0546 ERROR frmMain :: Run System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 229    at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 229
+
+2017-08-08 16:03:38.4364 ERROR  MessageType19 :: Parser() System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToInt32(String value)
+   at NMEA_MessageParserConstructor.RootMessages.Remove(String messagePart) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 216
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType19.Parser(String message1) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType19.cs:line 52    at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToInt32(String value)
+   at NMEA_MessageParserConstructor.RootMessages.Remove(String messagePart) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 216
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType19.Parser(String message1) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType19.cs:line 52
+
+2017-08-08 16:03:38.5131 ERROR MessageType19 :: getAttribute System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType19.getAttributes() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType19.cs:line 148    at NMEA_MessageParserConstructor.BL.Messages.MessageType19.getAttributes() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType19.cs:line 148
+

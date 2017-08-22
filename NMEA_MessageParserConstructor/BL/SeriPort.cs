@@ -43,6 +43,7 @@ namespace NMEA_MessageParserConstructor.BL
                 if (myPort.IsOpen == false)
                 {
                     myPort.Open();
+                    this.State = 1;
                     return true;
                 }
                 else

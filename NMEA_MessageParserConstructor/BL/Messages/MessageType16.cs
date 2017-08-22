@@ -93,9 +93,9 @@ namespace NMEA_MessageParserConstructor.BL.Messages
 
         #region Attributeları döndürür.
         //!AIVDM,1,1,,A,@address@hidden<P00,0*18
-        public override List<Tuple<string, string>> getAttributes()
+        public override List<Tuple<string, string>> getAttributesAndValues()
         {
-            List<Tuple<string, string>> _listAttribute = base.getAttributes();
+            List<Tuple<string, string>> _listAttribute = base.getAttributesAndValues();
             try
             {
 

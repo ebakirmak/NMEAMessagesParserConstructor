@@ -79,11 +79,12 @@ namespace NMEA_MessageParserConstructor.BL.Messages
             this.Spare = Convert.ToByte(getDecimalFromBinary(content, 139, 9));
             //RAIM
             this.RAIMFlag = Convert.ToByte(getDecimalFromBinary(content, 148, 1));
-            //Communication State            
-            this.Sotdma.SyncState = Convert.ToByte(getDecimalFromBinary(content, 149, 2));
-            this.Sotdma.SlotTimeOut = Convert.ToByte(getDecimalFromBinary(content, 151, 3));
-            //Communication State Sub Message
-            this.Sotdma.subMessage.SlotNumber = Convert.ToInt32(getDecimalFromBinary(content, 154, 14));
+            //Communication State     
+            Sotdma.setValue(content,149);       
+            //this.Sotdma.SyncState = Convert.ToByte(getDecimalFromBinary(content, 149, 2));
+            //this.Sotdma.SlotTimeOut = Convert.ToByte(getDecimalFromBinary(content, 151, 3));
+            ////Communication State Sub Message
+            //this.Sotdma.subMessage.SlotNumber = Convert.ToInt32(getDecimalFromBinary(content, 154, 14));
             this.CommunicationState = Sotdma;
             return null;
         }
@@ -114,10 +115,10 @@ namespace NMEA_MessageParserConstructor.BL.Messages
         #endregion
 
         #region Attributeları döndürür.
-        public override List<Tuple<string, string>> getAttributes()
+        public override List<Tuple<string, string>> getAttributesAndValues()
         {
-            List<Tuple<string, string>> _listAttribute = base.getAttributes();
-            List<Tuple<string, string>> _listSotdma = this.Sotdma.getAttributes();
+            List<Tuple<string, string>> _listAttribute = base.getAttributesAndValues();
+            List<Tuple<string, string>> _listSotdma = this.Sotdma.getAttributesAndValues();
             List<Tuple<string, string>> _attributes = new List<Tuple<string, string>> {
                   new Tuple<string, string>("User ID",this.UserID.ToString()),
                   new Tuple<string, string>("UTC Year",this.UtcYear.ToString()),

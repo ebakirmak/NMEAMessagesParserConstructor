@@ -1,0 +1,16 @@
+2017-08-20 14:50:07.7645 ERROR RootMessages :: getMessageID System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 142    at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 142
+
+2017-08-20 14:50:07.8196 ERROR frmMain :: Run System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 147
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 157    at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 147
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 157
+
+2017-08-20 14:51:01.1499 ERROR RootMessages :: getMessageID System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 142    at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 142
+
+2017-08-20 14:51:01.1890 ERROR frmMain :: Run System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 147
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 157    at NMEA_MessageParserConstructor.RootMessages.getMessageID(String message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 147
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 157
+

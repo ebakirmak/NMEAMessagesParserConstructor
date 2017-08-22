@@ -42,8 +42,8 @@ namespace NMEA_MessageParserConstructor.BL.Messages
             this.OverallDimensions = new OverallDimension();
         }
 
-      
 
+        #region Parser
 
         #region Mesaj yapısında bulunan attributelara, alınan mesajdaki değerleri set ettik.
         public override string[] Parser(string message1,string message2)
@@ -107,6 +107,32 @@ namespace NMEA_MessageParserConstructor.BL.Messages
         }
         #endregion
 
+        #region getAttributesAndValues(): Attributeları döndürür.
+        public override List<Tuple<string, string>> getAttributesAndValues()
+        {
+            List<Tuple<string, string>> _listAttribute = base.getAttributesAndValues();
+            List<Tuple<string, string>> _attributes = new List<Tuple<string, string>> {
+                  new Tuple<string, string>("User ID",this.UserID.ToString()),
+                  new Tuple<string, string>("AIS Version Indicator",this.AISVersionIndicator.ToString()),
+                  new Tuple<string, string>("IMO Number",this.IMONumber.ToString()),
+                  new Tuple<string, string>("Call Sign",this.CallSign.ToString()),
+                  new Tuple<string, string>("Name",this.Name.ToString()),
+                  new Tuple<string, string>("Type Of Ship And Cargo Type",this.TypeOfShipAndCargoType.ToString()),
+                  new Tuple<string, string>("Overall Dimensions",this.OverallDimensions.ToString()),
+                  new Tuple<string, string>("EPFD Type",this.TypeOfEPFD.ToString()),
+                  new Tuple<string, string>("Eta", this.Eta.ToString()),
+                  new Tuple<string, string>("MaxStaticDraught",this.MaxStaticDraught.ToString()),
+                  new Tuple<string, string>("Destination",this.Destination.ToString()),
+                  new Tuple<string, string>("DTE",this.DTE.ToString())
+             };
+            _listAttribute.AddRange(_attributes);
+            return _listAttribute;
+        }
+        #endregion
+
+        #endregion
+
+
         #region ToString() methodunu override ettik.
         public override string ToString()
         {
@@ -132,27 +158,6 @@ namespace NMEA_MessageParserConstructor.BL.Messages
         }
         #endregion
 
-        #region Attributeları döndürür.
-        public override List<Tuple<string, string>> getAttributes()
-        {
-            List<Tuple<string, string>> _listAttribute = base.getAttributes();
-            List<Tuple<string, string>> _attributes = new List<Tuple<string, string>> {
-                  new Tuple<string, string>("User ID",this.UserID.ToString()),
-                  new Tuple<string, string>("AIS Version Indicator",this.AISVersionIndicator.ToString()),
-                  new Tuple<string, string>("IMO Number",this.IMONumber.ToString()),
-                  new Tuple<string, string>("Call Sign",this.CallSign.ToString()),
-                  new Tuple<string, string>("Name",this.Name.ToString()),
-                  new Tuple<string, string>("Type Of Ship And Cargo Type",this.TypeOfShipAndCargoType.ToString()),
-                  new Tuple<string, string>("Overall Dimensions",this.OverallDimensions.ToString()),
-                  new Tuple<string, string>("EPFD Type",this.TypeOfEPFD.ToString()),
-                  new Tuple<string, string>("Eta", this.Eta.ToString()),
-                  new Tuple<string, string>("MaxStaticDraught",this.MaxStaticDraught.ToString()),
-                  new Tuple<string, string>("Destination",this.Destination.ToString()),
-                  new Tuple<string, string>("DTE",this.DTE.ToString())
-             };
-            _listAttribute.AddRange(_attributes);            
-            return _listAttribute;
-        }
-        #endregion
+       
     }
 }

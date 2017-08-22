@@ -29,7 +29,8 @@ namespace NMEA_MessageParserConstructor.BL.Messages
             binaryData = new BinaryData();
             this.log = LogManager.GetCurrentClassLogger();
         }
-       
+
+        #region Parser
 
         #region Mesaj yapısında bulunan attributelara, alınan mesajdaki değerleri set ettik.
         public override string[] Parser(string message)
@@ -75,25 +76,10 @@ namespace NMEA_MessageParserConstructor.BL.Messages
         }
         #endregion
 
-        #region ToString mesajını ezdik. Methodu sınıfa göre tasarladık.
-        public override string ToString()
-        {
-            return
-                "Message ID: " + this.MessageID + "\n" +
-                "Repeat Indicator: " + this.RepeatIndicator + "\n" +
-                "Source ID: " + this.SourceID + "\n" +
-                "Sequence Number: " + this.SequenceNumber + "\n" +
-                "Destination ID: " + this.DestinationID + "\n" +
-                "Retransmit Flag: " + this.RetransmitFlag + "\n" +
-                "Spare: " + this.Spare + "\n" +
-                this.binaryData.ToString();
-        }
-        #endregion
-
         #region Attributeları döndürür.
-        public override List<Tuple<string, string>> getAttributes()
+        public override List<Tuple<string, string>> getAttributesAndValues()
         {
-            List<Tuple<string, string>> _listAttribute = base.getAttributes();
+            List<Tuple<string, string>> _listAttribute = base.getAttributesAndValues();
             List<Tuple<string, string>> _listBinaryData = this.binaryData.getAttributes();
 
             List<Tuple<string, string>> _attributes = new List<Tuple<string, string>> {
@@ -112,6 +98,25 @@ namespace NMEA_MessageParserConstructor.BL.Messages
             return _listAttribute;
         }
         #endregion
+
+        #endregion
+
+        #region ToString mesajını ezdik. Methodu sınıfa göre tasarladık.
+        public override string ToString()
+        {
+            return
+                "Message ID: " + this.MessageID + "\n" +
+                "Repeat Indicator: " + this.RepeatIndicator + "\n" +
+                "Source ID: " + this.SourceID + "\n" +
+                "Sequence Number: " + this.SequenceNumber + "\n" +
+                "Destination ID: " + this.DestinationID + "\n" +
+                "Retransmit Flag: " + this.RetransmitFlag + "\n" +
+                "Spare: " + this.Spare + "\n" +
+                this.binaryData.ToString();
+        }
+        #endregion
+
+      
 
     }
 }

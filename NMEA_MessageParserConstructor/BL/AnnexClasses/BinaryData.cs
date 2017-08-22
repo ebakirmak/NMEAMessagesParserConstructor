@@ -22,7 +22,7 @@ namespace NMEA_MessageParserConstructor.BL.AnnexClasses
             this.root = new RootMessages();
         }
 
-        #region BinarData attribute'lerini set ediyoruz.
+        #region setValue(string content, int start): BinarData attribute'lerini set ediyoruz.
         public void setValue(string content, int start)
         {
             try

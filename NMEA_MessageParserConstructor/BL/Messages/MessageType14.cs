@@ -72,9 +72,9 @@ namespace NMEA_MessageParserConstructor.BL.Messages
         #endregion
 
         #region Attributeları döndürür.
-        public override List<Tuple<string, string>> getAttributes()
+        public override List<Tuple<string, string>> getAttributesAndValues()
         {
-            List<Tuple<string, string>> _listAttribute = base.getAttributes();
+            List<Tuple<string, string>> _listAttribute = base.getAttributesAndValues();
             try
             {
 

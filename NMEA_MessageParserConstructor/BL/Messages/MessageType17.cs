@@ -84,9 +84,9 @@ namespace NMEA_MessageParserConstructor.BL.Messages
 
         #region Attributeları döndürür.
         //new Tuple<string, string>("",this..ToString()),
-        public override List<Tuple<string, string>> getAttributes()
+        public override List<Tuple<string, string>> getAttributesAndValues()
         {
-            List<Tuple<string, string>> _listAttribute = base.getAttributes();
+            List<Tuple<string, string>> _listAttribute = base.getAttributesAndValues();
 
             List<Tuple<string, string>> _listCorrectionData = this.Data.getAttributes();
 

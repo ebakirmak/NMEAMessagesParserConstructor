@@ -74,15 +74,30 @@ namespace NMEA_MessageParserConstructor.BL.AnnexClasses
         #endregion
 
         #region Attributeları döndürür.
-        public  List<Tuple<string, string>> getAttributes()
+        public List<Tuple<string, string>> getAttributesAndValues()
         {
-            List < Tuple < string, string>> _attributes = new List<Tuple<string, string>> {
+            List<Tuple<string, string>> _attributes = new List<Tuple<string, string>> {
                   new Tuple<string, string>("DAC ",this.getDAC().ToString()),
                   new Tuple<string, string>("FID ",this.getFID().ToString()),
                   new Tuple<string, string>("Data",this.getData().ToString())
-             };          
+             };
             return _attributes;
         }
+        #endregion
+
+
+        #region Constructor
+        #region Attributeları döndürür.
+        public List<Tuple<string, string>> getAttributes()
+        {
+            List<Tuple<string, string>> _attributes = new List<Tuple<string, string>> {
+                  new Tuple<string, string>("DAC ","0"),
+                  new Tuple<string, string>("FID ","0"),
+                  new Tuple<string, string>("Data","0")
+             };
+            return _attributes;
+        }
+        #endregion
         #endregion
 
 

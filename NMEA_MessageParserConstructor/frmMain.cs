@@ -43,7 +43,7 @@ namespace NMEA_MessageParserConstructor
         private void frmMain_Load(object sender, EventArgs e)
         {
             cmbPortName.Items.AddRange( SeriPort.getPortNames());
-            lstMessages.Items.Add("!AIVDM,1,1,,A,3@0000A0@:P4Tv00TWh02P22RP0C,0*23");
+            lstMessages.Items.Add("!AIVDM,1,1,1,B,8>h8nkP0Glr=<hFI0D6??wvlFR06EuOwgwl?wnSwe7wvlOw?sAwwnSGmwvh0,0*17");
             //maritec message 4
             lstMessages.Items.Add("!AIVDM,1,1,,A,400TcdiuiT7VDR>3nIfr6>i00000,0*78");
             tmrMessage.Interval = 500;
@@ -296,75 +296,79 @@ namespace NMEA_MessageParserConstructor
         private void cmbMessageType_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            RootMessages mesaj;
+            RootMessages messageObject;
 
             byte messageID = Convert.ToByte(cmbMessageType.SelectedItem.ToString().Split(' ')[2]);
 
             #region Mesaj ID göre MesajType[MesajID] nesnesi oluşturuluyor.
             if (messageID == 1)
-                mesaj = new MessageType1();
+                messageObject = new MessageType1();
             else if (messageID == 2)
-                mesaj = new MessageType2();
+                messageObject = new MessageType2();
             else if (messageID == 3)
-                mesaj = new MessageType3();
+                messageObject = new MessageType3();
             else if (messageID == 4)
-                mesaj = new MessageType4();
+                messageObject = new MessageType4();
+            else if (messageID == 5)
+                messageObject = new MessageType5();
             else if (messageID == 6)
-                mesaj = new MessageType6();
+                messageObject = new MessageType6();
             else if (messageID == 7)
-                mesaj = new MessageType7();
+                messageObject = new MessageType7();
             else if (messageID == 8)
-                mesaj = new MessageType8();
+                messageObject = new MessageType8();
             else if (messageID == 9)
-                mesaj = new MessageType9();
+                messageObject = new MessageType9();
             else if (messageID == 10)
-                mesaj = new MessageType10();
+                messageObject = new MessageType10();
             else if (messageID == 11)
-                mesaj = new MessageType11();
+                messageObject = new MessageType11();
             else if (messageID == 12)
-                mesaj = new MessageType12();
+                messageObject = new MessageType12();
             else if (messageID == 13)
-                mesaj = new MessageType13();
+                messageObject = new MessageType13();
             else if (messageID == 14)
-                mesaj = new MessageType14();
+                messageObject = new MessageType14();
             else if (messageID == 15)
-                mesaj = new MessageType15();
+                messageObject = new MessageType15();
             else if (messageID == 16)
-                mesaj = new MessageType16();
+                messageObject = new MessageType16();
+            else if (messageID == 17)
+                messageObject = new MessageType17();
             else if (messageID == 18)
-                mesaj = new MessageType18();
+                messageObject = new MessageType18();
             else if (messageID == 19)
-                mesaj = new MessageType19();
+                messageObject = new MessageType19();
             else if (messageID == 20)
-                mesaj = new MessageType20();
+                messageObject = new MessageType20();
             else if (messageID == 22)
-                mesaj = new MessageType22();
+                messageObject = new MessageType22();
             else if (messageID == 23)
-                mesaj = new MessageType23();
+                messageObject = new MessageType23();
             else if (messageID == 24)
             {
-                MessageType24 mesaj24 = new MessageType24();
-                mesaj24.setPartNumber(VDM1);
-                if (mesaj24.getPartNumber() == 0)
-                    mesaj = new MessageType24A();
+                string type = cmbMessageType.SelectedItem.ToString().Split(' ')[3];
+              
+                if (type == "A")
+                    messageObject = new MessageType24A();
                 else
-                    mesaj = new MessageType24B();
+                    messageObject = new MessageType24B();
             }
             else if (messageID == 25)
-                mesaj = new MessageType25();
+                messageObject = new MessageType25();
             //MessageBox.Show("Mesaj 26 düzelt");   
             else if (messageID == 26)
-                mesaj = new MessageType26();
+                messageObject = new MessageType26();
             else if (messageID == 27)
-                mesaj = new MessageType27();
+                messageObject = new MessageType27();
             else
             {
                 MessageBox.Show("MESAJ PARSE EDİLEMEDİ.", "HATALI MESAJ", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                mesaj = null;
+                messageObject = null;
             }
             #endregion
 
-            AddMessagesRows(mesaj);
+            AddMessagesRows(messageObject);
 
         }
         #endregion
@@ -372,15 +376,19 @@ namespace NMEA_MessageParserConstructor
         #region AddMessagesRows Fonk: Mesajın tipine göre attribute'lerini ve value'lerini datagridview ekler.
         private void AddMessagesRows(RootMessages message)
         {
-            dgwMessages.ReadOnly = false;
-            dgwMessages.Rows.Clear();
-            dgwMessages.Refresh();
-            foreach (var item in message.getAttributes())
+            if (message != null)
             {
-                DataGridViewRow row = (DataGridViewRow)dgwMessages.Rows[0].Clone();
-                row.Cells[0].Value = item.Item1;
-                row.Cells[1].Value = item.Item2;
-                dgwMessages.Rows.Add(row);
+                dgwMessages.ReadOnly = false;
+                dgwMessages.Rows.Clear();
+                dgwMessages.Refresh();
+                foreach (var item in message.getAttributes())
+                {
+                    DataGridViewRow row = (DataGridViewRow)dgwMessages.Rows[0].Clone();
+                    row.Cells[0].Value = item.Item1;
+                    row.Cells[1].Value = item.Item2;
+                    dgwMessages.Rows.Add(row);
+
+                }
             }
         }
         #endregion
@@ -389,74 +397,76 @@ namespace NMEA_MessageParserConstructor
         private void btnConstructorMessage_Click(object sender, EventArgs e)
         {
             #region return edilen Message ID'sine göre ilgili sınıfta işlem yapılacak.
-            RootMessages mesaj;
+            RootMessages messageObject;
             byte messageID = Convert.ToByte(cmbMessageType.SelectedItem.ToString().Split(' ')[2]);
 
             if (messageID == 1)
-                mesaj = new MessageType1();
+                messageObject = new MessageType1();
             else if (messageID == 2)
-                mesaj = new MessageType2();
+                messageObject = new MessageType2();
             else if (messageID == 3)
-                mesaj = new MessageType3();
+                messageObject = new MessageType3();
             else if (messageID == 4)
-                mesaj = new MessageType4();
+                messageObject = new MessageType4();
+            else if (messageID == 5)
+                messageObject = new MessageType5();
             else if (messageID == 6)
-                mesaj = new MessageType6();
+                messageObject = new MessageType6();
             else if (messageID == 7)
-                mesaj = new MessageType7();
+                messageObject = new MessageType7();
             else if (messageID == 8)
-                mesaj = new MessageType8();
+                messageObject = new MessageType8();
             else if (messageID == 9)
-                mesaj = new MessageType9();
+                messageObject = new MessageType9();
             else if (messageID == 10)
-                mesaj = new MessageType10();
+                messageObject = new MessageType10();
             else if (messageID == 11)
-                mesaj = new MessageType11();
+                messageObject = new MessageType11();
             else if (messageID == 12)
-                mesaj = new MessageType12();
+                messageObject = new MessageType12();
             else if (messageID == 13)
-                mesaj = new MessageType13();
+                messageObject = new MessageType13();
             else if (messageID == 14)
-                mesaj = new MessageType14();
+                messageObject = new MessageType14();
             else if (messageID == 15)
-                mesaj = new MessageType15();
+                messageObject = new MessageType15();
             else if (messageID == 16)
-                mesaj = new MessageType16();
+                messageObject = new MessageType16();
             else if (messageID == 18)
-                mesaj = new MessageType18();
+                messageObject = new MessageType18();
             else if (messageID == 19)
-                mesaj = new MessageType19();
+                messageObject = new MessageType19();
             else if (messageID == 20)
-                mesaj = new MessageType20();
+                messageObject = new MessageType20();
             else if (messageID == 22)
-                mesaj = new MessageType22();
+                messageObject = new MessageType22();
             else if (messageID == 23)
-                mesaj = new MessageType23();
+                messageObject = new MessageType23();
             else if (messageID == 24)
             {
                 MessageType24 mesaj24 = new MessageType24();
                 mesaj24.setPartNumber(VDM1);
                 if (mesaj24.getPartNumber() == 0)
-                    mesaj = new MessageType24A();
+                    messageObject = new MessageType24A();
                 else
-                    mesaj = new MessageType24B();
+                    messageObject = new MessageType24B();
             }
             else if (messageID == 25)
-                mesaj = new MessageType25();
+                messageObject = new MessageType25();
             //MessageBox.Show("Mesaj 26 düzelt");   
             else if (messageID == 26)
-                mesaj = new MessageType26();
+                messageObject = new MessageType26();
             else if (messageID == 27)
-                mesaj = new MessageType27();
+                messageObject = new MessageType27();
             else
             {
                 MessageBox.Show("MESAJ PARSE EDİLEMEDİ.", "HATALI MESAJ", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                mesaj = null;
+                messageObject = null;
             }
 
             #endregion
 
-            ConstructorMessage(mesaj);
+            ConstructorMessage(messageObject);
         }
         #endregion
 

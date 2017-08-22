@@ -217,7 +217,8 @@
             "Message Type 21",
             "Message Type 22",
             "Message Type 23",
-            "Message Type 24",
+            "Message Type 24 A",
+            "Message Type 24 B",
             "Message Type 25",
             "Message Type 26",
             "Message Type 27"});

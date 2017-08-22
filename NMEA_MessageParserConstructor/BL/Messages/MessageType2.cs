@@ -36,7 +36,11 @@ namespace NMEA_MessageParserConstructor.BL.Messages
             this.Sotdma = new SOTDMA();
             this.log = LogManager.GetCurrentClassLogger();
         }
+        #region Parser
+        #endregion
 
+        #region Constructor
+        #endregion
         #region Parser(string message): Mesaj yapısında bulunan attributelara, alınan mesajdaki değerleri set ettik.
         public override string[] Parser(string message)
         {

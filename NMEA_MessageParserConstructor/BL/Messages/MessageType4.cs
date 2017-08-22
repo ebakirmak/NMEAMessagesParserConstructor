@@ -155,7 +155,7 @@ namespace NMEA_MessageParserConstructor.BL.Messages
                   new Tuple<string, string>("Position Accuracy",""),
                   new Tuple<string, string>("Longitude",""),
                   new Tuple<string, string>("Latitude",""),
-                  new Tuple<string, string>("Type Of Elec.",""),
+                  new Tuple<string, string>("EPFD Type",""),
                   new Tuple<string, string>("Broadcast Message",""),
                   new Tuple<string, string>("RAIM Flag",""),
              };

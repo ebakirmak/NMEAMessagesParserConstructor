@@ -27,27 +27,7 @@ namespace NMEA_MessageParserConstructor.BL.AnnexClasses
             this.root = new RootMessages();
         }
 
-        #region Correction Data attribute'lerini set ediyoruz.
-        public void setValue(string content, int start)
-        {
-            try
-            {
-                this.MessageType = Convert.ToInt32(root.getDecimalFromBinary(content, start, 6));
-                this.StationID = Convert.ToInt32(root.getDecimalFromBinary(content, start + 6, 10));
-                this.ZCount = Convert.ToInt32(root.getDecimalFromBinary(content, start + 16, 13));
-                this.SequenceNumber = Convert.ToInt32(root.getDecimalFromBinary(content,start + 29, 3));
-                this.N = Convert.ToInt32(root.getDecimalFromBinary(content, start + 32, 5));
-                this.Health = Convert.ToInt32(root.getDecimalFromBinary(content, start + 37, 3));
-                this.DataWord = Convert.ToString(root.getStringFromBinary(content, start + 40, content.Length -(start+40)));
-
-            }
-            catch (Exception ex)
-            {
-                log.Error(ex, "CorrectionDAta :: setValue");
-            }
-
-        }
-        #endregion
+       
 
         #region get Methodları
         public int getMessageType() {
@@ -87,8 +67,12 @@ namespace NMEA_MessageParserConstructor.BL.AnnexClasses
         }
         #endregion
 
-        #region Attributeları döndürür.
-        public List<Tuple<string, string>> getAttributes()
+
+
+        #region Parser
+
+            #region getAttributesAndValues(): Attributeları ve value'lerini döndürür.
+        public List<Tuple<string, string>> getAttributesAndValues()
         {
             List<Tuple<string, string>> _attributes = new List<Tuple<string, string>> {
                   new Tuple<string, string>("Broadcast Message Type ",this.getMessageType().ToString()),
@@ -102,6 +86,49 @@ namespace NMEA_MessageParserConstructor.BL.AnnexClasses
             return _attributes;
         }
         #endregion
+
+            #region setValues(): Correction Data attribute'lerini set ediyoruz.
+        public void setValues(string content, int start)
+        {
+            try
+            {
+                this.MessageType = Convert.ToInt32(root.getDecimalFromBinary(content, start, 6));
+                this.StationID = Convert.ToInt32(root.getDecimalFromBinary(content, start + 6, 10));
+                this.ZCount = Convert.ToInt32(root.getDecimalFromBinary(content, start + 16, 13));
+                this.SequenceNumber = Convert.ToInt32(root.getDecimalFromBinary(content, start + 29, 3));
+                this.N = Convert.ToInt32(root.getDecimalFromBinary(content, start + 32, 5));
+                this.Health = Convert.ToInt32(root.getDecimalFromBinary(content, start + 37, 3));
+                this.DataWord = Convert.ToString(root.getStringFromBinary(content, start + 40, content.Length - (start + 40)));
+
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex, "CorrectionDAta :: setValue");
+            }
+
+        }
+        #endregion
+
+        #endregion
+
+        #region Constructor
+        #region getAttributes(): Attributeları  döndürür.
+        public List<Tuple<string, string>> getAttributes()
+        {
+            List<Tuple<string, string>> _attributes = new List<Tuple<string, string>> {
+                  new Tuple<string, string>("Broadcast Message Type",""),
+                  new Tuple<string, string>("Station ID",""),
+                  new Tuple<string, string>("Z Count",""),
+                  new Tuple<string, string>("Sequence Number",""),
+                  new Tuple<string, string>("N",""),
+                  new Tuple<string, string>("Health",""),
+                  new Tuple<string, string>("Data Word",""),
+             };
+            return _attributes;
+        }
+        #endregion
+        #endregion
+
 
     }
 }

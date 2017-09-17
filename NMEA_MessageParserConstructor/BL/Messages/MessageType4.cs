@@ -136,8 +136,7 @@ namespace NMEA_MessageParserConstructor.BL.Messages
 
         #endregion
 
-        #region Constructor 
-
+        #region Constructor
 
          #region getAttributes(): Attributeları döndürür.
         public override List<Tuple<string, string>> getAttributes()
@@ -282,8 +281,6 @@ namespace NMEA_MessageParserConstructor.BL.Messages
                  return Message + content;
          }
          #endregion
-
-
 
         #endregion
 

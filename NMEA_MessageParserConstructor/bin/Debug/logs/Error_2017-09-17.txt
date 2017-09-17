@@ -1,0 +1,18 @@
+2017-09-17 23:43:14.6081 ERROR frmMain :: Run System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.RootMessages.getAttributesAndValues() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 281
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType5.getAttributesAndValues() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType5.cs:line 113
+   at NMEA_MessageParserConstructor.frmMain.ShowMessageValue(RootMessages message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 280
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 248    at NMEA_MessageParserConstructor.RootMessages.getAttributesAndValues() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 281
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType5.getAttributesAndValues() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType5.cs:line 113
+   at NMEA_MessageParserConstructor.frmMain.ShowMessageValue(RootMessages message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 280
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 248
+
+2017-09-17 23:45:20.2285 ERROR frmMain :: Run System.NullReferenceException: Object reference not set to an instance of an object.
+   at NMEA_MessageParserConstructor.RootMessages.getAttributesAndValues() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 281
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType5.getAttributesAndValues() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType5.cs:line 113
+   at NMEA_MessageParserConstructor.frmMain.ShowMessageValue(RootMessages message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 280
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 248    at NMEA_MessageParserConstructor.RootMessages.getAttributesAndValues() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\RootMessages.cs:line 281
+   at NMEA_MessageParserConstructor.BL.Messages.MessageType5.getAttributesAndValues() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\BL\Messages\MessageType5.cs:line 113
+   at NMEA_MessageParserConstructor.frmMain.ShowMessageValue(RootMessages message) in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 280
+   at NMEA_MessageParserConstructor.frmMain.Run() in C:\Users\Emre\Desktop\NMEA\NMEA_MessageParserConstructor\frmMain.cs:line 248
+

@@ -25,19 +25,20 @@ namespace NMEA_MessageParserConstructor.BL.Dictionarys
             {
 
                 
-                if (binary.Count() == 1)
-                    BinaryField = binary.PadLeft(6, '0');
-                else if (binary.Count() == 2)
-                    BinaryField = binary.PadLeft(6, '0');
-                else if (binary.Count() == 3)
-                    BinaryField = binary.PadLeft(6, '0');
-                else if (binary.Count() == 4)
-                    BinaryField = binary.PadLeft(6, '0');
-                else if (binary.Count() == 5)
-                    BinaryField = binary.PadLeft(6, '0');
-                else
-                    BinaryField = binary;
+                //if (binary.Count() == 1)
+                //    BinaryField = binary.PadLeft(6, '0');
+                //else if (binary.Count() == 2)
+                //    BinaryField = binary.PadLeft(6, '0');
+                //else if (binary.Count() == 3)
+                //    BinaryField = binary.PadLeft(6, '0');
+                //else if (binary.Count() == 4)
+                //    BinaryField = binary.PadLeft(6, '0');
+                //else if (binary.Count() == 5)
+                //    BinaryField = binary.PadLeft(6, '0');
+                //else
+                //    BinaryField = binary;
 
+                BinaryField = binary.PadLeft(6, '0');
 
                 if (BinaryField == "000000")
                     this.ValidCharacter += "@";
@@ -168,6 +169,140 @@ namespace NMEA_MessageParserConstructor.BL.Dictionarys
                 else if (BinaryField == "111111")
                     this.ValidCharacter += "?";
             }
+
+            return this.ValidCharacter;
+        }
+
+        public string getBinarySixToString(char ch)
+        {
+            if (ch == '@')
+                this.ValidCharacter = "000000";
+            else if (ch == 'A')
+                this.ValidCharacter = "000001";
+            else if (ch == 'B')
+                this.ValidCharacter = "000010";
+            else if (ch == 'C')
+                this.ValidCharacter = "000011";
+            else if (ch == 'D')
+                this.ValidCharacter = "000100";
+            else if (ch == 'E')
+                this.ValidCharacter = "000101";
+            else if (ch == 'F')
+                this.ValidCharacter = "000110";
+            else if (ch == 'G')
+                this.ValidCharacter = "000110";
+            else if (ch == 'H')
+                this.ValidCharacter = "001000";
+            else if (ch == 'I')
+                this.ValidCharacter = "001001";
+            else if (ch == 'J')
+                this.ValidCharacter = "001010";
+            else if (ch == 'K')
+                this.ValidCharacter = "001011";
+            else if (ch == 'L')
+                this.ValidCharacter = "001100";
+            else if (ch == 'M')
+                this.ValidCharacter = "001101";
+            else if (ch == 'N')
+                this.ValidCharacter = "001110";
+            else if (ch == 'O')
+                this.ValidCharacter = "001111";
+            else if (ch == 'P')
+                this.ValidCharacter = "010000";
+            else if (ch == 'Q')
+                this.ValidCharacter = "010001";
+            else if (ch == 'R')
+                this.ValidCharacter = "010010";
+            else if (ch == 'S')
+                this.ValidCharacter = "010011";
+            else if (ch == 'T')
+                this.ValidCharacter = "010100";
+            else if (ch == 'U')
+                this.ValidCharacter = "010101";
+            else if (ch == 'V')
+                this.ValidCharacter = "010110";
+            else if (ch == 'W')
+                this.ValidCharacter = "010111";
+            else if (ch == 'X')
+                this.ValidCharacter = "011000";
+            else if (ch == 'Y')
+                this.ValidCharacter = "011001";
+            else if (ch == 'Z')
+                this.ValidCharacter = "011010";
+            else if (ch == '[')
+                this.ValidCharacter = "011011";
+            else if (ch == '\\')
+                this.ValidCharacter = "011100";
+            else if (ch == ']')
+                this.ValidCharacter = "011101";
+            else if (ch == '^')
+                this.ValidCharacter = "011110";
+            else if (ch == '-')
+                this.ValidCharacter = "011111";
+            else if (ch == ' ')
+                this.ValidCharacter = "100000";
+            else if (ch == '!')
+                this.ValidCharacter = "100001";
+            else if (ch == '\"')
+                this.ValidCharacter = "100010";
+            else if (ch == '#')
+                this.ValidCharacter = "100011";
+            else if (ch =='$')
+                this.ValidCharacter = "100100";
+            else if (ch == '%')
+                this.ValidCharacter = "100100";
+            else if (ch == '&')
+                this.ValidCharacter = "100110";
+            else if (ch == '\'')
+                this.ValidCharacter = "'";
+            else if (ch == '(')
+                this.ValidCharacter = "101000";
+            else if (ch == ')')
+                this.ValidCharacter = "101001";
+            else if (ch == '*')
+                this.ValidCharacter = "101010";
+            else if (ch == '+')
+                this.ValidCharacter = "101011";
+            else if (ch == ',')
+                this.ValidCharacter = "101100";
+            else if (ch == '-')
+                this.ValidCharacter = "101101";
+            else if (ch == '.')
+                this.ValidCharacter = "101110";
+            else if (ch == '/')
+                this.ValidCharacter = "101111";
+            else if (ch == '0')
+                this.ValidCharacter = "110000";
+            else if (ch == '1')
+                this.ValidCharacter = "110001";
+            else if (ch == '2')
+                this.ValidCharacter = "110010";
+            else if (ch == '3')
+                this.ValidCharacter = "110011";
+            else if (ch == '4')
+                this.ValidCharacter = "110100";
+            else if (ch == '5')
+                this.ValidCharacter = "110101";
+            else if (ch == '6')
+                this.ValidCharacter = "110110";
+            else if (ch == '7')
+                this.ValidCharacter = "110111";
+            else if (ch == '8')
+                this.ValidCharacter = "111000";
+            else if (ch == '9')
+                this.ValidCharacter = "111001";
+            else if (ch == ':')
+                this.ValidCharacter = "111010";
+            else if (ch == ';')
+                this.ValidCharacter = "111011";
+            else if (ch == '<')
+                this.ValidCharacter = "111100";
+            else if (ch == '=')
+                this.ValidCharacter = "111101";
+            else if (ch == '>')
+                this.ValidCharacter = "111110";
+            else if (ch == '?')
+                this.ValidCharacter = "111111";
 
             return this.ValidCharacter;
         }

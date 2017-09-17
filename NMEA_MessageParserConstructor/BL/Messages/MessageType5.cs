@@ -20,7 +20,7 @@ namespace NMEA_MessageParserConstructor.BL.Messages
         //Ship dimensions - Gemi boyutları | Gemi genel boyutları
         private OverallDimension OverallDimensions { get; set; }
         //Type of electronic position fixing device
-        private byte TypeOfEPFD { get; set; }
+        private byte TOEPFD { get; set; }
         //Estimated time of arrival; MMDDHHMM UTC | Tahmini varış zamanı
         private ETA Eta { get; set; }
         //Maximum present static draught
@@ -52,6 +52,9 @@ namespace NMEA_MessageParserConstructor.BL.Messages
             string[] messageParts1 = message1.Split(',');
             string[] messageParts2 = message2.Split(',');
 
+
+            //
+            string[] messageParts = base.Parser(message1);
             //Context'i oku. Binary yapıda.
             string content = getContentBinary(messageParts1[5], Remove(messageParts1[6]));
             content += getContentBinary(messageParts2[5], Remove(messageParts2[6]));
@@ -85,7 +88,7 @@ namespace NMEA_MessageParserConstructor.BL.Messages
             this.OverallDimensions.setValue(content, 240);
             
             //
-            this.TypeOfEPFD = Convert.ToByte(getDecimalFromBinary(content, 270, 4));
+            this.TOEPFD = Convert.ToByte(getDecimalFromBinary(content, 270, 4));
 
             //Estimated time of arrival.
             this.Eta.setValue(content, 274);
@@ -119,7 +122,7 @@ namespace NMEA_MessageParserConstructor.BL.Messages
                   new Tuple<string, string>("Name",this.Name.ToString()),
                   new Tuple<string, string>("Type Of Ship And Cargo Type",this.TypeOfShipAndCargoType.ToString()),
                   new Tuple<string, string>("Overall Dimensions",this.OverallDimensions.ToString()),
-                  new Tuple<string, string>("EPFD Type",this.TypeOfEPFD.ToString()),
+                  new Tuple<string, string>("EPFD Type",this.TOEPFD.ToString()),
                   new Tuple<string, string>("Eta", this.Eta.ToString()),
                   new Tuple<string, string>("MaxStaticDraught",this.MaxStaticDraught.ToString()),
                   new Tuple<string, string>("Destination",this.Destination.ToString()),
@@ -138,146 +141,175 @@ namespace NMEA_MessageParserConstructor.BL.Messages
         #region getAttributes(): Attributeları döndürür.
         public override List<Tuple<string, string>> getAttributes()
         {
-            List<Tuple<string, string>> _listAttribute = base.getAttributes();
+            List<Tuple<string, string>> _listAttribute = base.getAttributes(2);
             List<Tuple<string, string>> _attributes = new List<Tuple<string, string>> {
-                  new Tuple<string, string>("User ID",""),
-                  new Tuple<string, string>("AIS Version Indicator",""),
-                  new Tuple<string, string>("IMO Number",""),
-                  new Tuple<string, string>("Call Sign",""),
-                  new Tuple<string, string>("Name",""),
-                  new Tuple<string, string>("Type Of Ship And Cargo Type",""),
-                  new Tuple<string, string>("Overall Dimensions A",""),
-                  new Tuple<string, string>("Overall Dimensions B",""),
-                  new Tuple<string, string>("Overall Dimensions C",""),
-                  new Tuple<string, string>("Overall Dimensions D",""),
-                  new Tuple<string, string>("EPFD Type",""),
-                  new Tuple<string, string>("ETA Month",""),
-                  new Tuple<string, string>("ETA Day",""),
-                  new Tuple<string, string>("ETA Month",""),
-                  new Tuple<string, string>("ETA Minute",""),
-                  new Tuple<string, string>("ETA Second",""),
-                  new Tuple<string, string>("Max. static draught",""),
-                  new Tuple<string, string>("Destination",""),
-                  new Tuple<string, string>("DTE (availability)",""),
+                  new Tuple<string, string>("User ID","603916439"),
+                  new Tuple<string, string>("AIS Version Indicator","0"),
+                  new Tuple<string, string>("IMO Number","439303422"),
+                  new Tuple<string, string>("Call Sign","ZA83R"),
+                  new Tuple<string, string>("Name","ARCO AVON"),
+                  new Tuple<string, string>("Type Of Ship And Cargo Type","69"),
+                  new Tuple<string, string>("Overall Dimensions A","113"),
+                  new Tuple<string, string>("Overall Dimensions B","31"),
+                  new Tuple<string, string>("Overall Dimensions C","17"),
+                  new Tuple<string, string>("Overall Dimensions D","11"),
+                  new Tuple<string, string>("EPFD Type","0"),
+                  new Tuple<string, string>("ETA Month","3"),
+                  new Tuple<string, string>("ETA Day","23"),
+                  new Tuple<string, string>("ETA Hour","19"),
+                  new Tuple<string, string>("ETA Minute","45"),
+                  new Tuple<string, string>("Max. static draught","13,2"),
+                  new Tuple<string, string>("Destination","HOUSTON"),
+                  new Tuple<string, string>("DTE (availability)","0"),
              };
             _listAttribute.AddRange(_attributes);
             return _listAttribute;
         }
         #endregion
 
-        //#region Constructor(): Girilen değerlere göre VDM veya VDO mesajı oluşturuluyor.
-        //public override string Constructor(List<string> _listMessage)
-        //{
-        //    //Temel mesaj özellikleri alınıyor.
-        //    string Message = base.Constructor(_listMessage);
+        #region Constructor(): Girilen değerlere göre VDM veya VDO mesajı oluşturuluyor. Bir mesajın uzunluğu maksimum 289.
+        public override string Constructor(List<string> _listMessage)
+        {
+            //Temel mesaj özellikleri alınıyor.
+            string Message = base.Constructor(_listMessage);
+            string Message2 = base.Constructor(_listMessage);
+            #region Datagridview'den alınan değerleri set et.
+            string errorMessage = "Error!";
+            /////////////////////////////////////////////////////
+            if (ControlMessageID(Convert.ToByte(_listMessage[5])))
+                this.MessageID = Convert.ToByte(_listMessage[5]);
+            else
+             return   errorMessage += "\nMessage ID değerini kontrol ediniz.";
+            /////////////////////////////////////////////////////   
+            if (ControlRepeatIndicator(Convert.ToByte(_listMessage[8])))
+                this.RepeatIndicator = Convert.ToByte(_listMessage[8]);
+            else
+             return  errorMessage += "\nRepeat Indicator değerini kontrol ediniz.";
+            ////////////////////////////////////////////////////////////
+            this.UserID = Convert.ToInt32(_listMessage[10]);
+            ///////////////////////////////////////////////////////////
+            if (ControlAISVersionIndicator(Convert.ToByte(_listMessage[11])))
+                this.AISVersionIndicator = Convert.ToByte(_listMessage[11]);
+            else
+                return errorMessage += "\nAIS Version Indicator değerini kontrol ediniz.";
+            //////////////////////////////////////////////////////////
+            if (ControlIMONumber(Convert.ToInt32(_listMessage[12])))
+                this.IMONumber = Convert.ToInt32(_listMessage[12]);
+            else
+                return errorMessage += "\nIMO Number değerini kontrol ediniz.";
+            /////////////////////////////////////////////////////////
+            if (ControlCallSign(Convert.ToString(_listMessage[13])))
+                this.CallSign = Convert.ToString(_listMessage[13]);
+            else
+                return errorMessage += "\nCall Sign değerini kontrol ediniz.";
+            //////////////////////////////////////////////////////////
+            if (ControlName(Convert.ToString(_listMessage[14])))
+                this.Name = Convert.ToString(_listMessage[14]).PadRight(20,'@');
+            else
+                return errorMessage += "\nName değerini kontrol ediniz.";
+            ////////////////////////////////////////////////////////
+            if (ControlTOSACT(Convert.ToByte(_listMessage[15])))
+                this.TypeOfShipAndCargoType = Convert.ToByte(_listMessage[15]);
+            else
+                return errorMessage += "\nType of ship and cargo type değerini kontrol ediniz.";
+            ///////////////////////////////////////////////////
+            if (ControlOverallDimensionAB(Convert.ToByte(_listMessage[16])))
+                this.OverallDimensions.setA( Convert.ToByte(_listMessage[16]));
+            else
+                return errorMessage += "\nDim A değerini kontrol ediniz.";
+            //////////////////////////////////////////////////////
+            if (ControlOverallDimensionAB(Convert.ToByte(_listMessage[17])))
+                this.OverallDimensions.setB( Convert.ToByte(_listMessage[17]));
+            else
+                return errorMessage += "\nDim B değerini kontrol ediniz.";
+            //////////////////////////////////////////////////////
+            if (ControlOverallDimensionCD(Convert.ToByte(_listMessage[18])))
+                this.OverallDimensions.setC(Convert.ToByte(Math.Round(Convert.ToDouble(_listMessage[18]), 7)));
+            else
+                return errorMessage += "\nDim C değerini kontrol ediniz.";
+            ////////////////////////////////////////////////////////
+            if (ControlOverallDimensionCD(Convert.ToByte(_listMessage[19])))
+                this.OverallDimensions.setD(Convert.ToByte((Math.Round(Convert.ToDouble(_listMessage[19]), 7))));
+            else
+                return errorMessage += "\nDim D değerini kontrol ediniz.";
+            /////////////////////////////////////////////////////////
+            if (ControlTOEPFD(Convert.ToByte(_listMessage[20])))
+                this.TOEPFD = Convert.ToByte(_listMessage[20]);
+            else
+                return errorMessage += "\nType Of Electronic position fixing device değerini kontrol ediniz.";
+            //////////////////////////////////////////////////
+            if (ControlUTCMinute(Convert.ToByte(_listMessage[24])))
+                this.Eta.setMinute(Convert.ToByte(_listMessage[24]));
+            else
+                return errorMessage += "\nETA Minute değerini kontrol ediniz.";
+            /////////////////////////////////////////////////
+            if (ControlUTCHour(Convert.ToByte(_listMessage[23])))
+                this.Eta.setHour(Convert.ToByte(_listMessage[23]));
+            else
+                return errorMessage += "\nETA Hour değerini kontrol ediniz.";
+            /////////////////////////////////////////////////
+            if (ControlUTCDay(Convert.ToByte(_listMessage[22])))
+                this.Eta.setDay(Convert.ToByte(_listMessage[22]));
+            else
+                return errorMessage += "\nETA Day değerini kontrol ediniz.";
+            /////////////////////////////////////////////////
+            if (ControlUTCMonth(Convert.ToByte(_listMessage[21])))
+                this.Eta.setMonth(Convert.ToByte(_listMessage[21]));
+            else
+                return errorMessage += "\nETA Month değerini kontrol ediniz.";
+            /////////////////////////////////////////////////
+            if (ControlDraught(Convert.ToDouble(_listMessage[25])))
+                this.MaxStaticDraught=Convert.ToDouble(_listMessage[25]);
+            else
+                return errorMessage += "\nDraught değerini kontrol ediniz.";
+            /////////////////////////////////////////////////
+            if (ControlDestination(Convert.ToString(_listMessage[26])))
+                this.Destination=Convert.ToString(_listMessage[26]).PadRight(20,'@');
+            else
+                return errorMessage += "\nDestination değerini kontrol ediniz.";
+            /////////////////////////////////////////////////
+            if (ControlDTE(Convert.ToByte(_listMessage[27])))
+                this.DTE = Convert.ToByte(_listMessage[27]);
+            else
+                return errorMessage += "\nDTE değerini kontrol ediniz.";
+            #endregion
 
-        //    #region Datagridview'den alınan değerleri set et.
-        //    string errorMessage = "Error!";
-        //    /////////////////////////////////////////////////////
-        //    if (ControlMessageID(Convert.ToByte(_listMessage[5])))
-        //        this.MessageID = Convert.ToByte(_listMessage[5]);
-        //    else
-        //        errorMessage += "\nMessage ID değerini kontrol ediniz.";
-        //    /////////////////////////////////////////////////////   
-        //    if (ControlRepeatIndicator(Convert.ToByte(_listMessage[8])))
-        //        this.RepeatIndicator = Convert.ToByte(_listMessage[8]);
-        //    else
-        //        errorMessage += "\nRepeat Indicator değerini kontrol ediniz.";
-        //    ////////////////////////////////////////////////////////////
-        //    this.UserID = Convert.ToInt32(_listMessage[10]);
-        //    if (ControlUTCYear(Convert.ToInt32(_listMessage[11])))
-        //        this.UtcYear = Convert.ToInt32(_listMessage[11]);
-        //    else
-        //        errorMessage += "\nUTC Year değerini kontrol ediniz.";
-        //    //////////////////////////////////////////////////////////
-        //    if (ControlUTCMonth(Convert.ToInt32(_listMessage[12])))
-        //        this.UtcMonth = Convert.ToByte(_listMessage[12]);
-        //    else
-        //        errorMessage += "\nUTC Month değerini kontrol ediniz.";
-        //    /////////////////////////////////////////////////////////
-        //    if (ControlUTCDay(Convert.ToByte(_listMessage[13])))
-        //        this.UtcDay = Convert.ToByte(_listMessage[13]);
-        //    else
-        //        errorMessage += "\nUTC Day değerini kontrol ediniz.";
-        //    //////////////////////////////////////////////////////////
-        //    if (ControlUTCHour(Convert.ToByte(_listMessage[14])))
-        //        this.UtcHour = Convert.ToByte(_listMessage[14]);
-        //    else
-        //        errorMessage += "\nUTC Hour değerini kontrol ediniz.";
-        //    ////////////////////////////////////////////////////////
-        //    if (ControlUTCMinute(Convert.ToByte(_listMessage[15])))
-        //        this.UtcMinute = Convert.ToByte(_listMessage[15]);
-        //    else
-        //        errorMessage += "\nUTC Minute değerini kontrol ediniz.";
-        //    ///////////////////////////////////////////////////
-        //    if (ControlUTCSecond(Convert.ToByte(_listMessage[16])))
-        //        this.UtcSecond = Convert.ToByte(_listMessage[16]);
-        //    else
-        //        errorMessage += "\nUTC Second değerini kontrol ediniz.";
-        //    //////////////////////////////////////////////////////
-        //    if (ControlPositionAccuracy(Convert.ToByte(_listMessage[17])))
-        //        this.PositionAccuracy = Convert.ToByte(_listMessage[17]);
-        //    else
-        //        errorMessage += "\nPosition Accuracy değerini kontrol ediniz.";
-        //    //////////////////////////////////////////////////////
-        //    if (ControlLongitude(Convert.ToDouble(_listMessage[18])))
-        //        this.Longitude = Math.Round(Convert.ToDouble(_listMessage[18]), 7);
-        //    else
-        //        errorMessage += "\nLongitude değerini kontrol ediniz.";
-        //    ////////////////////////////////////////////////////////
-        //    if (ControlLatitude(Convert.ToDouble(_listMessage[19])))
-        //        this.Latitude = Math.Round(Convert.ToDouble(_listMessage[19]), 7);
-        //    else
-        //        errorMessage += "\nLatitude değerini kontrol ediniz.";
-        //    /////////////////////////////////////////////////////////
-        //    if (ControlTOEPFD(Convert.ToByte(_listMessage[20])))
-        //        this.TOEPFD = Convert.ToByte(_listMessage[20]);
-        //    else
-        //        errorMessage += "\nType Of Electronic position fixing device değerini kontrol ediniz.";
-        //    //////////////////////////////////////////////////
-        //    if (ControlTCFLRBM(Convert.ToByte(_listMessage[21])))
-        //        this.RAIMFlag = Convert.ToByte(_listMessage[21]);
-        //    else
-        //        errorMessage += "\nTransmission Control for long-range broadcast message değerini kontrol ediniz.";
-        //    /////////////////////////////////////////////////
-        //    if (ControlRAIM(Convert.ToByte(_listMessage[22])))
-        //        this.RAIMFlag = Convert.ToByte(_listMessage[22]);
-        //    else
-        //        errorMessage += "\nRAIM Flag değerini kontrol ediniz.";
-        //    /////////////////////////////////////////////////
-        //    this.Sotdma.setValue(_listMessage, 23);
-        //    #endregion
+            #region Bit değerlerine göre binary mesaj oluşturuluyor.
+            string binaryMessage = setBinaryToDecimal(this.MessageID).PadLeft(6, '0');
+            binaryMessage += setBinaryToDecimal(this.RepeatIndicator).PadLeft(2, '0');
+            binaryMessage += setBinaryToDecimal(this.UserID).PadLeft(30, '0');
+            binaryMessage += setBinaryToDecimal(this.AISVersionIndicator).PadLeft(2, '0');
+            binaryMessage += setBinaryToDecimal(this.IMONumber).PadLeft(30, '0');
+            binaryMessage += setBinaryToString(this.CallSign).PadLeft(42, '0');
+            binaryMessage += setBinaryToString(this.Name).PadLeft(120, '0');
+            binaryMessage += setBinaryToDecimal(this.TypeOfShipAndCargoType).PadLeft(8, '0');
+            binaryMessage += setBinaryToDecimal(this.OverallDimensions.getA()).PadLeft(9, '0');
+            binaryMessage += setBinaryToDecimal(this.OverallDimensions.getB()).PadLeft(9, '0');
+            binaryMessage += setBinaryToDecimal(this.OverallDimensions.getC()).PadLeft(6, '0');
+            binaryMessage += setBinaryToDecimal(this.OverallDimensions.getD()).PadLeft(6, '0');
+            binaryMessage += setBinaryToDecimal(this.TOEPFD).PadLeft(4, '0');
+            binaryMessage += setBinaryToDecimal(this.Eta.getMonth()).PadLeft(4, '0');
+            binaryMessage += setBinaryToDecimal(this.Eta.getDay()).PadLeft(5, '0');
+            binaryMessage += setBinaryToDecimal(this.Eta.getHour()).PadLeft(5, '0');
 
-        //    #region Bit değerlerine göre binary mesaj oluşturuluyor.
-        //    string binaryMessage = setBinaryToDecimal(this.MessageID).PadLeft(6, '0');
-        //    binaryMessage += setBinaryToDecimal(this.RepeatIndicator).PadLeft(2, '0');
-        //    binaryMessage += setBinaryToDecimal(this.UserID).PadLeft(30, '0');
-        //    binaryMessage += setBinaryToDecimal(this.UtcYear).PadLeft(14, '0');
-        //    binaryMessage += setBinaryToDecimal(this.UtcMonth).PadLeft(4, '0');
-        //    binaryMessage += setBinaryToDecimal(this.UtcDay).PadLeft(5, '0');
-        //    binaryMessage += setBinaryToDecimal(this.UtcHour).PadLeft(5, '0');
-        //    binaryMessage += setBinaryToDecimal(this.UtcMinute).PadLeft(6, '0');
-        //    binaryMessage += setBinaryToDecimal(this.UtcSecond).PadLeft(6, '0');
-        //    binaryMessage += setBinaryToDecimal(this.PositionAccuracy).PadLeft(1, '0');
-        //    binaryMessage += setBinaryToDecimal(MultiplyLongitude(this.Longitude), 28).PadLeft(28, '0');
-        //    binaryMessage += setBinaryToDecimal(MultiplyLatitude(this.Latitude), 27).PadLeft(27, '0');
-        //    binaryMessage += setBinaryToDecimal(this.TOEPFD).PadLeft(4, '0');
-        //    binaryMessage += setBinaryToDecimal(this.TCFLRBM).PadLeft(1, '0');
-        //    binaryMessage += setBinaryToDecimal(this.Spare).PadLeft(9, '0');
-        //    binaryMessage += setBinaryToDecimal(this.RAIMFlag).PadLeft(1, '0');
-        //    binaryMessage += Sotdma.getBinaryToSOTDMAValue();
-        //    #endregion
+            string binaryMessageContinue = setBinaryToDecimal(this.Eta.getMinute()).PadLeft(6, '0');
+            binaryMessageContinue += setBinaryToDecimal(MultiplyDraught(this.MaxStaticDraught)).PadLeft(8, '0');
+            binaryMessageContinue += setBinaryToString(this.Destination).PadLeft(120, '0');
+            binaryMessageContinue += setBinaryToDecimal(this.DTE).PadLeft(1, '0');
+            binaryMessageContinue += setBinaryToDecimal(this.Spare).PadLeft(1, '0');
+            #endregion
 
-        //    #region binary message, SetContent fonksiyonuna gönderilerek, ASCII8 tipinde mesaj content içeriği oluşturuluyor.
-        //    string content = setContent(binaryMessage);
-        //    #endregion
+            #region binary message, SetContent fonksiyonuna gönderilerek, ASCII8 tipinde mesaj content içeriği oluşturuluyor.
+            string content = setContent(binaryMessage);
+            string content2 = setContent(binaryMessageContinue);
+            #endregion
 
-        //    if (errorMessage.Contains("Error!") && errorMessage.Length > 6)
-        //        return errorMessage;
-        //    else
-        //        return Message + content;
-        //}
-        //#endregion
+            if (errorMessage.Contains("Error!") && errorMessage.Length > 6)
+                return errorMessage;
+            else
+                return Message + content +"\n"+Message2+ content2;
+        }
+        #endregion
 
 
 
@@ -300,7 +332,7 @@ namespace NMEA_MessageParserConstructor.BL.Messages
                                   " B: " + this.OverallDimensions.getB() +
                                   " C: " + this.OverallDimensions.getC() +
                                   " D: " + this.OverallDimensions.getD() + "\n" +
-                "Type Of EPFD: " + this.TypeOfEPFD + "\n" +
+                "Type Of EPFD: " + this.TOEPFD + "\n" +
                 this.Eta.ToString() +
                 "Max. static draught: " + this.MaxStaticDraught + "\n" +
                 "Destination: " + this.Destination + "\n" +

@@ -41,31 +41,49 @@ namespace NMEA_MessageParserConstructor.BL.AnnexClasses
         }
         #endregion
 
-        #region A attribute döndür.
+        #region Minute attribute set ve get.
         public byte getMinute()
         {
             return this.Minute;
         }
+        public void setMinute(byte a)
+        {
+            this.Minute = a;
+        }
         #endregion
 
-        #region B attribute döndür.
+        #region Hour attribute set ve get.
         public byte getHour()
         {
             return this.Hour;
         }
+
+        public void setHour(byte a)
+        {
+            this.Hour = a;
+        }
         #endregion
 
-        #region C attribute döndür.
+        #region Day attribute set ve get.
         public byte getDay()
         {
             return this.Day;
         }
+
+        public void setDay(byte a)
+        {
+            this.Day = a;
+        }
         #endregion
 
-        #region D attribute döndür.
+        #region Month  attribute set ve get.
         public byte getMonth()
         {
             return this.Month;
+        }
+        public void setMonth(byte a)
+        {
+            this.Month = a;
         }
         #endregion
 

@@ -59,6 +59,8 @@ namespace NMEA_MessageParserConstructor.BL.Messages
             return null;
 
         }
+
+
         #endregion
 
         #region getAttributesAndValues(): Attributeları döndürür.

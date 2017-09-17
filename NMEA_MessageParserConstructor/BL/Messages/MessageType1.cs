@@ -40,6 +40,7 @@ namespace NMEA_MessageParserConstructor
             this.log = LogManager.GetCurrentClassLogger();
         }
 
+        #region  Parser
         #region Parser(string message): Mesaj yapısında bulunan attributelara, alınan mesajdaki değerleri set ettik.
         public override string[] Parser(string message)
         {            
@@ -49,7 +50,6 @@ namespace NMEA_MessageParserConstructor
             //Tüm mesajlarda olan özellikleri burada gir.
             try
             {
-                Console.WriteLine(content.Length);
                 //MessageID
                 this.MessageID = Convert.ToByte(getDecimalFromBinary(content, 0, 6));
                 //Repeat indicator
@@ -95,6 +95,39 @@ namespace NMEA_MessageParserConstructor
         }
         #endregion
 
+        #region Attributeları ve değerlerini döndürür.
+        public override List<Tuple<string, string>> getAttributesAndValues()
+        {
+            List<Tuple<string, string>> _listAttribute = base.getAttributesAndValues();
+            List<Tuple<string, string>> _listSotdma = this.Sotdma.getAttributesAndValues();
+            List<Tuple<string, string>> _attributes = new List<Tuple<string, string>> {
+                  new Tuple<string, string>("User ID",this.UserID.ToString()),
+                  new Tuple<string, string>("Navigational Status",this.NavigationalStatus.ToString()),
+                  new Tuple<string, string>("Rate Of Turn ROTAIS",this.RateOfTurnROTAIS.ToString()),
+                  new Tuple<string, string>("SOG",this.SOG.ToString()),
+                  new Tuple<string, string>("PositionAccuracy",this.PositionAccuracy.ToString()),
+                  new Tuple<string, string>("Longitude",this.Longitude.ToString()),
+                  new Tuple<string, string>("Latitude",this.Latitude.ToString()),
+                  new Tuple<string, string>("COG", this.COG.ToString()),
+                  new Tuple<string, string>("True Heading", this.TrueHeading.ToString()),
+                  new Tuple<string, string>("Time Stamp",this.TimeStamp.ToString()),
+                  new Tuple<string, string>("Spe. Man. Indicator",this.SpecialManoeuvreIndicator.ToString()),
+                  new Tuple<string, string>("RAIM Flag",this.RAIMFlag.ToString()),
+                  new Tuple<string, string>("Sub Message","")
+             };
+            _listAttribute.AddRange(_attributes);
+            foreach (var sotdma in _listSotdma)
+            {
+                _listAttribute.Add(new Tuple<string, string>(sotdma.Item1, sotdma.Item2));
+
+            }
+            return _listAttribute;
+        }
+        #endregion
+
+        #endregion
+
+        #region Constructor
 
         #region Constructor(): Girilen değerlere göre VDM veya VDO mesajı oluşturuluyor.
         public override string Constructor(List<string> _listMessage)
@@ -122,7 +155,7 @@ namespace NMEA_MessageParserConstructor
             ////////////////////////////////////////////////////////////
 
             if (ControlRateOfTurn(float.Parse(_listMessage[12])))
-                this.RateOfTurnROTAIS =Convert.ToDouble(_listMessage[12]);
+                this.RateOfTurnROTAIS = Convert.ToDouble(_listMessage[12]);
             else
                 errorMessage += "\nRate Of Turn ROTAIS değerini kontrol ediniz.";
             ///////////////////////////////////////////////////////////
@@ -137,12 +170,12 @@ namespace NMEA_MessageParserConstructor
                 errorMessage += "\nPosition Accuracy değerini kontrol ediniz.";
             ////////////////////////////////////////////////////////
             if (ControlLongitude(Convert.ToDouble(_listMessage[15])))
-                this.Longitude = Math.Round(Convert.ToDouble(_listMessage[15]),7);
+                this.Longitude = Math.Round(Convert.ToDouble(_listMessage[15]), 7);
             else
                 errorMessage += "\nLongitude değerini kontrol ediniz.";
             //////////////////////////////////////////////////////////
             if (ControlLatitude(Convert.ToDouble(_listMessage[16])))
-                this.Latitude = Math.Round(Convert.ToDouble(_listMessage[16]),7);
+                this.Latitude = Math.Round(Convert.ToDouble(_listMessage[16]), 7);
             else
                 errorMessage += "\nLatitude değerini kontrol ediniz.";
             ////////////////////////////////////////////////////////////
@@ -186,13 +219,13 @@ namespace NMEA_MessageParserConstructor
             binaryMessage += setBinaryToDecimal(MultiplySOG(this.SOG)).PadLeft(10, '0');
             Console.WriteLine(binaryMessage.Length);
 
-            binaryMessage += setBinaryToDecimal(this.PositionAccuracy).PadLeft(1,'0');
+            binaryMessage += setBinaryToDecimal(this.PositionAccuracy).PadLeft(1, '0');
             Console.WriteLine(binaryMessage.Length);
 
-            binaryMessage += setBinaryToDecimal(MultiplyLongitude(this.Longitude),28).PadLeft(28, '0');
+            binaryMessage += setBinaryToDecimal(MultiplyLongitude(this.Longitude), 28).PadLeft(28, '0');
             Console.WriteLine(binaryMessage.Length);
 
-            binaryMessage += setBinaryToDecimal(MultiplyLatitude(this.Latitude),27).PadLeft(27, '0');
+            binaryMessage += setBinaryToDecimal(MultiplyLatitude(this.Latitude), 27).PadLeft(27, '0');
             Console.WriteLine(binaryMessage.Length);
 
             binaryMessage += setBinaryToDecimal(MultiplyCOG(this.COG)).PadLeft(12, '0');
@@ -203,72 +236,18 @@ namespace NMEA_MessageParserConstructor
                 setBinaryToDecimal(this.SpecialManoeuvreIndicator).PadLeft(2, '0') +
                 setBinaryToDecimal(this.Spare).PadLeft(3, '0') +
                 setBinaryToDecimal(this.RAIMFlag).PadLeft(1, '0');
-           binaryMessage += Sotdma.getBinaryToSOTDMAValue();
-              
+            binaryMessage += Sotdma.getBinaryToSOTDMAValue();
+
             #endregion
             Console.WriteLine(binaryMessage.Length);
             #region binary message, SetContent fonksiyonuna gönderilerek, ASCII8 tipinde mesaj content içeriği oluşturuluyor.
             string content = setContent(binaryMessage);
             #endregion
 
-            if (errorMessage.Contains("Error!") && errorMessage.Length >6)
+            if (errorMessage.Contains("Error!") && errorMessage.Length > 6)
                 return errorMessage;
             else
-                return Message+content;
-        }
-        #endregion
-      
-
-        #region ToString mesajını ezdik. Methodu sınıfa göre tasarladık.
-        public override string ToString()
-        {
-            return 
-                ( "Mesaj ID: ")+ this.MessageID + "\n" +
-                "Repeat Indicator: "+ this.RepeatIndicator + "\n" +
-                "User ID: "+this.UserID + "\n" +
-                "Navigational Status: " + this.NavigationalStatus + "\n" +
-                "Rate Of Turn ROTAIS: "+ this.RateOfTurnROTAIS + "\n" +
-                "SOG: "+ this.SOG + "\n" +
-                this.PositionAccuracy + "\n" +
-                this.Longitude + "\n" +
-                this.Latitude + "\n" +
-                this.COG + "\n" +
-                this.TrueHeading + "\n" +
-                this.TimeStamp + "\n" +
-                this.SpecialManoeuvreIndicator + "\n" +
-                this.Spare + "\n" +
-                this.RAIMFlag + "\n" +
-                this.CommunicationState.ToString();
-        }
-        #endregion
-
-        #region Attributeları ve değerlerini döndürür.
-        public override List<Tuple<string,string>> getAttributesAndValues()
-        {
-            List<Tuple<string,string>> _listAttribute = base.getAttributesAndValues();
-            List<Tuple<string, string>> _listSotdma = this.Sotdma.getAttributesAndValues();
-            List<Tuple<string, string>> _attributes = new List<Tuple<string, string>> {
-                  new Tuple<string, string>("User ID",this.UserID.ToString()),
-                  new Tuple<string, string>("Navigational Status",this.NavigationalStatus.ToString()),
-                  new Tuple<string, string>("Rate Of Turn ROTAIS",this.RateOfTurnROTAIS.ToString()),
-                  new Tuple<string, string>("SOG",this.SOG.ToString()),
-                  new Tuple<string, string>("PositionAccuracy",this.PositionAccuracy.ToString()),
-                  new Tuple<string, string>("Longitude",this.Longitude.ToString()),
-                  new Tuple<string, string>("Latitude",this.Latitude.ToString()),
-                  new Tuple<string, string>("COG", this.COG.ToString()),
-                  new Tuple<string, string>("True Heading", this.TrueHeading.ToString()),
-                  new Tuple<string, string>("Time Stamp",this.TimeStamp.ToString()),
-                  new Tuple<string, string>("Spe. Man. Indicator",this.SpecialManoeuvreIndicator.ToString()),
-                  new Tuple<string, string>("RAIM Flag",this.RAIMFlag.ToString()),
-                  new Tuple<string, string>("Sub Message","")
-             };
-            _listAttribute.AddRange(_attributes);
-            foreach (var sotdma in _listSotdma)
-            {
-                _listAttribute.Add( new Tuple<string, string>(sotdma.Item1, sotdma.Item2));
-
-            }
-            return _listAttribute;
+                return Message + content;
         }
         #endregion
 
@@ -300,6 +279,35 @@ namespace NMEA_MessageParserConstructor
             return _listAttribute;
         }
         #endregion
+
+        #endregion
+
+        #region ToString mesajını ezdik. Methodu sınıfa göre tasarladık.
+        public override string ToString()
+        {
+            return 
+                ( "Mesaj ID: ")+ this.MessageID + "\n" +
+                "Repeat Indicator: "+ this.RepeatIndicator + "\n" +
+                "User ID: "+this.UserID + "\n" +
+                "Navigational Status: " + this.NavigationalStatus + "\n" +
+                "Rate Of Turn ROTAIS: "+ this.RateOfTurnROTAIS + "\n" +
+                "SOG: "+ this.SOG + "\n" +
+                this.PositionAccuracy + "\n" +
+                this.Longitude + "\n" +
+                this.Latitude + "\n" +
+                this.COG + "\n" +
+                this.TrueHeading + "\n" +
+                this.TimeStamp + "\n" +
+                this.SpecialManoeuvreIndicator + "\n" +
+                this.Spare + "\n" +
+                this.RAIMFlag + "\n" +
+                this.CommunicationState.ToString();
+        }
+        #endregion
+
+      
+
+      
 
       
     }

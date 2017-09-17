@@ -54,15 +54,13 @@ namespace NMEA_MessageParserConstructor
 
         public RootMessages()
         {
+            this.CurrentMessageNumber = 1;
             this.log = LogManager.GetCurrentClassLogger();
         }        
 
         #region Mesajın VDM veya VDO mesajı olup olmadığını kontrol edecek
         public bool CheckMessage(string message)
         {
-
-
-
             string [] messageParts = message.Split(',');
             if(messageParts.Length == 7)
             {
@@ -88,6 +86,8 @@ namespace NMEA_MessageParserConstructor
             }
             return false;
         }
+
+
         #endregion
 
         #region VDM veya VDO mesajını parçalarına ayrıştıracak ve geri döndürecek.
@@ -183,6 +183,7 @@ namespace NMEA_MessageParserConstructor
         {
             int ascii;
             string content = "";
+            binaryMessage = setBinary(binaryMessage);
             for (int i = 0; i < binaryMessage.Length; i+=6)
             {
                 ascii = Convert.ToInt32(binaryMessage.Substring(i, 6),2);
@@ -194,6 +195,18 @@ namespace NMEA_MessageParserConstructor
                 content += Convert.ToChar(ascii);
             }
             return content;
+        }
+
+        private string setBinary (string binaryMessage)
+        {
+            if (binaryMessage.Length % 6 == 0)
+                return binaryMessage;
+            do
+            {
+                binaryMessage += "0";
+            } while (!(binaryMessage.Length % 6 == 0));
+
+            return binaryMessage;
         }
         #endregion
 
@@ -255,13 +268,18 @@ namespace NMEA_MessageParserConstructor
         }
         #endregion
 
+
+
+
         #region Parser 
 
         #region Attributeları döndürür.
         // new Tuple<string, string>("",this..ToString()),
         public virtual List<Tuple<string, string>> getAttributesAndValues()
         {
-            List<Tuple<string, string>> _attributes = new List<Tuple<string, string>> {
+            try
+            {
+                List<Tuple<string, string>> _attributes = new List<Tuple<string, string>> {
                 new Tuple<string, string>("NMEA String",this.NMEAString.ToString()),
                 new Tuple<string, string>("Checksum",this.Checksum.ToString()),
                 new Tuple<string, string>("Prefix",this.Prefix.ToString()),
@@ -275,14 +293,75 @@ namespace NMEA_MessageParserConstructor
                 new Tuple<string, string>("Priority",this.Priority.ToString()),
                 new Tuple<string, string>("Repeat Indicator",this.RepeatIndicator.ToString()),
                 new Tuple<string, string>("Spare",this.Spare.ToString()),
+
            };
-            return _attributes;
+                return _attributes;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+        
+        }
+        #endregion
+
+        #region Attributelar, verilen özel değerler ile işleme sokularak asıl değerlerine ulaşılır.
+
+        #region ProperRateOfTurnROTAIS(double value): (ROTAIS / 4.733)^2 HATA VAR
+        protected double ProperRateOfTurnROTAIS(double value)
+        {
+            if (value > 127)
+            {
+                string binary = Convert.ToString(Convert.ToInt32(value), 2);
+                string newBinary = "0";
+                foreach (var bit in binary)
+                {
+                    if (bit == '0')
+                        newBinary += "1";
+                    else
+                        newBinary += "0";
+                }
+                value = Convert.ToInt32(newBinary, 2);
+            }
+            value = value / 4.733;
+            return Math.Pow(value, 2);
+        }
+        #endregion
+
+        #region ProperSog(): SOG değerini 10'a böl.
+        protected double ProperSOG(int value)
+        {
+            return value / 10;
+        }
+        #endregion
+
+        #region ProperLongitude(): Longitude değerini 1/10.000 min => 600.000 böldük.
+        protected double ProperLongitude(double value)
+        {
+            return value /= 600000;
+        }
+        #endregion
+
+        #region ProperLatitude(): Latitude değerini 1/10.000 min => 600.000 böldük.
+        protected double ProperLatitude(double value)
+        {
+            return value / 600000;
+        }
+        #endregion
+
+        #region ProperCOG(): COG değerini 10'a böldük.
+        protected double ProperCOG(float value)
+        {
+            return value / 10;
         }
         #endregion
 
         #endregion
 
+        #endregion
 
+        #region Constructor methodları.
 
         #region Mesaj oluşturmak için ilgili attribute'ları dön.
         public virtual List<Tuple<string, string>> getAttributes()
@@ -301,40 +380,47 @@ namespace NMEA_MessageParserConstructor
            };
             return _attributes;
         }
+
+        public virtual List<Tuple<string, string>> getAttributes(byte totalMesCount)
+        {
+            List<Tuple<string, string>> _attributes = new List<Tuple<string, string>> {
+                new Tuple<string, string>("Prefix","!"),
+                new Tuple<string, string>("Talker","AI"),
+                new Tuple<string, string>("Sentence","VDM"),
+                new Tuple<string, string>("Total Message Count",totalMesCount.ToString()),
+                new Tuple<string, string>("Channel","A"),
+                new Tuple<string, string> ("Message ID", this.MessageID.ToString() ),
+                new Tuple<string,string>( "Description",this.Description),
+                new Tuple<string, string>("Priority",this.Priority.ToString()),
+                new Tuple<string, string>("Repeat Indicator",this.RepeatIndicator.ToString()),
+                new Tuple<string, string>("Spare",this.Spare.ToString()),
+           };
+            return _attributes;
+        }
         #endregion
 
-
-
-        #region Ondalık bir değeri binary dönüştürür.
-        //public virtual string setBinaryToDouble (double item)
-        //{
-        //    return BitConverter.ToDouble(item).ToString();
-        //}
-        #endregion
-
-        #region Constructor methodları.
-
-        #region Girilen değerlere göre VDM veya VDO mesajı oluşturuluyor.
+        #region Constructor(): Girilen değerlere göre VDM veya VDO mesajı oluşturuluyor.
         public virtual string Constructor(List<string> _listMessage)
         {
             this.Prefix = _listMessage[0];
             this.Talker = _listMessage[1];
             this.Sentence = _listMessage[2];
             this.TotalMessageCount = Convert.ToInt32(_listMessage[3]);
-            this.CurrentMessageNumber = 1;
             this.Channel = _listMessage[4];
             this.Spare = Convert.ToInt32(_listMessage[9]);
-
-            return this.Prefix +
+            string mes = this.Prefix +
                    this.Talker +
                    this.Sentence + "," +
                    this.TotalMessageCount + "," +
                    this.CurrentMessageNumber + ", ," +
                    this.Channel + ",";
+            this.CurrentMessageNumber += 1;
+            return mes;
         }
+
         #endregion
 
-        #region Decimal bir değeri binary  dönüştürür.
+        #region setBinaryToDecimal(int item): Decimal bir değeri binary  dönüştürür.
         public virtual string setBinaryToDecimal(int item)
         {
                 string binary = "";
@@ -347,8 +433,10 @@ namespace NMEA_MessageParserConstructor
                 }
                 return Convert.ToString(item,2);
         }
+        #endregion
 
-        public virtual string setBinaryToDecimal(int item,int padLeft)
+        #region setBinaryToDecimal(int item, int padLeft): 
+        public virtual string setBinaryToDecimal(int item, int padLeft)
         {
 
             string binary = "";
@@ -360,14 +448,29 @@ namespace NMEA_MessageParserConstructor
             }
             return Convert.ToString(item, 2);
         }
-
         #endregion
+
+        #region setBinaryToString(int item): ASCII6 tablosundaki değerleri binary dönüştürür.
+        public virtual string setBinaryToString(string item)
+        {
+            string binary = "";
+            Ascii6 asciiObject = new Ascii6();
+            foreach (var ch in item)
+            {
+                binary += asciiObject.getBinarySixToString(ch);
+            }
+            return binary;
+            
+        }
+        #endregion
+
+
+
+        #region setBinaryToComplement(): Negatif olan bir değerin complementi alınıyor.
 
         public string setBinaryToComplement(int item, int padLeft)
         {
             string binary = "", complementBinary = "";
-
-
             binary = Convert.ToString(item, 2).PadLeft(padLeft, '0');
             foreach (var bit in binary)
             {
@@ -376,78 +479,11 @@ namespace NMEA_MessageParserConstructor
                 else if (bit == '0')
                     complementBinary += "1";
             }
-
-
             return Convert.ToString(complementBinary);
         }
+
+        #endregion
         
-        #endregion
-
-
-
-
-
-
-        #region Attributelar, verilen özel değerler ile işleme sokularak asıl değerlerine ulaşılır.
-
-        #region ProperRateOfTurnROTAIS(double value): (ROTAIS / 4.733)^2 HATA VAR
-        protected double ProperRateOfTurnROTAIS(double value)
-        {
-            if (value > 127)
-            {
-                string binary = Convert.ToString(Convert.ToInt32(value),2);
-                string newBinary = "0";
-                foreach (var bit in binary)
-                {
-                    if (bit == '0')
-                        newBinary += "1";
-                    else
-                        newBinary += "0";
-                }
-                value = Convert.ToInt32(newBinary, 2);
-            }
-            value =value / 4.733;
-            return Math.Pow(value,2);
-        }
-        #endregion
-
-        #region  SOG değerini 10'a böl.
-        protected double ProperSOG (int value)
-        {
-            return value / 10;
-        }
-        #endregion
-
-        #region  Longitude değerini 1/10.000 min => 600.000 böldük.
-        protected double ProperLongitude (double value)
-        {
-            return value /= 600000;
-        }
-        #endregion
-
-        #region  Latitude değerini 1/10.000 min => 600.000 böldük.
-        protected double ProperLatitude(double value)
-        {
-            return value / 600000;
-        }
-        #endregion
-
-        #region COG değerini 10'a böldük.
-        protected double ProperCOG (float value)
-        {
-            return value / 10;
-        }
-        #endregion
-
-        #endregion
-
-
-
-
-
-
-
-
         #region Attribute value'lerinin kontrolleri
 
         #region MessageID Kontrol
@@ -542,7 +578,7 @@ namespace NMEA_MessageParserConstructor
         #endregion
 
         #region SOG
-        protected bool ControlSOG (double value)
+        protected bool ControlSOG(double value)
         {
             if (value < 1023)
                 return true;
@@ -713,44 +749,174 @@ namespace NMEA_MessageParserConstructor
         }
         #endregion
 
-
+        #region AIS Version Indicator
+        protected bool ControlAISVersionIndicator(byte value)
+        {
+            if (value >= 0 && value < 4)
+                return true;
+            else
+                return false;
+        }
         #endregion
 
+        #region IMO Number  Taner Bey'e Sor!
+        protected bool ControlIMONumber(int value)
+        {
+            if (value >= 1000000 && value < 1073741823)
+                return true;
+            else
+                return false;
+        }
+        #endregion
 
+        #region Call Sign - String
+        protected bool ControlCallSign(string value)
+        {
+            if (value.Length <8)
+                return true;
+            else
+                return false;
+        }
+        #endregion
 
+        #region Name
+        protected bool ControlName(string value)
+        {
+            if (value.Length < 21)
+                return true;
+            else
+                return false;
+        }
+        #endregion
 
+        #region Type Of ship and cargo type
+        protected bool ControlTOSACT(byte value)
+        {
+            if (value <= 255)
+                return true;
+            else
+                return false;
+        }
+        #endregion
+
+        #region Overall Dimension A - B
+        protected bool ControlOverallDimensionAB(int value)
+        {
+            if (value < 512)
+                return true;
+            else
+                return false;
+        }
+        #endregion
+
+        #region Overall Dimension C - D
+        protected bool ControlOverallDimensionCD(byte value)
+        {
+            if (value < 64)
+                return true;
+            else
+                return false;
+        }
+        #endregion
+
+        #region Draught
+        protected bool ControlDraught(double value)
+        {
+            if (MultiplyDraught(value)<=255)
+                return true;
+            else
+                return false;
+        }
+        #endregion
+
+        #region Destination
+        protected bool ControlDestination(string value)
+        {
+            if (value.Length < 21)
+                return true;
+            else
+                return false;
+        }
+        #endregion
+
+        #region DTE
+        protected bool ControlDTE(byte value)
+        {
+            if (value==0 || value == 1)
+                return true;
+            else
+                return false;
+        }
+        #endregion
+
+        #endregion
 
         #region Attribute value'lerini ilgili değerler ile çarpıp binary çevir.
 
         #region SOG 10 ile çarpılacak.
         protected int MultiplySOG(double value)
         {
-            return Convert.ToInt32( value * 10);
+            return Convert.ToInt32(value * 10);
         }
         #endregion
 
-        #region
-        protected  int MultiplyLongitude(double value)
+        #region Longitude
+        protected int MultiplyLongitude(double value)
         {
             return Convert.ToInt32(value * 600000);
         }
         #endregion
 
-        #region
+        #region Latitude
         protected int MultiplyLatitude(double value)
         {
             return Convert.ToInt32(value * 600000);
         }
         #endregion
 
-        #region
+        #region COG
         protected short MultiplyCOG(double value)
         {
             return Convert.ToInt16(value * 10);
         }
         #endregion
 
+        #region Static Draught
+        protected byte MultiplyDraught(double value)
+        {
+            if (value * 10 < 256)
+                return Convert.ToByte(value * 10);
+            else
+                return 0;
+        }
         #endregion
+
+        #endregion
+
+
+        #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

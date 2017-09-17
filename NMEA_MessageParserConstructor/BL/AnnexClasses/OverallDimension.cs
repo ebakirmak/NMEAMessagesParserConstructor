@@ -10,8 +10,8 @@ namespace NMEA_MessageParserConstructor.BL.AnnexClasses
 {
     public class OverallDimension
     {
-        private byte A { get; set; }
-        private byte B { get; set; }
+        private int A { get; set; }
+        private int B { get; set; }
         private byte C { get; set; }
         private byte D { get; set; }
         private Logger log { get; set; }
@@ -43,31 +43,50 @@ namespace NMEA_MessageParserConstructor.BL.AnnexClasses
         }
         #endregion
 
-        #region A attribute döndür.
-        public byte getA()
+        #region A attribute set ve get.
+        public int getA()
         {
             return this.A;
         }
-        #endregion
 
-        #region B attribute döndür.
-        public byte getB()
+        public void setA(int a)
         {
-            return this.B;
+            this.A = a;
         }
         #endregion
 
-        #region C attribute döndür.
+        #region B attribute set ve get.
+        public int getB()
+        {
+            return this.B;
+        }
+
+        public void setB(int b)
+        {
+            this.B = b;
+        }
+        #endregion
+
+        #region C attribute set ve get.
         public byte getC()
         {
             return this.C;
         }
+        public void setC(byte C)
+        {
+            this.C = C;
+        }
         #endregion
 
-        #region D attribute döndür.
+        #region D attribute set ve get.
         public byte getD()
         {
             return this.D;
+        }
+
+        public void setD(byte d)
+        {
+            this.D = d;
         }
         #endregion
 

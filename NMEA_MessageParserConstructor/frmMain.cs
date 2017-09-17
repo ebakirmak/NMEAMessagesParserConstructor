@@ -482,12 +482,26 @@ namespace NMEA_MessageParserConstructor
                 _listMessageInformation = getInformation();
             else if (message is MessageType4)
                 _listMessageInformation = getInformation();
+            else if (message is MessageType5)
+                _listMessageInformation = getInformation();
 
             string state = message.Constructor(AssignmentZero(_listMessageInformation));
+            string[] stateArray = state.Split('\n');
             if (state.Contains("Error!") && state.Length > 6)
                 MessageBox.Show("Girdiğiniz değerleri lütfen kontrol ediniz." + state, "BİLGİLENDİRME MESAJI", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else
-                lstMessages.Items.Add(state+",0*23");
+            {
+                if(stateArray != null)
+                {
+                    lstMessages.Items.Add(stateArray[0] + ",0*23");
+                    lstMessages.Items.Add(stateArray[1] + ",0*23");
+                }
+                else
+                {
+                    lstMessages.Items.Add(state + ",0*23");
+                }
+                
+            }
         }
         #endregion
 
